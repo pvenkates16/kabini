@@ -109,6 +109,28 @@
             margin-right: 8px;
             border-radius: 2px;
         }
+        .flight-list-disclaimer {
+            font-size: 0.85rem;
+            color: #ef4444; /* red-500 */
+            background-color: #fef2f2; /* red-50 */
+            border-left: 4px solid #ef4444;
+            padding: 8px 12px;
+            margin-top: 1rem;
+            border-radius: 0 4px 4px 0;
+        }
+        .flight-entry {
+            background-color: #f8fafc; /* slate-50 */
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #e2e8f0; /* slate-200 */
+        }
+        .flight-entry:last-child {
+            margin-bottom: 0;
+        }
+        .flight-entry strong {
+            color: #1e293b; /* slate-800 */
+        }
     </style>
 </head>
 <body class="bg-stone-100 text-stone-800">
@@ -226,7 +248,33 @@
                         <p class="text-sm text-stone-600 mb-1"><strong>Layovers:</strong> Chennai, Kolkata, Bengaluru, Hyderabad, Ahmedabad.</p>
                         <p class="text-sm text-stone-600 mb-1"><strong>Approx. Time:</strong> 7-10 hours (with layovers).</p>
                         <p class="text-sm text-stone-600 mb-3"><strong>Approx. One-Way Price:</strong> $90 - $175 USD.</p>
-                        <div class="chart-container h-64 sm:h-72"><canvas id="delhiChart"></canvas></div>
+                        <div class="chart-container h-64 sm:h-72 mb-4"><canvas id="delhiChart"></canvas></div>
+                        <div class="flight-list-disclaimer">
+                            <strong>Note:</strong> The following are *illustrative examples* only. Real-time prices, times, and availability vary. Always check a live flight search engine.
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="text-lg font-semibold text-teal-700 mb-2">Example Flights:</h4>
+                            <div class="flight-entry">
+                                <p><strong>Arrival Nov 27: DEL - IXZ</strong></p>
+                                <p class="text-sm text-stone-600">IndiGo 6E 2147 (DEL 06:00 -> MAA 08:30) &rarr; IndiGo 6E 272 (MAA 09:30 -> IXZ 11:00)</p>
+                                <p class="text-sm text-stone-600">Est. Price: $150 | Total Time: ~5 hrs</p>
+                            </div>
+                            <div class="flight-entry">
+                                <p><strong>Departure Dec 1: IXZ - DEL</strong></p>
+                                <p class="text-sm text-stone-600">Air India 550 (IXZ 12:00 -> CCU 14:00) &rarr; Air India 401 (CCU 15:30 -> DEL 18:00)</p>
+                                <p class="text-sm text-stone-600">Est. Price: $120 | Total Time: ~6 hrs</p>
+                            </div>
+                            <div class="flight-entry">
+                                <p><strong>Departure Dec 2: IXZ - DEL</strong></p>
+                                <p class="text-sm text-stone-600">IndiGo 6E 272 (IXZ 11:30 -> BLR 13:30) &rarr; IndiGo 6E 202 (BLR 14:30 -> DEL 17:00)</p>
+                                <p class="text-sm text-stone-600">Est. Price: $110 | Total Time: ~5.5 hrs</p>
+                            </div>
+                            <div class="flight-entry">
+                                <p><strong>Departure Dec 3: IXZ - DEL</strong></p>
+                                <p class="text-sm text-stone-600">IndiGo 6E 272 (IXZ 15:00 -> HYD 17:00) &rarr; IndiGo 6E 202 (HYD 18:00 -> DEL 20:30)</p>
+                                <p class="text-sm text-stone-600">Est. Price: $130 | Total Time: ~5.5 hrs</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
                         <h3 class="text-2xl font-semibold text-teal-600 mb-3">Mumbai (BOM) to IXZ</h3>
@@ -234,7 +282,33 @@
                         <p class="text-sm text-stone-600 mb-1"><strong>Layovers:</strong> Ahmedabad, Bangalore, Chennai.</p>
                         <p class="text-sm text-stone-600 mb-1"><strong>Approx. Time:</strong> 8-10 hours (with layovers); Direct ~3.5 hrs (limited).</p>
                         <p class="text-sm text-stone-600 mb-3"><strong>Approx. One-Way Price:</strong> $75 - $100 USD.</p>
-                         <div class="chart-container h-64 sm:h-72"><canvas id="mumbaiChart"></canvas></div>
+                         <div class="chart-container h-64 sm:h-72 mb-4"><canvas id="mumbaiChart"></canvas></div>
+                        <div class="flight-list-disclaimer">
+                            <strong>Note:</strong> The following are *illustrative examples* only. Real-time prices, times, and availability vary. Always check a live flight search engine.
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="text-lg font-semibold text-teal-700 mb-2">Example Flights:</h4>
+                            <div class="flight-entry">
+                                <p><strong>Arrival Nov 27: BOM - IXZ (Direct)</strong></p>
+                                <p class="text-sm text-stone-600">IndiGo 6E 5600 (BOM 08:00 -> IXZ 11:30)</p>
+                                <p class="text-sm text-stone-600">Est. Price: $95 | Total Time: ~3.5 hrs</p>
+                            </div>
+                            <div class="flight-entry">
+                                <p><strong>Departure Dec 1: IXZ - BOM</strong></p>
+                                <p class="text-sm text-stone-600">IndiGo 6E 5600 (IXZ 12:00 -> BOM 15:30) </p>
+                                <p class="text-sm text-stone-600">Est. Price: $85 | Total Time: ~3.5 hrs</p>
+                            </div>
+                             <div class="flight-entry">
+                                <p><strong>Departure Dec 2: IXZ - BOM</strong></p>
+                                <p class="text-sm text-stone-600">IndiGo 6E 272 (IXZ 11:30 -> BLR 13:30) &rarr; IndiGo 6E 202 (BLR 14:30 -> BOM 16:00)</p>
+                                <p class="text-sm text-stone-600">Est. Price: $90 | Total Time: ~4.5 hrs</p>
+                            </div>
+                            <div class="flight-entry">
+                                <p><strong>Departure Dec 3: IXZ - BOM</strong></p>
+                                <p class="text-sm text-stone-600">Air India 550 (IXZ 15:00 -> MAA 17:00) &rarr; Air India 401 (MAA 18:00 -> BOM 20:30)</p>
+                                <p class="text-sm text-stone-600">Est. Price: $100 | Total Time: ~5.5 hrs</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
                         <h3 class="text-2xl font-semibold text-teal-600 mb-3">Pune (PNQ) to IXZ</h3>
@@ -242,7 +316,33 @@
                         <p class="text-sm text-stone-600 mb-1"><strong>Layovers:</strong> Chennai, Bengaluru, New Delhi (NO DIRECT FLIGHTS).</p>
                         <p class="text-sm text-stone-600 mb-1"><strong>Approx. Time:</strong> 7-12+ hours.</p>
                         <p class="text-sm text-stone-600 mb-3"><strong>Approx. One-Way Price:</strong> $90 - $120 USD.</p>
-                        <div class="chart-container h-64 sm:h-72"><canvas id="puneChart"></canvas></div>
+                        <div class="chart-container h-64 sm:h-72 mb-4"><canvas id="puneChart"></canvas></div>
+                        <div class="flight-list-disclaimer">
+                            <strong>Note:</strong> The following are *illustrative examples* only. Real-time prices, times, and availability vary. Always check a live flight search engine.
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="text-lg font-semibold text-teal-700 mb-2">Example Flights:</h4>
+                            <div class="flight-entry">
+                                <p><strong>Arrival Nov 27: PNQ - IXZ</strong></p>
+                                <p class="text-sm text-stone-600">IndiGo 6E 101 (PNQ 07:00 -> BLR 08:30) &rarr; IndiGo 6E 272 (BLR 09:30 -> IXZ 11:30)</p>
+                                <p class="text-sm text-stone-600">Est. Price: $105 | Total Time: ~4.5 hrs</p>
+                            </div>
+                            <div class="flight-entry">
+                                <p><strong>Departure Dec 1: IXZ - PNQ</strong></p>
+                                <p class="text-sm text-stone-600">IndiGo 6E 272 (IXZ 12:00 -> MAA 13:30) &rarr; IndiGo 6E 202 (MAA 14:30 -> PNQ 16:30)</p>
+                                <p class="text-sm text-stone-600">Est. Price: $95 | Total Time: ~4.5 hrs</p>
+                            </div>
+                            <div class="flight-entry">
+                                <p><strong>Departure Dec 2: IXZ - PNQ</strong></p>
+                                <p class="text-sm text-stone-600">Air India Express 550 (IXZ 14:00 -> BLR 16:00) &rarr; Air India Express 401 (BLR 17:00 -> PNQ 19:00)</p>
+                                <p class="text-sm text-stone-600">Est. Price: $110 | Total Time: ~5 hrs</p>
+                            </div>
+                            <div class="flight-entry">
+                                <p><strong>Departure Dec 3: IXZ - PNQ</strong></p>
+                                <p class="text-sm text-stone-600">IndiGo 6E 272 (IXZ 11:30 -> MAA 13:00) &rarr; IndiGo 6E 202 (MAA 14:00 -> PNQ 16:00)</p>
+                                <p class="text-sm text-stone-600">Est. Price: $100 | Total Time: ~4.5 hrs</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -256,7 +356,33 @@
                         <p class="text-sm text-stone-600 mb-1"><strong>Layovers:</strong> Major Indian hubs (DEL, BOM) & possibly international hubs (Munich, Doha, etc.).</p>
                         <p class="text-sm text-stone-600 mb-1"><strong>Approx. Time:</strong> 24+ hours (multi-leg).</p>
                         <p class="text-sm text-stone-600 mb-3"><strong>Approx. Roundtrip Price:</strong> $1,000 - $1,300+ USD.</p>
-                        <div class="chart-container h-64 sm:h-72"><canvas id="sfoChart"></canvas></div>
+                        <div class="chart-container h-64 sm:h-72 mb-4"><canvas id="sfoChart"></canvas></div>
+                        <div class="flight-list-disclaimer">
+                            <strong>Note:</strong> The following are *illustrative examples* only. Real-time prices, times, and availability vary. Always check a live flight search engine.
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="text-lg font-semibold text-teal-700 mb-2">Example Flights:</h4>
+                            <div class="flight-entry">
+                                <p><strong>Arrival Nov 27: SFO - IXZ</strong></p>
+                                <p class="text-sm text-stone-600">United UA 869 (SFO 22:00 -> DEL 04:30 +2 days) &rarr; IndiGo 6E 2147 (DEL 06:00 -> MAA 08:30) &rarr; IndiGo 6E 272 (MAA 09:30 -> IXZ 11:00)</p>
+                                <p class="text-sm text-stone-600">Est. Price: $600 (one way) | Total Time: ~28 hrs</p>
+                            </div>
+                            <div class="flight-entry">
+                                <p><strong>Departure Dec 1: IXZ - SFO</strong></p>
+                                <p class="text-sm text-stone-600">Air India 550 (IXZ 12:00 -> DEL 14:30) &rarr; Air India 173 (DEL 16:00 -> SFO 08:00)</p>
+                                <p class="text-sm text-stone-600">Est. Price: $550 (one way) | Total Time: ~20 hrs</p>
+                            </div>
+                            <div class="flight-entry">
+                                <p><strong>Departure Dec 2: IXZ - SFO</strong></p>
+                                <p class="text-sm text-stone-600">IndiGo 6E 272 (IXZ 11:30 -> BLR 13:30) &rarr; Qatar Airways QR 573 (BLR 16:00 -> DOH 17:00) &rarr; Qatar Airways QR 713 (DOH 01:00 -> SFO 06:00 +1 day)</p>
+                                <p class="text-sm text-stone-600">Est. Price: $650 (one way) | Total Time: ~26 hrs</p>
+                            </div>
+                            <div class="flight-entry">
+                                <p><strong>Departure Dec 3: IXZ - SFO</strong></p>
+                                <p class="text-sm text-stone-600">IndiGo 6E 272 (IXZ 15:00 -> HYD 17:00) &rarr; Emirates EK 529 (HYD 22:00 -> DXB 01:00 +1 day) &rarr; Emirates EK 225 (DXB 08:30 -> SFO 12:30)</p>
+                                <p class="text-sm text-stone-600">Est. Price: $700 (one way) | Total Time: ~30 hrs</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
                         <h3 class="text-2xl font-semibold text-teal-600 mb-3">Atlanta (ATL) to IXZ</h3>
@@ -264,7 +390,33 @@
                         <p class="text-sm text-stone-600 mb-1"><strong>Layovers:</strong> Major Indian hubs (DEL, BOM) & international hubs (Doha, Istanbul, etc.).</p>
                         <p class="text-sm text-stone-600 mb-1"><strong>Approx. Time:</strong> 24+ hours (multi-leg).</p>
                         <p class="text-sm text-stone-600 mb-3"><strong>Approx. Roundtrip Price:</strong> $1,000 - $1,500+ USD.</p>
-                        <div class="chart-container h-64 sm:h-72"><canvas id="atlantaChart"></canvas></div>
+                        <div class="chart-container h-64 sm:h-72 mb-4"><canvas id="atlantaChart"></canvas></div>
+                        <div class="flight-list-disclaimer">
+                            <strong>Note:</strong> The following are *illustrative examples* only. Real-time prices, times, and availability vary. Always check a live flight search engine.
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="text-lg font-semibold text-teal-700 mb-2">Example Flights:</h4>
+                            <div class="flight-entry">
+                                <p><strong>Arrival Nov 27: ATL - IXZ</strong></p>
+                                <p class="text-sm text-stone-600">Qatar Airways QR 758 (ATL 20:00 -> DOH 17:30 +1 day) &rarr; Qatar Airways QR 570 (DOH 20:00 -> BOM 02:00 +2 days) &rarr; IndiGo 6E 5600 (BOM 08:00 -> IXZ 11:30)</p>
+                                <p class="text-sm text-stone-600">Est. Price: $700 (one way) | Total Time: ~30 hrs</p>
+                            </div>
+                            <div class="flight-entry">
+                                <p><strong>Departure Dec 1: IXZ - ATL</strong></p>
+                                <p class="text-sm text-stone-600">IndiGo 6E 5600 (IXZ 12:00 -> BOM 15:30) &rarr; Qatar Airways QR 571 (BOM 03:00 -> DOH 04:30 +1 day) &rarr; Qatar Airways QR 757 (DOH 08:00 -> ATL 16:00)</p>
+                                <p class="text-sm text-stone-600">Est. Price: $650 (one way) | Total Time: ~28 hrs</p>
+                            </div>
+                            <div class="flight-entry">
+                                <p><strong>Departure Dec 2: IXZ - ATL</strong></p>
+                                <p class="text-sm text-stone-600">IndiGo 6E 272 (IXZ 11:30 -> BLR 13:30) &rarr; Turkish Airlines TK 705 (BLR 06:00 -> IST 10:00 +1 day) &rarr; Turkish Airlines TK 35 (IST 14:00 -> ATL 18:00)</p>
+                                <p class="text-sm text-stone-600">Est. Price: $750 (one way) | Total Time: ~30 hrs</p>
+                            </div>
+                            <div class="flight-entry">
+                                <p><strong>Departure Dec 3: IXZ - ATL</strong></p>
+                                <p class="text-sm text-stone-600">Air India 550 (IXZ 15:00 -> DEL 17:30) &rarr; Air India AI 101 (DEL 02:00 -> EWR 07:00 +1 day) &rarr; United UA 450 (EWR 10:00 -> ATL 12:00)</p>
+                                <p class="text-sm text-stone-600">Est. Price: $800 (one way) | Total Time: ~32 hrs</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -655,4 +807,3 @@
 
 </body>
 </html>
-
