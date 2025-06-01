@@ -65,6 +65,29 @@
             font-weight: bold;
             color: #bf360c; /* Deep Orange for emphasis */
         }
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+        .image-gallery img {
+            max-width: 100%;
+            width: 280px; /* Fixed width for better layout */
+            height: 180px; /* Fixed height for consistency */
+            object-fit: cover; /* Ensures images cover the area without distortion */
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .image-note {
+            font-style: italic;
+            text-align: center;
+            margin-top: 10px;
+            color: #666;
+            font-size: 0.9em;
+        }
         footer {
             text-align: center;
             padding: 20px;
@@ -118,16 +141,27 @@
         </section>
 
         <section id="accommodation">
-            <h2>Accommodation (Example: Eco-Resort / Wildlife Lodge)</h2>
-            <p><strong>Recommendation:</strong> A well-regarded eco-resort or wildlife lodge nestled on the banks of the Kabini River, offering a blend of comfort, nature immersion, and excellent safari services. Look for options with:</p>
+            <h2>Accommodation Options & Indicative Prices (Kabini)</h2>
+            <p>In Kabini, your stay will typically be at a wildlife resort or lodge, which often includes meals and some activities like safaris. Prices vary significantly based on the level of luxury, inclusions, and season. Please note, prices are indicative per night for two adults and can change based on exact dates, package inclusions, and booking time. It's crucial to <span class="highlight">contact the resorts directly or check their official websites for current rates and availability, especially for group bookings.</span></p>
+
+            <h3>Luxury Resorts: (Approx. ₹25,000 - ₹50,000+ per night)</h3>
             <ul>
-                <li>Spacious cottages/rooms with comfortable amenities.</li>
-                <li>On-site restaurant, lounge areas, and perhaps a library or common games room.</li>
-                <li>Natural surroundings and easy access to safari booking points.</li>
-                <li>Good reputation for wildlife sightings and expert naturalists.</li>
-                <li>Examples (research specific properties for November, often need advance booking): The Serai Kabini, Orange County Kabini (Evolve Back), Kaav Safari Lodge, JLR Kabini River Lodge.</li>
+                <li><strong>Evolve Back, Kabini (formerly Orange County):</strong> Known for its luxurious, tribal-themed villas and excellent service. Offers a premium wildlife experience.</li>
+                <li><strong>The Serai Kabini:</strong> A high-end resort with beautiful views of the Kabini river, comfortable accommodations, and well-regarded safari services.</li>
             </ul>
-            <p><strong>Benefit for Group:</strong> Provides a cohesive and immersive experience, with all activities and dining centrally located, maximizing shared time in a natural setting.</p>
+
+            <h3>Mid-Range Resorts: (Approx. ₹15,000 - ₹25,000 per night)</h3>
+            <ul>
+                <li><strong>JLR Kabini River Lodge:</strong> Operated by Jungle Lodges & Resorts, it's a popular choice known for its direct access to safaris and focus on wildlife experiences. Offers comfortable cottages and tents.</li>
+                <li><strong>Kaav Safari Lodge:</strong> A smaller, more boutique option offering personalized service and comfortable stays, often with all-inclusive packages.</li>
+            </ul>
+
+            <h3>Value/Budget-Friendly Resorts: (Approx. ₹8,000 - ₹15,000 per night)</h3>
+            <ul>
+                <li>There are several smaller resorts and homestays around Kabini. While they might offer a more basic experience, they can still arrange safaris. Research thoroughly for reviews and amenities.</li>
+            </ul>
+
+            <p><strong>Benefit for Group:</strong> Staying at a single resort provides a cohesive and immersive experience, with all activities and dining centrally located, maximizing shared time in a natural setting.</p>
         </section>
 
         <section id="itinerary">
@@ -193,6 +227,14 @@
 
         <section id="sightseeing-highlights">
             <h2>Sightseeing & Activity Highlights</h2>
+            <p>Get ready for incredible encounters with nature! Below are some highlights of what you can expect during your Kabini adventure:</p>
+            <div class="image-gallery">
+                <img src="https://via.placeholder.com/280x180?text=Elephant+Safari" alt="Elephant in Kabini forest during safari">
+                <img src="https://via.placeholder.com/280x180?text=Tiger+Sighting" alt="Tiger in its natural habitat">
+                <img src="https://via.placeholder.com/280x180?text=Bird+Watching" alt="Colorful bird perched on a branch">
+                 <img src="https://via.placeholder.com/280x180?text=Deer+Herd" alt="Herd of deer in the forest">
+            </div>
+            <p class="image-note"><em>Note: Actual images are not embedded here. These are placeholders. When you build your website, you can replace the "src" attribute with URLs of actual wildlife safari photos to enhance the visual experience.</em></p>
             <ul>
                 <li><strong>Jeep Safaris:</strong> The prime attraction! Explore the Nagarhole National Park for sightings of tigers, leopards, elephants, gaurs, deer, wild dogs, and more.</li>
                 <li><strong>Boat Safaris:</strong> Experience wildlife from the Kabini River, often offering unique perspectives of animals coming to the water's edge and fantastic birdwatching opportunities.</li>
@@ -222,8 +264,9 @@
         <section id="contact-rsvp">
             <h2>Contact Information & RSVP</h2>
             <ul>
-                <li><strong>Trip Coordinator/Contact Person:</strong> Rahul Masurekar</li>
-                <li><strong>Phone:</strong> +91 98862 20044</li>
+                <li><strong>Trip Coordinator/Contact Person:</strong> [Your Name/Organizer's Name]</li>
+                <li><strong>Phone:</strong> [Your Phone Number]</li>
+                <li><strong>Email:</strong> [Your Email Address]</li>
                 <li><strong>RSVP By:</strong> [Date, e.g., October 15th] to confirm your participation and preferred 4-day window. Remember, safari bookings require early confirmation!</li>
             </ul>
         </section>
