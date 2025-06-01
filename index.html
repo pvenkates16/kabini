@@ -88,6 +88,14 @@
             color: #666;
             font-size: 0.9em;
         }
+        /* Style for the word cloud container */
+        #word-cloud-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
         footer {
             text-align: center;
             padding: 20px;
@@ -97,6 +105,8 @@
             border-top: 1px solid #e0e0e0;
         }
     </style>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-cloud@1.2.5/d3.layout.cloud.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -107,15 +117,15 @@
         <section id="welcome">
             <p>Dear adventurers, prepare for an exhilarating and refreshing 4-day wildlife escape designed exclusively for our cherished group! We've crafted a fantastic trip from <span class="highlight"> November 25th to 29th</span> , so say yes to thrilling safaris, serene nature, and abundant quality time together. Get ready to witness the wonders of Kabini and create unforgettable memories!</p>
             <p>Let's add some new stories to the classic collection:
-                  <ul>
+                <ul>
                     <li>हरमुनिया</li>
                     <li>भालू फूँक</li>
                     <li>पपीता</li>
                     <li>डंडा है या छेदा</li>
                     <li>ఎర్ర పూకు, వెర్ర పూకు</li>
-                  </ul>
+                </ul>
             Remind me if I've forgotten any highlights.
-          </p>
+            </p>
         </section>
 
         <section id="overview">
@@ -136,6 +146,15 @@
             </ul>
         </section>
 
+        <section id="attendees-word-cloud">
+            <h2>Our Cherished Attendees</h2>
+            <p>Here's a word cloud visualizing our hawabaazes. The size of the name indicates  "presence".</p>
+            <div id="word-cloud-container">
+                <canvas id="wordCloudCanvas" width="800" height="400" style="border:1px solid #ccc; background-color: #f9f9f9;"></canvas>
+            </div>
+            <p class="image-note"><em>Note: This word cloud is generated dynamically using JavaScript. If it doesn't appear immediately, try refreshing the page.</em></p>
+        </section>
+
         <section id="destination-transit">
             <h2>Destination Choice & Transit from Bangalore</h2>
             <ul>
@@ -154,19 +173,19 @@
             <h2>Accommodation Options & Indicative Prices (Kabini)</h2>
             <p>In Kabini, your stay will typically be at a wildlife resort or lodge, which often includes meals and some activities like safaris. Prices vary significantly based on the level of luxury, inclusions, and season. Please note, prices are indicative per night for two adults and can change based on exact dates, package inclusions, and booking time. It's crucial to <span class="highlight">contact the resorts directly or check their official websites for current rates and availability, especially for group bookings.</span></p>
 
-            <h3>Luxury Resorts:</h3>
+            <h3>Luxury Resorts: (Approx. ₹25,000 - ₹50,000+ per night)</h3>
             <ul>
                 <li><strong><a href="https://www.evolveback.com/evolve-back-kabini/stay.html">Evolve Back, Kabini (formerly Orange County):</a></strong> Known for its luxurious, tribal-themed villas and excellent service. Offers a premium wildlife experience.</li>
                 <li><strong><a href="https://www.theserai.in/kabini-resort/">The Serai Kabini:</a></strong> A high-end resort with beautiful views of the Kabini river, comfortable accommodations, and well-regarded safari services.</li>
             </ul>
 
-            <h3>Mid-Range Resorts:</h3>
+            <h3>Mid-Range Resorts: (Approx. ₹15,000 - ₹25,000 per night)</h3>
             <ul>
                 <li><strong><a href="https://www.junglelodges.com/resort/kabini-river-lodge/">JLR Kabini River Lodge:</a></strong> Operated by Jungle Lodges & Resorts, it's a popular choice known for its direct access to safaris and focus on wildlife experiences. Offers comfortable cottages and tents.</li>
                 <li><strong><a href="https://kaav.com/#1">Kaav Safari Lodge:</a></strong> A smaller, more boutique option offering personalized service and comfortable stays, often with all-inclusive packages.</li>
             </ul>
 
-            <h3>Value/Budget-Friendly Resorts:</h3>
+            <h3>Value/Budget-Friendly Resorts: (Approx. ₹8,000 - ₹15,000 per night)</h3>
             <ul>
                 <li>There are several smaller resorts and homestays around Kabini. While they might offer a more basic experience, they can still arrange safaris. Research thoroughly for reviews and amenities.</li>
             </ul>
@@ -288,8 +307,59 @@
         </section>
     </div>
 
-    <footer>
+    <footer style="margin-top: 50px;">
         <p>&copy; 2025 The Golden Getaway. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Attendees data for the word cloud
+        // You can fill in the names here
+        const attendees = [
+            "Rahul", "Prabhu", "Rasmani", "Minocha",
+            "VG", "Khatarnath", "Pawan", "Rajiv Chandra",
+            "Arore", "Murthy", "Gajju", "Khalid",
+            "Anand Prasad", "Venky", "Jamil"
+        ];
+
+        // Prepare data for d3-cloud (each name gets an arbitrary value for size)
+        const words = attendees.map(function(d) {
+            return {text: d, size: 10 + Math.random() * 30}; // Random size for visual variety
+        });
+
+        const margin = {top: 10, right: 10, bottom: 10, left: 10},
+              width = 800 - margin.left - margin.right,
+              height = 400 - margin.top - margin.bottom;
+
+        const fill = d3.scaleOrdinal(d3.schemeCategory10); // Use D3's color scheme
+
+        const layout = d3.layout.cloud()
+            .size([width, height])
+            .words(words)
+            .padding(5) // Space between words
+            .rotate(function() { return ~~(Math.random() * 2) * 90; }) // 0 or 90 degree rotation
+            .font("Impact")
+            .fontSize(function(d) { return d.size; }) // Use the assigned size
+            .on("end", draw);
+
+        layout.start();
+
+        function draw(words) {
+            const canvas = document.getElementById("wordCloudCanvas");
+            const ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, width, height);
+            ctx.translate(width / 2, height / 2); // Center the drawing
+
+            words.forEach(function(d) {
+                ctx.save();
+                ctx.translate(d.x, d.y);
+                ctx.rotate(d.rotate * Math.PI / 180);
+                ctx.textAlign = "center";
+                ctx.font = d.size + "px " + d.font;
+                ctx.fillStyle = fill(d.text); // Color based on text
+                ctx.fillText(d.text, 0, 0);
+                ctx.restore();
+            });
+        }
+    </script>
 </body>
 </html>
