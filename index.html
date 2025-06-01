@@ -3,895 +3,257 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Port Blair Interactive Travel Planner (Nov 27 - Dec 1)</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>The Golden Getaway: A Bangalore Escape</title>
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 300px; max-height: 350px; }
-        @media (min-width: 768px) { .chart-container { height: 350px; max-height: 400px;} }
-        .nav-link { transition: all 0.3s ease; }
-        .nav-link.active { color: #0d9488; border-bottom-color: #0d9488; font-weight: 600; }
-        .tab-button { transition: all 0.3s ease; }
-        .tab-button.active { background-color: #0d9488; color: white; }
-        .section-fade-in { animation: fadeIn 0.8s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Geo Visualization Styles */
-        .geo-map-container {
-            position: relative;
-            width: 100%;
-            max-width: 900px;
-            height: 450px; /* Adjust height as needed */
-            margin: 2rem auto;
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Indian_Ocean_map.svg/1000px-Indian_Ocean_map.svg.png'); /* A simple regional map background */
-            background-size: cover;
-            background-position: center;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-
-        .city-node {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background-color: #0d9488; /* Teal */
-            border-radius: 50%;
-            transform: translate(-50%, -50%); /* Center the dot on its coordinates */
-            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.4);
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.2s ease-in-out;
-        }
-        .city-node:hover {
-            transform: translate(-50%, -50%) scale(1.3);
-            background-color: #059669; /* Darker teal */
-            box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.6);
-        }
-        .city-node.active-origin {
-            background-color: #f59e0b; /* Amber */
-            box-shadow: 0 0 0 5px rgba(245, 158, 11, 0.7);
-        }
-        .city-node.active-destination {
-            background-color: #ef4444; /* Red */
-            box-shadow: 0 0 0 5px rgba(239, 68, 68, 0.7);
-        }
-        .city-node .tooltip {
-            position: absolute;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            white-space: nowrap;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s ease-in-out;
-            z-index: 11;
-        }
-        .city-node:hover .tooltip {
-            opacity: 1;
-        }
-
-        .flight-path-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 5;
-            pointer-events: none; /* Allows clicks to pass through to underlying elements if any */
-        }
-        .legend {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 8px;
-            border-radius: 6px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            font-size: 0.8rem;
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
             color: #333;
-            z-index: 15;
         }
-        .legend-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 4px;
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .legend-color-box {
-            width: 20px;
-            height: 4px;
-            margin-right: 8px;
-            border-radius: 2px;
+        header {
+            background-color: #004d40; /* Dark Teal */
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 20px;
         }
-        .flight-list-disclaimer {
-            font-size: 0.85rem;
-            color: #ef4444; /* red-500 */
-            background-color: #fef2f2; /* red-50 */
-            border-left: 4px solid #ef4444;
-            padding: 8px 12px;
-            margin-top: 1rem;
-            border-radius: 0 4px 4px 0;
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
         }
-        .flight-entry {
-            background-color: #f8fafc; /* slate-50 */
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            margin-bottom: 0.5rem;
-            border: 1px solid #e2e8f0; /* slate-200 */
+        h2 {
+            color: #00695c; /* Medium Teal */
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            font-size: 1.8em;
         }
-        .flight-entry:last-child {
-            margin-bottom: 0;
+        h3 {
+            color: #26a69a; /* Light Teal */
+            font-size: 1.4em;
+            margin-top: 20px;
         }
-        .flight-entry strong {
-            color: #1e293b; /* slate-800 */
+        p {
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        ol {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #d32f2f; /* Dark Red for emphasis */
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            color: #777;
+            font-size: 0.9em;
+            border-top: 1px solid #e0e0e0;
         }
     </style>
 </head>
-<body class="bg-stone-100 text-stone-800">
+<body>
+    <div class="container">
+        <header>
+            <h1>The Golden Getaway: A Bangalore Escape for Our Cherished Group!</h1>
+        </header>
 
-    <header class="bg-teal-700 text-white shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <h1 class="text-xl sm:text-2xl font-bold">Port Blair Travel Planner</h1>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="#overview" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-teal-100 hover:bg-teal-600 hover:text-white active" data-section="overview">Overview</a>
-                        <a href="#fly" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-teal-100 hover:bg-teal-600 hover:text-white" data-section="fly">Fly to Port Blair</a>
-                        <a href="#sea" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-teal-100 hover:bg-teal-600 hover:text-white" data-section="sea">Sea Travel</a>
-                        <a href="#tips" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-teal-100 hover:bg-teal-600 hover:text-white" data-section="tips">Travel Tips</a>
-                        <a href="#airport" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-teal-100 hover:bg-teal-600 hover:text-white" data-section="airport">IXZ Airport</a>
-                    </div>
-                </div>
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-teal-200 hover:text-white hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="md:hidden hidden" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#overview" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-teal-100 hover:bg-teal-600 hover:text-white active" data-section="overview">Overview</a>
-                <a href="#fly" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-teal-100 hover:bg-teal-600 hover:text-white" data-section="fly">Fly to Port Blair</a>
-                <a href="#sea" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-teal-100 hover:bg-teal-600 hover:text-white" data-section="sea">Sea Travel</a>
-                <a href="#tips" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-teal-100 hover:bg-teal-600 hover:text-white" data-section="tips">Travel Tips</a>
-                <a href="#airport" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-teal-100 hover:bg-teal-600 hover:text-white" data-section="airport">IXZ Airport</a>
-            </div>
-        </div>
-    </header>
-
-    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
-        <section id="overview" class="pt-10 pb-12 section-fade-in">
-            <h2 class="text-3xl font-bold text-teal-700 mb-6 text-center">Planning Your Andaman Trip: Nov 27 (Arrival) - Dec 1 (Departure)</h2>
-            <div class="bg-white p-6 sm:p-8 rounded-xl shadow-xl max-w-3xl mx-auto">
-                <p class="text-lg mb-4 text-stone-700">Welcome to your interactive guide for planning travel to Port Blair for a short trip with an arrival on <strong>November 27th</strong> and departure on <strong>December 1st</strong>. This planner synthesizes key information to help you make informed decisions.</p>
-                <div class="bg-teal-50 p-4 rounded-lg border border-teal-200 mb-6">
-                    <h3 class="text-xl font-semibold text-teal-700 mb-2">Key Recommendation: Fly to Port Blair</h3>
-                    <p class="text-stone-600">For this brief 4-day itinerary, <strong>air travel is the only practical option</strong>. Sea travel from mainland India involves multi-day journeys, making it unsuitable for such a constrained timeframe. Direct flights to Port Blair (IXZ) are limited, so expect layovers, especially for international travelers.</p>
-                </div>
-                <p class="text-stone-700 mb-4">This interactive planner will walk you through air travel options, explain why sea travel isn't feasible, provide essential booking tips, and give you information about Port Blair's Veer Savarkar International Airport (IXZ).</p>
-                <div class="text-center mt-6">
-                    <a href="#fly" data-section="fly" class="nav-link inline-block bg-teal-600 text-white font-semibold py-3 px-6 rounded-lg shadow hover:bg-teal-700 transition duration-300">Explore Flight Options</a>
-                </div>
-            </div>
+        <section id="welcome">
+            <p>Dear friends, get ready for a rejuvenating and memorable 4-day escape designed just for us! We've planned a fantastic trip between <span class="highlight">November 22nd and 30th</span> (you choose your preferred 4-day window within this period) that promises relaxation, fun, and quality time together. From delicious food to breathtaking sights, every detail has been thoughtfully considered to ensure we maximize our moments and create lasting memories. Let the good times roll!</p>
         </section>
 
-        <section id="fly" class="pt-10 pb-12 section-fade-in hidden-section bg-stone-50 my-8 rounded-xl shadow-lg">
-            <h2 class="text-3xl font-bold text-teal-700 mb-8 text-center">Fly to Port Blair: Your Best Bet</h2>
-            <p class="text-center text-stone-700 max-w-2xl mx-auto mb-10">Air travel offers the speed and flexibility needed for your Nov 27th arrival and Dec 1st departure. Most journeys will involve layovers. Remember that flight prices are dynamic; use real-time search engines for current fares and book well in advance, especially as late November/early December is peak season.</p>
-
-            <h3 class="text-2xl font-bold text-teal-700 mb-6 text-center">Visualizing Flight Paths</h3>
-            <p class="text-center text-stone-600 mb-4 max-w-2xl mx-auto">Click on an origin city below to highlight its approximate flight path(s) to Port Blair (IXZ).</p>
-
-            <div class="geo-map-container" id="geoMapContainer">
-                <canvas id="flightPathCanvas" class="flight-path-canvas"></canvas>
-                <div class="city-node" id="node-delhi" style="top: 20%; left: 35%;" data-city="delhi">
-                    <span class="tooltip">Delhi (DEL)</span></div>
-                <div class="city-node" id="node-mumbai" style="top: 35%; left: 28%;" data-city="mumbai">
-                    <span class="tooltip">Mumbai (BOM)</span></div>
-                <div class="city-node" id="node-pune" style="top: 38%; left: 29.5%;" data-city="pune">
-                    <span class="tooltip">Pune (PNQ)</span></div>
-                <div class="city-node" id="node-chennai" style="top: 50%; left: 38%;" data-city="chennai">
-                    <span class="tooltip">Chennai (MAA)</span></div>
-                <div class="city-node" id="node-kolkata" style="top: 30%; left: 45%;" data-city="kolkata">
-                    <span class="tooltip">Kolkata (CCU)</span></div>
-                <div class="city-node" id="node-bengaluru" style="top: 48%; left: 33%;" data-city="bengaluru">
-                    <span class="tooltip">Bengaluru (BLR)</span></div>
-                <div class="city-node" id="node-hyderabad" style="top: 40%; left: 33.5%;" data-city="hyderabad">
-                    <span class="tooltip">Hyderabad (HYD)</span></div>
-                <div class="city-node" id="node-ahmedabad" style="top: 28%; left: 28%;" data-city="ahmedabad">
-                    <span class="tooltip">Ahmedabad (AMD)</span></div>
-                <div class="city-node active-destination" id="node-portblair" style="top: 55%; left: 60%;" data-city="portblair">
-                    <span class="tooltip">Port Blair (IXZ)</span></div>
-                <div class="city-node" id="node-sfo" style="top: 25%; left: 5%;" data-city="sfo">
-                    <span class="tooltip">San Francisco (SFO)</span></div>
-                <div class="city-node" id="node-atlanta" style="top: 35%; left: 15%;" data-city="atlanta">
-                    <span class="tooltip">Atlanta (ATL)</span></div>
-                <div class="city-node" id="node-doha" style="top: 30%; left: 25%;" data-city="doha">
-                    <span class="tooltip">Doha (DOH) - Layover</span></div>
-                <div class="city-node" id="node-istanbul" style="top: 20%; left: 20%;" data-city="istanbul">
-                    <span class="tooltip">Istanbul (IST) - Layover</span></div>
-
-                <div class="legend">
-                    <div class="legend-item">
-                        <span class="legend-color-box" style="background-color: #22c55e;"></span> No-Stop Flight
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-color-box" style="background-color: #ef4444;"></span> Hop Flight (with layovers)
-                    </div>
-                </div>
-            </div>
-
-            <div class="tabs-container mb-8 text-center">
-                <button class="tab-button bg-white hover:bg-teal-500 hover:text-white text-teal-700 font-semibold py-2 px-4 border border-teal-500 rounded-l-lg active" data-tab="indian-cities">From Indian Cities</button>
-                <button class="tab-button bg-white hover:bg-teal-500 hover:text-white text-teal-700 font-semibold py-2 px-4 border-t border-b border-teal-500" data-tab="international-origins">From International (USA)</button>
-            </div>
-
-            <div id="indian-cities" class="tab-content">
-                <p class="text-center text-stone-600 mb-6 italic">Flights from major Indian cities usually involve 1-2 layovers. Total journey time can range from 7-12+ hours. Mumbai has limited direct flights, while Chennai and Kolkata often have direct options.</p>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-4">
-                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                        <h3 class="text-2xl font-semibold text-teal-600 mb-3">Delhi (DEL) to IXZ</h3>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Airlines:</strong> IndiGo, Air India, Air India Express, Akasa Air, Alliance Air.</p>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Layovers:</strong> Chennai, Kolkata, Bengaluru, Hyderabad, Ahmedabad.</p>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Approx. Time:</strong> 7-10 hours (with layovers).</p>
-                        <p class="text-sm text-stone-600 mb-3"><strong>Approx. One-Way Price:</strong> $90 - $175 USD.</p>
-                        <div class="chart-container h-64 sm:h-72 mb-4"><canvas id="delhiChart"></canvas></div>
-                        <div class="flight-list-disclaimer">
-                            <strong>Note:</strong> The following are *illustrative examples* only. Real-time prices, times, and availability vary. Always check a live flight search engine.
-                        </div>
-                        <div class="mt-4">
-                            <h4 class="text-lg font-semibold text-teal-700 mb-2">Example Flights:</h4>
-                            <div class="flight-entry">
-                                <p><strong>Arrival Nov 27: DEL - IXZ</strong></p>
-                                <p class="text-sm text-stone-600">IndiGo 6E 2147 (DEL 06:00 -> MAA 08:30) &rarr; IndiGo 6E 272 (MAA 09:30 -> IXZ 11:00)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $150 | Total Time: ~5 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Departure Dec 1: IXZ - DEL</strong></p>
-                                <p class="text-sm text-stone-600">Air India 550 (IXZ 12:00 -> CCU 14:00) &rarr; Air India 401 (CCU 15:30 -> DEL 18:00)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $120 | Total Time: ~6 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Departure Dec 2: IXZ - DEL</strong></p>
-                                <p class="text-sm text-stone-600">IndiGo 6E 272 (IXZ 11:30 -> BLR 13:30) &rarr; IndiGo 6E 202 (BLR 14:30 -> DEL 17:00)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $110 | Total Time: ~5.5 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Departure Dec 3: IXZ - DEL</strong></p>
-                                <p class="text-sm text-stone-600">IndiGo 6E 272 (IXZ 15:00 -> HYD 17:00) &rarr; IndiGo 6E 202 (HYD 18:00 -> DEL 20:30)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $130 | Total Time: ~5.5 hrs</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                        <h3 class="text-2xl font-semibold text-teal-600 mb-3">Mumbai (BOM) to IXZ</h3>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Airlines:</strong> IndiGo, Air India, Akasa Air, SpiceJet, Vistara.</p>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Layovers:</strong> Ahmedabad, Bangalore, Chennai.</p>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Approx. Time:</strong> 8-10 hours (with layovers); Direct ~3.5 hrs (limited).</p>
-                        <p class="text-sm text-stone-600 mb-3"><strong>Approx. One-Way Price:</strong> $75 - $100 USD.</p>
-                         <div class="chart-container h-64 sm:h-72 mb-4"><canvas id="mumbaiChart"></canvas></div>
-                        <div class="flight-list-disclaimer">
-                            <strong>Note:</strong> The following are *illustrative examples* only. Real-time prices, times, and availability vary. Always check a live flight search engine.
-                        </div>
-                        <div class="mt-4">
-                            <h4 class="text-lg font-semibold text-teal-700 mb-2">Example Flights:</h4>
-                            <div class="flight-entry">
-                                <p><strong>Arrival Nov 27: BOM - IXZ (Direct)</strong></p>
-                                <p class="text-sm text-stone-600">IndiGo 6E 5600 (BOM 08:00 -> IXZ 11:30)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $95 | Total Time: ~3.5 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Departure Dec 1: IXZ - BOM</strong></p>
-                                <p class="text-sm text-stone-600">IndiGo 6E 5600 (IXZ 12:00 -> BOM 15:30) </p>
-                                <p class="text-sm text-stone-600">Est. Price: $85 | Total Time: ~3.5 hrs</p>
-                            </div>
-                             <div class="flight-entry">
-                                <p><strong>Departure Dec 2: IXZ - BOM</strong></p>
-                                <p class="text-sm text-stone-600">IndiGo 6E 272 (IXZ 11:30 -> BLR 13:30) &rarr; IndiGo 6E 202 (BLR 14:30 -> BOM 16:00)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $90 | Total Time: ~4.5 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Departure Dec 3: IXZ - BOM</strong></p>
-                                <p class="text-sm text-stone-600">Air India 550 (IXZ 15:00 -> MAA 17:00) &rarr; Air India 401 (MAA 18:00 -> BOM 20:30)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $100 | Total Time: ~5.5 hrs</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                        <h3 class="text-2xl font-semibold text-teal-600 mb-3">Pune (PNQ) to IXZ</h3>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Airlines:</strong> IndiGo, Air India Express, Air India.</p>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Layovers:</strong> Chennai, Bengaluru, New Delhi (NO DIRECT FLIGHTS).</p>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Approx. Time:</strong> 7-12+ hours.</p>
-                        <p class="text-sm text-stone-600 mb-3"><strong>Approx. One-Way Price:</strong> $90 - $120 USD.</p>
-                        <div class="chart-container h-64 sm:h-72 mb-4"><canvas id="puneChart"></canvas></div>
-                        <div class="flight-list-disclaimer">
-                            <strong>Note:</strong> The following are *illustrative examples* only. Real-time prices, times, and availability vary. Always check a live flight search engine.
-                        </div>
-                        <div class="mt-4">
-                            <h4 class="text-lg font-semibold text-teal-700 mb-2">Example Flights:</h4>
-                            <div class="flight-entry">
-                                <p><strong>Arrival Nov 27: PNQ - IXZ</strong></p>
-                                <p class="text-sm text-stone-600">IndiGo 6E 101 (PNQ 07:00 -> BLR 08:30) &rarr; IndiGo 6E 272 (BLR 09:30 -> IXZ 11:30)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $105 | Total Time: ~4.5 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Departure Dec 1: IXZ - PNQ</strong></p>
-                                <p class="text-sm text-stone-600">IndiGo 6E 272 (IXZ 12:00 -> MAA 13:30) &rarr; IndiGo 6E 202 (MAA 14:30 -> PNQ 16:30)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $95 | Total Time: ~4.5 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Departure Dec 2: IXZ - PNQ</strong></p>
-                                <p class="text-sm text-stone-600">Air India Express 550 (IXZ 14:00 -> BLR 16:00) &rarr; Air India Express 401 (BLR 17:00 -> PNQ 19:00)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $110 | Total Time: ~5 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Departure Dec 3: IXZ - PNQ</strong></p>
-                                <p class="text-sm text-stone-600">IndiGo 6E 272 (IXZ 11:30 -> MAA 13:00) &rarr; IndiGo 6E 202 (MAA 14:00 -> PNQ 16:00)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $100 | Total Time: ~4.5 hrs</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                        <h3 class="text-2xl font-semibold text-teal-600 mb-3">Chennai (MAA) to IXZ</h3>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Airlines:</strong> IndiGo, Air India, SpiceJet, Alliance Air.</p>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Layovers:</strong> Limited, often direct.</p>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Approx. Time:</strong> Direct ~1.5 - 2 hours.</p>
-                        <p class="text-sm text-stone-600 mb-3"><strong>Approx. One-Way Price:</strong> $50 - $100 USD.</p>
-                        <div class="chart-container h-64 sm:h-72 mb-4"><canvas id="chennaiChart"></canvas></div>
-                        <div class="flight-list-disclaimer">
-                            <strong>Note:</strong> The following are *illustrative examples* only. Real-time prices, times, and availability vary. Always check a live flight search engine.
-                        </div>
-                        <div class="mt-4">
-                            <h4 class="text-lg font-semibold text-teal-700 mb-2">Example Flights:</h4>
-                            <div class="flight-entry">
-                                <p><strong>Arrival Nov 27: MAA - IXZ (Direct)</strong></p>
-                                <p class="text-sm text-stone-600">IndiGo 6E 272 (MAA 09:30 -> IXZ 11:00)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $75 | Total Time: ~1.5 hrs</p>
-                            </div>
-                             <div class="flight-entry">
-                                <p><strong>Arrival Nov 27: MAA - IXZ (Hop)</strong></p>
-                                <p class="text-sm text-stone-600">Air India 550 (MAA 06:00 -> BLR 07:00) &rarr; IndiGo 6E 272 (BLR 09:30 -> IXZ 11:30)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $85 | Total Time: ~5.5 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Departure Dec 1: IXZ - MAA (Direct)</strong></p>
-                                <p class="text-sm text-stone-600">IndiGo 6E 272 (IXZ 12:00 -> MAA 13:30)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $70 | Total Time: ~1.5 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Departure Dec 2: IXZ - MAA (Direct)</strong></p>
-                                <p class="text-sm text-stone-600">SpiceJet SG 111 (IXZ 14:00 -> MAA 15:30)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $65 | Total Time: ~1.5 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Departure Dec 3: IXZ - MAA (Direct)</strong></p>
-                                <p class="text-sm text-stone-600">IndiGo 6E 272 (IXZ 15:00 -> MAA 16:30)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $70 | Total Time: ~1.5 hrs</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                        <h3 class="text-2xl font-semibold text-teal-600 mb-3">Kolkata (CCU) to IXZ</h3>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Airlines:</strong> IndiGo, Air India, SpiceJet, Vistara.</p>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Layovers:</strong> Limited, often direct.</p>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Approx. Time:</strong> Direct ~2 hours.</p>
-                        <p class="text-sm text-stone-600 mb-3"><strong>Approx. One-Way Price:</strong> $60 - $110 USD.</p>
-                        <div class="chart-container h-64 sm:h-72 mb-4"><canvas id="kolkataChart"></canvas></div>
-                        <div class="flight-list-disclaimer">
-                            <strong>Note:</strong> The following are *illustrative examples* only. Real-time prices, times, and availability vary. Always check a live flight search engine.
-                        </div>
-                        <div class="mt-4">
-                            <h4 class="text-lg font-semibold text-teal-700 mb-2">Example Flights:</h4>
-                            <div class="flight-entry">
-                                <p><strong>Arrival Nov 27: CCU - IXZ (Direct)</strong></p>
-                                <p class="text-sm text-stone-600">IndiGo 6E 621 (CCU 08:30 -> IXZ 10:30)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $80 | Total Time: ~2 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Arrival Nov 27: CCU - IXZ (Hop)</strong></p>
-                                <p class="text-sm text-stone-600">Air India 401 (CCU 06:00 -> MAA 08:30) &rarr; IndiGo 6E 272 (MAA 09:30 -> IXZ 11:00)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $100 | Total Time: ~5 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Departure Dec 1: IXZ - CCU (Direct)</strong></p>
-                                <p class="text-sm text-stone-600">Air India 550 (IXZ 12:00 -> CCU 14:00)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $90 | Total Time: ~2 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Departure Dec 2: IXZ - CCU (Direct)</strong></p>
-                                <p class="text-sm text-stone-600">IndiGo 6E 622 (IXZ 11:00 -> CCU 13:00)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $85 | Total Time: ~2 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Departure Dec 3: IXZ - CCU (Direct)</strong></p>
-                                <p class="text-sm text-stone-600">SpiceJet SG 321 (IXZ 15:00 -> CCU 17:00)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $95 | Total Time: ~2 hrs</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="international-origins" class="tab-content hidden">
-                 <p class="text-center text-stone-600 mb-6 italic">Travel from the USA involves multiple legs: international flight to a major Indian hub, then a domestic flight to Port Blair. Expect 24+ hours total travel time.</p>
-                <div class="grid md:grid-cols-2 gap-6 sm:gap-8 px-4">
-                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                        <h3 class="text-2xl font-semibold text-teal-600 mb-3">San Francisco (SFO) to IXZ</h3>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Airlines:</strong> Air India, Alaska Airlines (plus Indian domestic carriers for connection).</p>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Layovers:</strong> Major Indian hubs (DEL, BOM) & possibly international hubs (Munich, Doha, etc.).</p>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Approx. Time:</strong> 24+ hours (multi-leg).</p>
-                        <p class="text-sm text-stone-600 mb-3"><strong>Approx. Roundtrip Price:</strong> $1,000 - $1,300+ USD.</p>
-                        <div class="chart-container h-64 sm:h-72 mb-4"><canvas id="sfoChart"></canvas></div>
-                        <div class="flight-list-disclaimer">
-                            <strong>Note:</strong> The following are *illustrative examples* only. Real-time prices, times, and availability vary. Always check a live flight search engine.
-                        </div>
-                        <div class="mt-4">
-                            <h4 class="text-lg font-semibold text-teal-700 mb-2">Example Flights:</h4>
-                            <div class="flight-entry">
-                                <p><strong>Arrival Nov 27: SFO - IXZ</strong></p>
-                                <p class="text-sm text-stone-600">United UA 869 (SFO 22:00 -> DEL 04:30 +2 days) &rarr; IndiGo 6E 2147 (DEL 06:00 -> MAA 08:30) &rarr; IndiGo 6E 272 (MAA 09:30 -> IXZ 11:00)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $600 (one way) | Total Time: ~28 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Departure Dec 1: IXZ - SFO</strong></p>
-                                <p class="text-sm text-stone-600">Air India 550 (IXZ 12:00 -> DEL 14:30) &rarr; Air India 173 (DEL 16:00 -> SFO 08:00)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $550 (one way) | Total Time: ~20 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Departure Dec 2: IXZ - SFO</strong></p>
-                                <p class="text-sm text-stone-600">IndiGo 6E 272 (IXZ 11:30 -> BLR 13:30) &rarr; Qatar Airways QR 573 (BLR 16:00 -> DOH 17:00) &rarr; Qatar Airways QR 713 (DOH 01:00 -> SFO 06:00 +1 day)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $650 (one way) | Total Time: ~26 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Departure Dec 3: IXZ - SFO</strong></p>
-                                <p class="text-sm text-stone-600">IndiGo 6E 272 (IXZ 15:00 -> HYD 17:00) &rarr; Emirates EK 529 (HYD 22:00 -> DXB 01:00 +1 day) &rarr; Emirates EK 225 (DXB 08:30 -> SFO 12:30)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $700 (one way) | Total Time: ~30 hrs</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                        <h3 class="text-2xl font-semibold text-teal-600 mb-3">Atlanta (ATL) to IXZ</h3>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Airlines:</strong> Qatar Airways, Turkish Airlines, Delta, United (plus Indian domestic carriers).</p>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Layovers:</strong> Major Indian hubs (DEL, BOM) & international hubs (Doha, Istanbul, etc.).</p>
-                        <p class="text-sm text-stone-600 mb-1"><strong>Approx. Time:</strong> 24+ hours (multi-leg).</p>
-                        <p class="text-sm text-stone-600 mb-3"><strong>Approx. Roundtrip Price:</strong> $1,000 - $1,500+ USD.</p>
-                        <div class="chart-container h-64 sm:h-72 mb-4"><canvas id="atlantaChart"></canvas></div>
-                        <div class="flight-list-disclaimer">
-                            <strong>Note:</strong> The following are *illustrative examples* only. Real-time prices, times, and availability vary. Always check a live flight search engine.
-                        </div>
-                        <div class="mt-4">
-                            <h4 class="text-lg font-semibold text-teal-700 mb-2">Example Flights:</h4>
-                            <div class="flight-entry">
-                                <p><strong>Arrival Nov 27: ATL - IXZ</strong></p>
-                                <p class="text-sm text-stone-600">Qatar Airways QR 758 (ATL 20:00 -> DOH 17:30 +1 day) &rarr; Qatar Airways QR 570 (DOH 20:00 -> BOM 02:00 +2 days) &rarr; IndiGo 6E 5600 (BOM 08:00 -> IXZ 11:30)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $700 (one way) | Total Time: ~30 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Departure Dec 1: IXZ - ATL</strong></p>
-                                <p class="text-sm text-stone-600">IndiGo 6E 5600 (IXZ 12:00 -> BOM 15:30) &rarr; Qatar Airways QR 571 (BOM 03:00 -> DOH 04:30 +1 day) &rarr; Qatar Airways QR 757 (DOH 08:00 -> ATL 16:00)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $650 (one way) | Total Time: ~28 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Departure Dec 2: IXZ - ATL</strong></p>
-                                <p class="text-sm text-stone-600">IndiGo 6E 272 (IXZ 11:30 -> BLR 13:30) &rarr; Turkish Airlines TK 705 (BLR 06:00 -> IST 10:00 +1 day) &rarr; Turkish Airlines TK 35 (IST 14:00 -> ATL 18:00)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $750 (one way) | Total Time: ~30 hrs</p>
-                            </div>
-                            <div class="flight-entry">
-                                <p><strong>Departure Dec 3: IXZ - ATL</strong></p>
-                                <p class="text-sm text-stone-600">Air India 550 (IXZ 15:00 -> DEL 17:30) &rarr; Air India AI 101 (DEL 02:00 -> EWR 07:00 +1 day) &rarr; United UA 450 (EWR 10:00 -> ATL 12:00)</p>
-                                <p class="text-sm text-stone-600">Est. Price: $800 (one way) | Total Time: ~32 hrs</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <section id="overview">
+            <h2>Trip Overview & Philosophy</h2>
+            <ul>
+                <li><strong>Dates:</strong> Choose any 4 consecutive days between <span class="highlight">November 22nd and November 30th</span>.</li>
+                <li><strong>Group Size:</strong> Our beloved group of 60-year-olds!</li>
+                <li><strong>Goal:</strong> To relax, connect, experience new sights, and most importantly, maximize our shared time and enjoyment.</li>
+            </ul>
+            <h3>Maximizing Time Together - Our Constraints:</h3>
+            <ul>
+                <li><strong>Shared Accommodation:</strong> We will all stay in one central, comfortable location (e.g., a large villa, interconnected hotel suites, or a boutique resort) to ensure easy communication and spontaneity.</li>
+                <li><strong>Pre-booked Transport:</strong> All local transport will be pre-arranged (e.g., a comfortable mini-bus or multiple spacious taxis/vans) to avoid waiting times and ensure we travel together.</li>
+                <li><strong>Group Dining:</strong> All meals will be planned at common venues. While individual preferences will be considered, the focus will be on shared culinary experiences.</li>
+                <li><strong>Flexible Itinerary:</strong> While activities are suggested, there will be ample free time for spontaneous conversations, card games, or simply relaxing together. Participation in activities is encouraged but optional; the priority is group cohesion.</li>
+                <li><strong>Easy Accessibility:</strong> All chosen venues and activities will prioritize easy accessibility, minimizing long walks or strenuous physical demands.</li>
+            </ul>
         </section>
 
-        <section id="sea" class="pt-10 pb-12 section-fade-in hidden-section">
-            <h2 class="text-3xl font-bold text-red-600 mb-6 text-center">Sea Travel: Not Advised for This Itinerary</h2>
-            <div class="bg-white p-6 sm:p-8 rounded-xl shadow-xl max-w-3xl mx-auto">
-                <p class="text-lg mb-4 text-stone-700">While Port Blair has a seaport, government passenger ships from mainland India (Chennai, Kolkata, Visakhapatnam) are <strong>not a viable option</strong> for your Nov 27th arrival and Dec 1st departure.</p>
-                <div class="bg-red-50 p-4 rounded-lg border border-red-200 mb-6">
-                    <h3 class="text-xl font-semibold text-red-700 mb-2">Key Reasons Sea Travel is Impractical:</h3>
-                    <ul class="list-disc list-inside text-stone-600 space-y-1">
-                        <li><strong>Long Journey:</strong> 50-60 hours (2-3 days) one-way. Arrival would be Nov 29th/30th.</li>
-                        <li><strong>Infrequent Sailings:</strong> Only a few sailings per month from each port.</li>
-                        <li><strong>Port Halt:</strong> Ships halt for 2-4 days in Port Blair, making a quick return unlikely.</li>
-                        <li><strong>Limited Time:</strong> You'd have 1-2 days at most in Port Blair.</li>
+        <section id="destination-transit">
+            <h2>Destination Choice & Transit from Bangalore</h2>
+            <ul>
+                <li><strong>Proposed Destination:</strong> <span class="highlight">Mysore, Karnataka</span> (A perfect blend of culture, history, and accessibility from Bangalore, offering a relaxed pace suitable for our group.)</li>
+            </ul>
+            <h3>Transit from Bangalore:</h3>
+            <ul>
+                <li><strong>Mode of Transport:</strong> Comfortable, air-conditioned mini-bus (e.g., a Tempo Traveller or similar) or multiple large SUVs/sedans, depending on final group size. This ensures we travel together, share stories, and arrive fresh.</li>
+                <li><strong>Travel Time:</strong> Approximately 3-4 hours (depending on traffic).</li>
+                <li><strong>Departure Point in Bangalore:</strong> A central, easily accessible pick-up point will be arranged (e.g., a common landmark or multiple pick-ups if feasible).</li>
+                <li><strong>Onboard Comfort:</strong> The vehicle will be equipped with comfortable seating, ample legroom, and provisions for water and light snacks. Scheduled comfort breaks will be taken.</li>
+            </ul>
+        </section>
+
+        <section id="accommodation">
+            <h2>Accommodation (Example: Boutique Hotel / Heritage Stay)</h2>
+            <p><strong>Recommendation:</strong> A centrally located boutique hotel or heritage property that offers spacious rooms, good amenities, and a relaxed ambiance. Look for options with:</p>
+            <ul>
+                <li>Ground floor rooms or easy elevator access.</li>
+                <li>On-site restaurant and lounge area for group gatherings.</li>
+                <li>Gardens or common areas for relaxation.</li>
+                <li>Examples (research specific properties for November): The Green Hotel, Radisson Blu Plaza Hotel Mysore (for modern comfort), Hotel Mysore Dasprakash (for a blend of comfort and history).</li>
+            </ul>
+            <p><strong>Benefit for Group:</strong> Provides a comfortable base, easy access to common areas for unwinding, and eliminates separate travel to individual rooms after activities.</p>
+        </section>
+
+        <section id="itinerary">
+            <h2>Proposed 4-Day Itinerary & Activities</h2>
+            <p>(Note: This is a sample itinerary. Exact timings can be flexible.)</p>
+
+            <h3>Day 1: Arrival & Royal Welcome</h3>
+            <ul>
+                <li><strong>Morning (9:00 AM):</strong> Depart from Bangalore.</li>
+                <li><strong>Afternoon (1:00 PM):</strong> Arrive in Mysore, check into accommodation.</li>
+                <li><strong>Lunch (2:00 PM):</strong> Group lunch at the hotel restaurant or a nearby traditional South Indian restaurant.</li>
+                <li><strong>Late Afternoon (4:00 PM):</strong> Relax and settle in.</li>
+                <li><strong>Evening (6:00 PM):</strong> Gentle stroll through <strong>Brindavan Gardens</strong> (light and sound show if available and desired, otherwise enjoy the illuminated terraces and fountains). Ensure comfortable seating is available.</li>
+                <li><strong>Dinner (8:00 PM):</strong> Group dinner at a restaurant near Brindavan Gardens or back at the hotel.</li>
+                <li><strong>Night:</strong> Leisure time, perhaps a friendly card game or conversation in the common lounge.</li>
+            </ul>
+
+            <h3>Day 2: Cultural Immersion & Palatial Grandeur</h3>
+            <ul>
+                <li><strong>Morning (9:30 AM):</strong> Visit the magnificent <strong>Mysore Palace</strong> (Amba Vilas Palace). Allocate ample time for a leisurely tour, focusing on key areas. Wheelchair/stroller access points will be utilized if needed.</li>
+                <li><strong>Lunch (1:00 PM):</strong> Group lunch at a local restaurant offering authentic Mysore cuisine.</li>
+                <li><strong>Afternoon (3:00 PM):</strong> Explore <strong>Chamundi Hills</strong> and the <strong>Sri Chamundeshwari Temple</strong>. Option to take the vehicle to the top to minimize strenuous climbing.</li>
+                <li><strong>Late Afternoon (5:30 PM):</strong> Visit the <strong>Devraj Market</strong> for a sensory experience – vibrant colors, local produce, and handicrafts (optional, for those who enjoy a bustling market).</li>
+                <li><strong>Dinner (8:00 PM):</strong> Group dinner at a restaurant known for its ambiance and local specialties.</li>
+            </ul>
+
+            <h3>Day 3: Art, Serenity & Local Delights</h3>
+            <ul>
+                <li><strong>Morning (10:00 AM):</strong> Visit the <strong>Jaganmohan Palace Art Gallery and Auditorium</strong> to admire exquisite paintings and artifacts.</li>
+                <li><strong>Lunch (1:00 PM):</strong> Enjoy lunch at a relaxed cafe or restaurant.</li>
+                <li><strong>Afternoon (3:00 PM):</strong> Relax at the hotel or enjoy a peaceful boat ride at <strong>Karanji Lake</strong> (optional, gentle activity). Alternatively, for those interested in wildlife, a visit to <strong>Mysore Zoo</strong> (can use electric carts for easy viewing).</li>
+                <li><strong>Late Afternoon (5:00 PM):</strong> <strong>Group cooking demonstration/class</strong> (optional, for fun and bonding) focusing on a simple South Indian dish, or a shared storytelling session.</li>
+                <li><strong>Dinner (8:00 PM):</strong> Farewell group dinner at a special restaurant, perhaps with live music if available.</li>
+            </ul>
+
+            <h3>Day 4: Leisurely Departure</h3>
+            <ul>
+                <li><strong>Morning (9:30 AM):</strong> Leisurely breakfast and pack up.</li>
+                <li><strong>Late Morning (11:00 AM):</strong> Option for a final group activity (e.g., a visit to a local silk saree factory for those interested in shopping, or simply more relaxed time at the hotel).</li>
+                <li><strong>Lunch (1:00 PM):</strong> Final group lunch in Mysore.</li>
+                <li><strong>Afternoon (2:00 PM):</strong> Depart for Bangalore, filled with wonderful memories!</li>
+            </ul>
+        </section>
+
+        <section id="restaurants-bars">
+            <h2>Recommended Restaurants & Bars (Mysore)</h2>
+            <h3>Restaurants (Emphasis on comfortable seating, good hygiene, and local flavors):</h3>
+            <ul>
+                <li><strong>For Traditional South Indian:</strong>
+                    <ul>
+                        <li><strong>Hotel Vinayaka Mysore:</strong> Known for authentic dosas and South Indian meals.</li>
+                        <li><strong>Mylari Dosa Centre (Original):</strong> Famous for its soft, buttery dosas (can be crowded, consider timing).</li>
                     </ul>
-                </div>
-                <p class="text-stone-700 mb-4">Private ferry services (Makruzz, Green Ocean, etc.) operate <strong>only for inter-island travel</strong> within the Andamans (e.g., to Havelock/Neil Island) and do not connect to mainland India.</p>
-                <p class="text-stone-700 font-semibold">Conclusion: For this short, specific itinerary, air travel is the only realistic way to maximize your time in Port Blair.</p>
-            </div>
+                </li>
+                <li><strong>For Multi-Cuisine/Comfort:</strong>
+                    <ul>
+                        <li><strong>Mysore Cafe (at The Green Hotel):</strong> Relaxed setting, good food, often with outdoor seating.</li>
+                        <li><strong>The Old House:</strong> Italian-inspired cuisine in a charming heritage setting.</li>
+                        <li><strong>By the Way:</strong> Popular for its relaxed atmosphere and varied menu.</li>
+                    </ul>
+                </li>
+                <li><strong>Fine Dining/Special Occasion:</strong>
+                    <ul>
+                        <li><strong>The Grill (at Radisson Blu Plaza Hotel):</strong> For a more upscale experience.</li>
+                        <li><strong>La Uppu (at Country Inn & Suites):</strong> Offers a good buffet spread.</li>
+                    </ul>
+                </li>
+            </ul>
+            <h3>Bars (Focus on relaxed ambiance, not loud club scenes):</h3>
+            <ul>
+                <li><strong>Most hotels in Mysore will have a bar/lounge</strong> suitable for a relaxed evening drink.
+                    <ul>
+                        <li><strong>Lounge Bar at Radisson Blu Plaza Hotel:</strong> Upscale and comfortable.</li>
+                        <li><strong>The Terrace Bar at Southern Star Mysore:</strong> Often has a pleasant outdoor setting.</li>
+                    </ul>
+                </li>
+                <li><strong>Local pubs are generally not a focus for this group, but if desired for a very casual drink:</strong>
+                    <ul>
+                        <li><strong>Easy Beer & Wine Cafe:</strong> Simple, no-frills place.</li>
+                    </ul>
+                </li>
+            </ul>
         </section>
 
-        <section id="tips" class="pt-10 pb-12 section-fade-in hidden-section bg-stone-50 my-8 rounded-xl shadow-lg">
-            <h2 class="text-3xl font-bold text-teal-700 mb-8 text-center">Essential Booking & Travel Tips</h2>
-            <div class="max-w-3xl mx-auto px-4">
-                <div class="space-y-6">
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-xl font-semibold text-teal-600 mb-2">Book in Advance & Use Real-Time Search</h3>
-                        <p class="text-stone-700">Flight prices are dynamic. Use search engines like Expedia, Skyscanner, Kayak, or MakeMyTrip for current fares for Nov 27 - Dec 1. Book 2-3 months ahead if possible, as this is peak season.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-xl font-semibold text-teal-600 mb-2">Airport Arrival Times</h3>
-                        <p class="text-stone-700">Arrive at least <strong>2 hours before domestic flights</strong> and <strong>3-4 hours before international flights</strong>. For inter-island ferries from Port Blair, arrive at the jetty 45-60 minutes prior to departure.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-xl font-semibold text-teal-600 mb-2">Consider Mid-Week Travel</h3>
-                        <p class="text-stone-700">While your dates are fixed, generally, flying mid-week can sometimes be cheaper than on weekends. Booking on certain days (e.g., Sunday) might also yield better prices.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-xl font-semibold text-teal-600 mb-2">Identity Proof</h3>
-                        <p class="text-stone-700">Always carry valid government-issued photo identity proof for all travel, including flights and any potential ferry bookings.</p>
-                    </div>
-                </div>
-            </div>
+        <section id="sightseeing-highlights">
+            <h2>Sightseeing Highlights (Recap & Details)</h2>
+            <ul>
+                <li><strong>Mysore Palace (Amba Vilas Palace):</strong> A must-see, illuminated on Sundays and public holidays (check exact schedule for November).</li>
+                <li><strong>Brindavan Gardens:</strong> Famous terraced gardens with musical fountains (best visited in the evening).</li>
+                <li><strong>Chamundi Hills & Sri Chamundeshwari Temple:</strong> Panoramic views of Mysore and a significant temple.</li>
+                <li><strong>Jaganmohan Palace Art Gallery:</strong> Houses a remarkable collection of paintings, including those by Raja Ravi Varma.</li>
+                <li><strong>Karanji Lake:</strong> Serene lake with a walk-through aviary and boating options.</li>
+                <li><strong>Mysore Zoo (Sri Chamarajendra Zoological Gardens):</strong> One of India's oldest and most well-maintained zoos.</li>
+                <li><strong>Devraj Market:</strong> A vibrant local market for a true sensory experience of Mysore.</li>
+            </ul>
         </section>
 
-        <section id="airport" class="pt-10 pb-12 section-fade-in hidden-section">
-            <h2 class="text-3xl font-bold text-teal-700 mb-6 text-center">About Veer Savarkar Int'l Airport (IXZ)</h2>
-            <div class="bg-white p-6 sm:p-8 rounded-xl shadow-xl max-w-3xl mx-auto">
-                <p class="text-lg mb-4 text-stone-700">Veer Savarkar International Airport (IATA: IXZ) is the main gateway to the Andaman and Nicobar Islands, located about 2 km south of Port Blair city.</p>
-                <div class="grid sm:grid-cols-2 gap-6">
-                    <div>
-                        <h3 class="text-xl font-semibold text-teal-600 mb-2">Key Features:</h3>
-                        <ul class="list-disc list-inside text-stone-700 space-y-1">
-                            <li>Operates 24/7 for arrivals and departures.</li>
-                            <li>International airport status.</li>
-                            <li>Offers flexibility for flight timings.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-teal-600 mb-2">Amenities:</h3>
-                        <ul class="list-disc list-inside text-stone-700 space-y-1">
-                            <li>ATMs & Currency Exchange</li>
-                            <li>Baggage Handling</li>
-                            <li>Cafes</li>
-                            <li>Car Rental Services</li>
-                            <li><strong class="text-red-600">No Wi-Fi available.</strong></li>
-                        </ul>
-                    </div>
-                </div>
-                <p class="mt-6 text-stone-600 italic">Its 24/7 operation is beneficial for tight schedules and connecting flights with varied timings.</p>
-            </div>
+        <section id="packing-tips">
+            <h2>What to Pack & Other Tips</h2>
+            <ul>
+                <li><strong>Comfortable Walking Shoes:</strong> Essential for sightseeing.</li>
+                <li><strong>Light Layers:</strong> Mysore weather in November is generally pleasant (cool mornings/evenings, warm afternoons).</li>
+                <li><strong>Medications:</strong> Don't forget any personal medications.</li>
+                <li><strong>Small Backpack/Day Bag:</strong> For water, snacks, and personal items during excursions.</li>
+                <li><strong>Camera:</strong> To capture those golden memories!</li>
+                <li><strong>Power Bank:</strong> For charging phones and other devices.</li>
+                <li><strong>Sunscreen & Hat:</strong> For daytime outdoor activities.</li>
+                <li><strong>Positive Attitude & Sense of Humor!</strong></li>
+            </ul>
         </section>
-    </main>
 
-    <footer class="bg-teal-800 text-teal-200 text-center p-6 mt-12">
-        <p>&copy; <span id="currentYear"></span> Port Blair Travel Planner. Information based on provided report.</p>
-        <p class="text-xs mt-1">Always verify travel details with official sources and real-time booking platforms.</p>
+        <section id="contact-rsvp">
+            <h2>Contact Information & RSVP</h2>
+            <ul>
+                <li><strong>Trip Coordinator/Contact Person:</strong> [Your Name/Organizer's Name]</li>
+                <li><strong>Phone:</strong> [Your Phone Number]</li>
+                <li><strong>Email:</strong> [Your Email Address]</li>
+                <li><strong>RSVP By:</strong> [Date, e.g., October 15th] to confirm your participation and preferred 4-day window.</li>
+            </ul>
+        </section>
+
+        <section id="call-to-action">
+            <h3>Call to Action:</h3>
+            <p>We're so excited to share this special trip with all of you! Please review the details, and let's get ready for an unforgettable adventure together. Your presence makes every moment brighter!</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 The Golden Getaway. All rights reserved.</p>
     </footer>
-
-    <script>
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-        const navLinks = document.querySelectorAll('.nav-link');
-        const sections = document.querySelectorAll('main section');
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            mobileMenuButton.querySelectorAll('svg').forEach(svg => svg.classList.toggle('hidden'));
-        });
-        
-        function setActiveLink(sectionId) {
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${sectionId}` || link.dataset.section === sectionId) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        function showSection(sectionId) {
-            sections.forEach(section => {
-                if (section.id === sectionId) {
-                    section.classList.remove('hidden-section');
-                    section.classList.add('section-fade-in');
-                    section.style.display = 'block';
-                } else {
-                    section.style.display = 'none';
-                     section.classList.add('hidden-section');
-                }
-            });
-            setActiveLink(sectionId);
-             if (mobileMenu.classList.contains('hidden') === false) {
-                mobileMenu.classList.add('hidden');
-                mobileMenuButton.querySelectorAll('svg').forEach(svg => svg.classList.toggle('hidden'));
-            }
-        }
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const sectionId = link.dataset.section || link.getAttribute('href').substring(1);
-                showSection(sectionId);
-                history.pushState(null, null, `#${sectionId}`);
-            });
-        });
-        
-        const initialSection = window.location.hash ? window.location.hash.substring(1) : 'overview';
-        showSection(initialSection);
-        setActiveLink(initialSection);
-
-
-        window.addEventListener('popstate', () => {
-            const sectionId = window.location.hash ? window.location.hash.substring(1) : 'overview';
-            showSection(sectionId);
-        });
-        
-        // Tabs for flight origins
-        const tabButtons = document.querySelectorAll('.tab-button');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-
-                const targetTab = button.dataset.tab;
-                tabContents.forEach(content => {
-                    if (content.id === targetTab) {
-                        content.classList.remove('hidden');
-                    } else {
-                        content.classList.add('hidden');
-                    }
-                });
-            });
-        });
-        
-        // Chart.js data and options
-        const chartOptions = (titleText) => ({
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false },
-                title: { display: true, text: titleText, font: { size: 14 }, color: '#374151' },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return `${context.dataset.label}: ${context.formattedValue} hrs`;
-                        }
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: { display: true, text: 'Approx. Hours', font: {size: 12}, color: '#4ade80' },
-                    ticks: { color: '#374151' }
-                },
-                x: {
-                    ticks: { 
-                        color: '#374151',
-                        font: {size: 10},
-                        callback: function(value, index, values) {
-                            const label = this.getLabelForValue(value);
-                            const maxLength = 10;
-                            if (label.length > maxLength) {
-                                const words = label.split(' ');
-                                let currentLine = '';
-                                const lines = [];
-                                words.forEach(word => {
-                                    if ((currentLine + word).length > maxLength) {
-                                        lines.push(currentLine.trim());
-                                        currentLine = '';
-                                    }
-                                    currentLine += word + ' ';
-                                });
-                                lines.push(currentLine.trim());
-                                return lines;
-                            }
-                            return label;
-                        }
-                    }
-                }
-            }
-        });
-
-        const domesticChartData = (direct, layover) => ({
-            labels: ['Direct (If Avail.)', 'With Layovers'],
-            datasets: [{
-                label: 'Flight Time',
-                data: [direct, layover],
-                backgroundColor: ['#14b8a6', '#5eead4'],
-                borderColor: ['#0f766e', '#14b8a6'],
-                borderWidth: 1,
-                borderRadius: 5,
-            }]
-        });
-        
-        const internationalChartData = (totalTime) => ({
-            labels: ['Total Journey'],
-            datasets: [{
-                label: 'Flight Time',
-                data: [totalTime],
-                backgroundColor: ['#ef4444'],
-                borderColor: ['#b91c1c'],
-                borderWidth: 1,
-                borderRadius: 5,
-            }]
-        });
-
-        new Chart(document.getElementById('delhiChart'), { type: 'bar', data: domesticChartData(4, 8.5), options: chartOptions('Delhi: Approx. Flight Times') });
-        new Chart(document.getElementById('mumbaiChart'), { type: 'bar', data: domesticChartData(3.5, 9), options: chartOptions('Mumbai: Approx. Flight Times') });
-        new Chart(document.getElementById('puneChart'), { type: 'bar', data: domesticChartData(0, 9.5), options: chartOptions('Pune: Approx. Flight Times (No Direct)') });
-        new Chart(document.getElementById('chennaiChart'), { type: 'bar', data: domesticChartData(1.5, 4), options: chartOptions('Chennai: Approx. Flight Times') }); // New Chennai Chart
-        new Chart(document.getElementById('kolkataChart'), { type: 'bar', data: domesticChartData(2, 5), options: chartOptions('Kolkata: Approx. Flight Times') }); // New Kolkata Chart
-        new Chart(document.getElementById('sfoChart'), { type: 'bar', data: internationalChartData(28), options: chartOptions('SFO: Approx. Total Journey Time (Multi-Leg)') });
-        new Chart(document.getElementById('atlantaChart'), { type: 'bar', data: internationalChartData(30), options: chartOptions('Atlanta: Approx. Total Journey Time (Multi-Leg)') });
-
-
-        // --- Geo Visualization Logic ---
-        const canvas = document.getElementById('flightPathCanvas');
-        const ctx = canvas.getContext('2d');
-        const geoMapContainer = document.getElementById('geoMapContainer');
-        const cityNodes = document.querySelectorAll('.city-node');
-
-        // These coordinates are approximate and relative to the background map image.
-        // They are mapped from latitude/longitude to a 0-100% scale for 'top' and 'left'
-        // based on the background image's region (roughly 0-100 Longitude E-W, 0-100 Latitude N-S)
-        // Adjust these values if you use a different background image or map projection.
-        const cityCoords = {
-            'delhi': { x: 35, y: 20 },
-            'mumbai': { x: 28, y: 35 },
-            'pune': { x: 29.5, y: 38 },
-            'chennai': { x: 38, y: 50 },
-            'kolkata': { x: 45, y: 30 },
-            'bengaluru': { x: 33, y: 48 },
-            'hyderabad': { x: 33.5, y: 40 },
-            'ahmedabad': { x: 28, y: 28 },
-            'portblair': { x: 60, y: 55 }, // Destination
-            'sfo': { x: 5, y: 25 },
-            'atlanta': { x: 15, y: 35 },
-            'doha': { x: 25, y: 30 },
-            'istanbul': { x: 20, y: 20 }
-        };
-
-        const flightPaths = {
-            'delhi': [
-                ['delhi', 'kolkata', 'portblair'], // Hop flight
-                ['delhi', 'chennai', 'portblair'] // Hop flight
-            ],
-            'mumbai': [
-                ['mumbai', 'portblair'], // No-stop flight
-                ['mumbai', 'bengaluru', 'portblair'], // Hop flight
-                ['mumbai', 'chennai', 'portblair'] // Hop flight
-            ],
-            'pune': [
-                ['pune', 'chennai', 'portblair'], // Hop flight
-                ['pune', 'bengaluru', 'portblair'] // Hop flight
-            ],
-            'chennai': [ // New Chennai flights
-                ['chennai', 'portblair'], // No-stop flight
-                ['chennai', 'bengaluru', 'portblair'] // Hop flight
-            ],
-            'kolkata': [ // New Kolkata flights
-                ['kolkata', 'portblair'], // No-stop flight
-                ['kolkata', 'chennai', 'portblair'] // Hop flight
-            ],
-            'sfo': [
-                ['sfo', 'doha', 'delhi', 'portblair'], // Hop flight
-                ['sfo', 'istanbul', 'mumbai', 'portblair'] // Hop flight
-            ],
-            'atlanta': [
-                ['atlanta', 'doha', 'mumbai', 'portblair'], // Hop flight
-                ['atlanta', 'istanbul', 'delhi', 'portblair'] // Hop flight
-            ]
-        };
-
-        let currentActiveOrigin = null;
-
-        function resizeCanvas() {
-            canvas.width = geoMapContainer.offsetWidth;
-            canvas.height = geoMapContainer.offsetHeight;
-            if (currentActiveOrigin) {
-                drawFlightPaths(currentActiveOrigin);
-            } else {
-                clearCanvas();
-            }
-        }
-
-        function clearCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
-
-        function getCanvasCoords(cityId) {
-            const node = document.getElementById(`node-${cityId}`);
-            if (node) {
-                // Get the actual pixel position of the node relative to the container
-                const containerRect = geoMapContainer.getBoundingClientRect();
-                const nodeRect = node.getBoundingClientRect();
-                
-                const nodeX = nodeRect.left + nodeRect.width / 2 - containerRect.left;
-                const nodeY = nodeRect.top + nodeRect.height / 2 - containerRect.top;
-                return { x: nodeX, y: nodeY };
-            }
-            return null;
-        }
-
-        function drawFlightPaths(originCityId) {
-            clearCanvas();
-            const paths = flightPaths[originCityId];
-            if (!paths) return;
-
-            ctx.lineWidth = 2;
-            ctx.lineCap = 'round';
-
-            paths.forEach(path => {
-                ctx.beginPath();
-                
-                // Determine color based on path length (2 for direct, >2 for hop)
-                ctx.strokeStyle = (path.length === 2) ? '#22c55e' : '#ef4444'; // Green for no-stop, Red for hop
-
-                let startCoords = getCanvasCoords(path[0]);
-                if (startCoords) {
-                    ctx.moveTo(startCoords.x, startCoords.y);
-                }
-
-                for (let i = 1; i < path.length; i++) {
-                    let endCoords = getCanvasCoords(path[i]);
-                    if (endCoords) {
-                        ctx.lineTo(endCoords.x, endCoords.y);
-                    }
-                }
-                ctx.stroke();
-            });
-        }
-
-        // Event listeners for city nodes
-        cityNodes.forEach(node => {
-            const cityId = node.dataset.city;
-            if (cityId === 'portblair') return; // Don't make Port Blair clickable for paths
-
-            node.addEventListener('click', () => {
-                // Remove active class from all other origins
-                cityNodes.forEach(n => {
-                    if (n.dataset.city !== 'portblair') {
-                         n.classList.remove('active-origin');
-                    }
-                });
-
-                // Add active class to clicked origin
-                node.classList.add('active-origin');
-                currentActiveOrigin = cityId;
-                drawFlightPaths(cityId);
-            });
-        });
-
-        // Initial setup
-        window.addEventListener('resize', resizeCanvas);
-        // Draw the map initially when the section becomes visible
-        const flySectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && entry.target.id === 'fly') {
-                    // Only draw if not already drawn or if container size changed
-                    resizeCanvas();
-                    flySectionObserver.unobserve(entry.target); // Stop observing once visible
-                }
-            });
-        }, { threshold: 0.1 }); // Trigger when 10% of the section is visible
-
-        const flySection = document.getElementById('fly');
-        if (flySection) {
-            flySectionObserver.observe(flySection);
-        }
-    </script>
-
 </body>
 </html>
