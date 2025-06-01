@@ -141,14 +141,14 @@
                 <li><strong>Pre-booked Transport:</strong> All local transport, including Bangalore-Kabini transfers and safari pickups, will be pre-arranged (e.g., a comfortable tempo traveller or multiple spacious SUVs/vans) to minimize waiting times and ensure we travel as a cohesive unit.</li>
                 <li><strong>Group Dining:</strong> All meals will be planned at the resort's dining facilities, fostering shared culinary experiences and conversations. Dietary preferences will be accommodated.</li>
                 <li><strong>Curated Activities:</strong> Safaris and other major activities will be pre-booked for the entire group, guaranteeing everyone participates in the core experiences together.</li>
-                <li><strong>Flexible Free Time:</strong> While activities are planned, ample free time will be built in for relaxation, quiet conversations, or enjoying resort amenities together.</li>
+                <li><strong>Flexible Free Time:</b> While activities are planned, ample free time will be built in for relaxation, quiet conversations, or enjoying resort amenities together.</li>
                 <li><strong>Accessibility & Comfort:</strong> All chosen venues and activities will prioritize easy accessibility and comfort, minimizing strenuous physical demands. Safari vehicles will be chosen for ease of entry/exit.</li>
             </ul>
         </section>
 
         <section id="attendees-word-cloud">
-            <h2>Hawabaazes who are showing up</h2>
-            <p>Here's a word cloud visualizing our hawabaazes. The size of the name indicates  "presence".</p>
+            <h2>Our Cherished Attendees</h2>
+            <p>Here's a word cloud visualizing our wonderful group of travelers! The size of the name indicates its "presence" (all names are given equal weight for this visualization). You can edit the names by modifying the `attendees` array in the script at the bottom of this HTML file.</p>
             <div id="word-cloud-container">
                 <canvas id="wordCloudCanvas" width="800" height="400" style="border:1px solid #ccc; background-color: #f9f9f9;"></canvas>
             </div>
@@ -312,19 +312,24 @@
     </footer>
 
     <script>
+        console.log("Script starting...");
+
         // Attendees data for the word cloud
         // You can fill in the names here
         const attendees = [
-            "Rahul", "Prabhu", "Rasmani", "Minocha",
-            "VG", "Khatarnath", "Pawan", "Rajiv Chandra",
-            "Arore", "Murthy", "Gajju", "Khalid",
-            "Anand Prasad", "Venky", "Jamil"
+            "Attendee 1", "Attendee 2", "Attendee 3", "Attendee 4",
+            "Attendee 5", "Attendee 6", "Attendee 7", "Attendee 8",
+            "Attendee 9", "Attendee 10", "Attendee 11", "Attendee 12",
+            "Attendee 13", "Attendee 14", "Attendee 15", "Attendee 16"
         ];
+        console.log("Attendees array:", attendees);
 
         // Prepare data for d3-cloud (each name gets an arbitrary value for size)
         const words = attendees.map(function(d) {
             return {text: d, size: 10 + Math.random() * 30}; // Random size for visual variety
         });
+        console.log("Words array for d3-cloud:", words);
+
 
         const margin = {top: 10, right: 10, bottom: 10, left: 10},
               width = 800 - margin.left - margin.right,
@@ -341,10 +346,16 @@
             .fontSize(function(d) { return d.size; }) // Use the assigned size
             .on("end", draw);
 
+        console.log("D3 Cloud layout created. Starting layout calculation...");
         layout.start();
 
         function draw(words) {
+            console.log("Draw function called. Words to draw:", words);
             const canvas = document.getElementById("wordCloudCanvas");
+            if (!canvas) {
+                console.error("Canvas element not found!");
+                return;
+            }
             const ctx = canvas.getContext("2d");
             ctx.clearRect(0, 0, width, height);
             ctx.translate(width / 2, height / 2); // Center the drawing
@@ -359,6 +370,7 @@
                 ctx.fillText(d.text, 0, 0);
                 ctx.restore();
             });
+            console.log("Word cloud drawing complete.");
         }
     </script>
 </body>
