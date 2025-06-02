@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Golden Getaway: A Kabini Wildlife Escape!</title>
-    <style>
+<style>
         body {
             font-family: 'Georgia', serif;
             line-height: 1.6;
@@ -14,7 +14,7 @@
             color: #333;
         }
         .container {
-            max-width: 900px;
+            max-width: 1200px; /* Increased from 900px */
             margin: 20px auto;
             padding: 20px;
             background-color: #fff;
@@ -144,7 +144,7 @@
             margin-bottom: 20px;
             display: flex; /* Use flexbox for horizontal tabs */
             flex-wrap: wrap; /* Allow tabs to wrap if screen is small */
-            justify-content: center; /* Center the tabs */
+            justify-content: flex-start; /* Align tabs to the left */
             gap: 5px; /* Space between tabs */
         }
         .tab-button {
@@ -157,8 +157,9 @@
             border-radius: 5px 5px 0 0; /* Rounded top corners */
             text-decoration: none; /* Remove underline for links */
             color: #555;
-            flex-grow: 1; /* Allow tabs to grow and fill space */
-            max-width: 180px; /* Limit max width for each tab */
+            flex-grow: 0; /* Don't allow tabs to grow */
+            /* max-width: 180px; */ /* Remove max-width to allow tabs to take their content's width */
+            white-space: nowrap; /* Prevent text from wrapping */
             text-align: center;
         }
         .tab-button:hover {
