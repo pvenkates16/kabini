@@ -118,6 +118,25 @@
             font-size: 0.9em;
             border-top: 1px solid #e0e0e0;
         }
+        /* New style for attendee checkboxes */
+        .attendee-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .attendee-item {
+            display: flex;
+            align-items: center;
+            background-color: #e8f5e9;
+            padding: 8px 12px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .attendee-item input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
     </style>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3-cloud@1.2.7/build/d3.layout.cloud.min.js"></script>
@@ -160,8 +179,15 @@
             </ul>
         </section>
 
+        <section id="attendees-checkboxes">
+            <h2>Attendees Confirmation</h2>
+            <p>Please use the checkboxes below to confirm attendance. All attendees are marked as 'True' by default.</p>
+            <div class="attendee-list" id="attendeeCheckboxes">
+                </div>
+        </section>
+
         <section id="attendees-word-cloud">
-            <h2>Hawabaaz Attendees</h2>
+            <h2>Hawabaaz Attendees (Word Cloud)</h2>
             <p>Initial hand raisers</p>
             <div id="word-cloud-container">
                 <canvas id="wordCloudCanvas" width="800" height="400" style="border:1px solid #ccc; background-color: #f9f9f9;"></canvas>
@@ -377,14 +403,13 @@
     </div>
 
     <footer style="margin-top: 50px;">
-        <p>&copy; 2025 The Golden Getaway. All rights reserved.</p>
+        <p>© 2025 The Golden Getaway. All rights reserved.</p>
     </footer>
 
     <script>
         console.log("Script starting...");
 
-        // Attendees data for the word cloud
-        // You can fill in the names here
+        // Attendees data for the word cloud and checkboxes
         const attendees = [
             "Rahul", "Prabhu", "Ramani", "Minocha",
             "VG", "Khatarnath", "Pawan", "Rajiv Chandra",
@@ -392,6 +417,38 @@
             "Anand Prasad", "Venky", "Jamil", "Anyone else?"
         ];
         console.log("Attendees array:", attendees);
+
+        // Function to create checkboxes
+        function createAttendeeCheckboxes() {
+            const container = document.getElementById("attendeeCheckboxes");
+            if (container) {
+                attendees.forEach(attendee => {
+                    const div = document.createElement("div");
+                    div.classList.add("attendee-item");
+
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.id = `attendee_${attendee.replace(/\s+/g, '_')}`; // Create a valid ID
+                    checkbox.name = "attendee";
+                    checkbox.value = attendee;
+                    checkbox.checked = true; // True by default
+
+                    const label = document.createElement("label");
+                    label.htmlFor = checkbox.id;
+                    label.textContent = attendee;
+
+                    div.appendChild(checkbox);
+                    div.appendChild(label);
+                    container.appendChild(div);
+                });
+            } else {
+                console.error("Attendee checkboxes container not found!");
+            }
+        }
+
+        // Call the function to create checkboxes when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', createAttendeeCheckboxes);
+
 
         // Check if d3 and d3.layout.cloud are defined
         if (typeof d3 === 'undefined') {
