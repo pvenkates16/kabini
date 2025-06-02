@@ -181,7 +181,7 @@
 
         <section id="attendees-checkboxes">
             <h2>Attendees Confirmation</h2>
-            <p>Please use the checkboxes below to confirm attendance. All attendees are marked as 'True' by default, except for "Anyone else?".</p>
+            <p>If your name is not here, please contact the organisers at the bottom of this page</p>
             <div class="attendee-list" id="attendeeCheckboxes">
                 </div>
         </section>
@@ -444,6 +444,7 @@
                     checkbox.name = "attendee";
                     checkbox.value = attendee.name;
                     checkbox.checked = attendee.isPresent; // Use the isPresent property from data structure
+                    checkbox.disabled = true;        // make it read-only
 
                     // Add an event listener to update the data structure when checkbox changes
                     checkbox.addEventListener('change', (event) => {
