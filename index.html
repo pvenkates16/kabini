@@ -155,7 +155,7 @@
                     <li>भालू फूँक</li>
                     <li>पपीता</li>
                     <li>डंडा है या छेदा</li>
-                    <li>ఎర్ర పూకు, వెर्र పూकु</li>
+                    <li>ఎర్ర పూకు, వెर्र పూకు</li>
                 </ul>
             Remind me if I've forgotten any highlights.
             </p>
@@ -181,7 +181,7 @@
 
         <section id="attendees-checkboxes">
             <h2>Attendees Confirmation</h2>
-            <p>Please use the checkboxes below to confirm attendance. All attendees are marked as 'True' by default.</p>
+            <p>Please use the checkboxes below to confirm attendance. All attendees are marked as 'True' by default, except for "Anyone else?".</p>
             <div class="attendee-list" id="attendeeCheckboxes">
                 </div>
         </section>
@@ -409,33 +409,53 @@
     <script>
         console.log("Script starting...");
 
-        // Attendees data for the word cloud and checkboxes
-        const attendees = [
-            "Rahul", "Prabhu", "Ramani", "Minocha",
-            "VG", "Khatarnath", "Pawan", "Rajiv Chandra",
-            "Arore", "Murthy", "Gajju", "Khalid",
-            "Anand Prasad", "Venky", "Jamil", "Anyone else?"
+        // --- MODIFIED ATTENDEES DATA STRUCTURE ---
+        const attendeesData = [
+            { name: "Rahul", isPresent: true },
+            { name: "Prabhu", isPresent: true },
+            { name: "Ramani", isPresent: true },
+            { name: "Minocha", isPresent: true },
+            { name: "VG", isPresent: true },
+            { name: "Khatarnath", isPresent: true },
+            { name: "Pawan", isPresent: true },
+            { name: "Rajiv Chandra", isPresent: true },
+            { name: "Arore", isPresent: true },
+            { name: "Murthy", isPresent: true },
+            { name: "Gajju", isPresent: true },
+            { name: "Khalid", isPresent: true },
+            { name: "Anand Prasad", isPresent: true },
+            { name: "Venky", isPresent: true },
+            { name: "Jamil", isPresent: true },
+            { name: "Anyone else?", isPresent: false } // Set to false here
         ];
-        console.log("Attendees array:", attendees);
+        console.log("Attendees data:", attendeesData);
 
         // Function to create checkboxes
         function createAttendeeCheckboxes() {
             const container = document.getElementById("attendeeCheckboxes");
             if (container) {
-                attendees.forEach(attendee => {
+                attendeesData.forEach(attendee => {
                     const div = document.createElement("div");
                     div.classList.add("attendee-item");
 
                     const checkbox = document.createElement("input");
                     checkbox.type = "checkbox";
-                    checkbox.id = `attendee_${attendee.replace(/\s+/g, '_')}`; // Create a valid ID
+                    checkbox.id = `attendee_${attendee.name.replace(/\s+/g, '_')}`; // Create a valid ID
                     checkbox.name = "attendee";
-                    checkbox.value = attendee;
-                    checkbox.checked = true; // True by default
+                    checkbox.value = attendee.name;
+                    checkbox.checked = attendee.isPresent; // Use the isPresent property from data structure
+
+                    // Add an event listener to update the data structure when checkbox changes
+                    checkbox.addEventListener('change', (event) => {
+                        attendee.isPresent = event.target.checked;
+                        console.log(`${attendee.name} attendance status: ${attendee.isPresent}`);
+                        // If you want to update the word cloud based on attendance, you'd call
+                        // generateWordCloud(); here after filtering attendeesData.
+                    });
 
                     const label = document.createElement("label");
                     label.htmlFor = checkbox.id;
-                    label.textContent = attendee;
+                    label.textContent = attendee.name;
 
                     div.appendChild(checkbox);
                     div.appendChild(label);
@@ -450,6 +470,7 @@
         document.addEventListener('DOMContentLoaded', createAttendeeCheckboxes);
 
 
+        // Word Cloud generation logic - uses attendeesData.map for names
         // Check if d3 and d3.layout.cloud are defined
         if (typeof d3 === 'undefined') {
             console.error("D3.js library is not loaded or defined.");
@@ -458,10 +479,10 @@
             console.error("D3-cloud library (d3.layout.cloud) is not loaded or defined.");
         }
 
-
         // Prepare data for d3-cloud (each name gets an arbitrary value for size)
-        const words = attendees.map(function(d) {
-            return {text: d, size: 10 + Math.random() * 30}; // Random size for visual variety
+        // Now using attendeesData to get names for the word cloud
+        const words = attendeesData.map(function(d) {
+            return {text: d.name, size: 10 + Math.random() * 30}; // Random size for visual variety
         });
         console.log("Words array for d3-cloud:", words);
 
