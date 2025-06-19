@@ -1,10 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Hawabaaz Getaway: A Kabini Wildlife Escape!</title>
+    <!-- Tailwind CSS CDN for basic styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
 <style>
         body {
             font-family: 'Georgia', serif;
@@ -200,6 +201,38 @@
         .back-to-main:hover {
             background-color: #a02d09;
         }
+
+        /* Styles for Three.js container within a tab */
+        #fun-experiments #threejs-container {
+            position: relative; /* Changed from fixed to relative */
+            width: 100%; /* Fill parent width */
+            height: 400px; /* Set a fixed height for the canvas */
+            background-color: #1a202c; /* Dark background */
+            border-radius: 8px;
+            overflow: hidden; /* Ensure content stays within bounds */
+        }
+
+        #fun-experiments canvas {
+            display: block;
+            width: 100% !important; /* Override inline styles to ensure responsiveness */
+            height: 100% !important;
+            border-radius: 8px;
+        }
+
+        #fun-experiments .info-box {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.8em;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
     </style>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3-cloud@1.2.7/build/d3.layout.cloud.min.js"></script>
@@ -213,11 +246,12 @@
         <nav class="tabs-container">
             <a href="#welcome" class="tab-button active" data-tab="welcome">Welcome</a>
             <a href="#overview" class="tab-button" data-tab="overview">Overview</a>
-            <a href="#khatarnaths-kliks" class="tab-button" data-tab="khatarnaths-kliks">Khatarnath Kabini Kliks</a>
             <a href="#attendees" class="tab-button" data-tab="attendees">Attendees</a>
             <a href="#accommodations" class="tab-button" data-tab="accommodations">Accommodations</a>
             <a href="#itinerary" class="tab-button" data-tab="itinerary">Activities</a>
             <a href="#stops" class="tab-button" data-tab="stops">Roadside Stops</a>
+            <a href="#khatarnaths-kliks" class="tab-button" data-tab="khatarnaths-kliks">Khatarnath's Kabini Kliks</a>
+            <a href="#fun-experiments" class="tab-button" data-tab="fun-experiments">Hawabaazes hanging out</a>
             <a href="#contact" class="tab-button" data-tab="contact">Contact Info</a>
         </nav>
 
@@ -232,7 +266,7 @@
                         <li>भालू फूँक</li>
                         <li>पपीता</li>
                         <li>डंडा है या छेदा</li>
-                        <li>ఎర్ర పూకు, వెర्र పూకు</li>
+                        <li>ఎర్र పూకు, వెर्र పూకు</li>
                     </ul>
                 Remind me if I've forgotten any highlights.
                 </p>
@@ -417,53 +451,318 @@
                 </ul>
                 <p>It's best to factor in a short stop for these culinary gems. A quick 30-45 minute break can enhance your road trip experience significantly!</p>
             </section>
-			<section id="khatarnaths-kliks" class="tab-content">
-				<h2>Khatarnath's Kabini Kliks</h2>
-				<p>Here are some amazing captures by Khatarnath from his earlier Kabini trips!</p>
-				<div class="image-gallery">
-				<img src="kabini-leopards.jpg" alt="Khatarnath's Kabini Klik leopards">
-				<img src="https://lh3.googleusercontent.com/pw/AP1GczNFi9JgLeuaQpcmKm54Gj0rLRwl-ekqhK9n-q9EOF6TMCo3LHIm0kq_uEfUx9oaFY-bebk5GR62FWJOSdOdUIHpwfulFuJrHVqB-QcYt-kh8K9GpEMgfbVqZC9AB1hjANalL_YWEKNGZRUAY0hDC9duNQ=w2688-h1792-s-no?authuser=0" alt="Khatarnath's Kabini Klik 1">
-				<img src="https://lh3.googleusercontent.com/pw/AP1GczPgxwkLGO-T9rF0esq8tqRiY17dOVaXMlL7qNfARoKhAcWEpbKcrLJCPclpQ3kfozhiVGzfMjnSumFkT3hciwOBbSXz4KE5C5uPfNsSL3xYWK1T25TxhIOMQP6lDWTj8XGbUXN7W0rk-LlvFMMqzOfbZQ=w2688-h1792-s-no?authuser=0" alt="Khatarnath's Kabini Klik 2">
-				<img src="https://lh3.googleusercontent.com/pw/AP1GczPttgy7t2l8Jxen-y_VtjlhafYViGarcCj0I0ZKNQKgGLmzreddgBX0beIg5Yo4dlM54DGd-vUUxbaqTFifRmmF3MgARIXXuGhN232H6qblLxyKoY9BCx1UtBdHMVSzr0s-nA3-z930FWWJD4Vs6CIc7A=w2688-h1792-s-no?authuser=0" alt="Khatarnath's Kabini Klik 3">
-				<img src="https://lh3.googleusercontent.com/pw/AP1GczNOqXNqzELYLlkYjX44HgOZEVgsCkR3EIQeJit9kupk3MnShuVjING9Y2riDNc7qLUaxf4mV9lPx3DpK0_Nqi2oTQ8iASEPGMZePcGsADE4Kg985wEc7L4BUnY_FzYMgDZahIwNQIzU7lJxy5-b0blbvA=w2688-h1792-s-no?authuser=0" alt="Khatarnath's Kabini Klik 3">
-				<img src="https://lh3.googleusercontent.com/pw/AP1GczMj_tIe8twUZmFC_zEzcx-eBAOO81w1oBcUUK6VhQCNKFdpXLSbpRiRkrmcmXReSr3C_IbzFmkc1MRnCpEyfpWMSnl4Isvh2fAMajHi9O1hVuKaWNYRhOLJg3J4Jw2BO1kwDNmyJJNai_huZE_g7dLz1w=w2688-h1792-s-no?authuser=0" alt="Khatarnath's Kabini Klik 3">
-				<img src="https://lh3.googleusercontent.com/pw/AP1GczO5dAcPWhe2VP18a2SJPZDHDFWCUGpn-JQI6rqhVW_ymJUn-OXmNcGWylYKR6nJ_7L0ugFmsmLKYsfHf1YQiYxkno-QAOaVb8yL9v0-0zDbs3tFMT-XtCbPet7DJqbECO2LEAWvDGQXw9dbg-f6tKQwSA=w1617-h1078-s-no?authuser=0" alt="Khatarnath's Kabini Klik 3">
-				<img src="https://lh3.googleusercontent.com/pw/AP1GczOs6YW4Gk4WVBz6iTnnlMI7id48q1sP0ysw4teHxEq2pVMVfVmeIiemMzd00ffF77n-c5p3dYo-HkOGdfS2DB_wiJjg9PxvQzSzHtm_giEioLlAW66l6EsUkRKH4KhEeLgAhZ0wSFuUkZA-D4DQXGewoA=w2688-h1792-s-no?authuser=0" alt="Khatarnath's Kabini Klik 3">
-				<img src="https://lh3.googleusercontent.com/pw/AP1GczP6qxiee1VwfcC2eUtAwBqu1lb6z0NqROWetRcgCneKMX7a9uEQnVq2k2jOhXnjtV7VH8or_5ShsRm8vVjuAfl1h7p_Mk2oaU8Ml6qEI8X0dcGBmgdsSnZVIeV-W0zZ5oR2qHWczLSDNQonNuGGVlO-TQ=w2688-h1792-s-no?authuser=0" alt="Khatarnath's Kabini Klik 3">
-				<img src="https://lh3.googleusercontent.com/pw/AP1GczN9fJkiZ1ycRGshP6ZFhQE-azZ6x0pEiU5p2s21j08C08xqTZ4JXNSeBqMk99O9murHAuBwmjUj0VWp1oNmjrVRzuzWgoNlRSYp98g-pQZEojqH_wGIe3ZXih1c43FSPd6MsZxf0vQM3kbb6QCUpIgeGw=w2688-h1792-s-no?authuser=0" alt="Khatarnath's Kabini Klik 3">
-				<img src="https://lh3.googleusercontent.com/pw/AP1GczOZhd_4bAlxosPuk9d9yAsLtkT-va9N-HYph6Ho84IjXWQB4HRAV3ociM5-CHLB8J4wzrxHJ90YseVlrU-wXWxCerCb0cCatoBP2gdv13UkS_sjZRnnd4N0W1BXdoM8swnzVLpL-oL7fDCnAA9LmdUpxw=w2688-h1792-s-no?authuser=0" alt="Khatarnath's Kabini Klik 3">
-				<img src="https://lh3.googleusercontent.com/pw/AP1GczOctkllAj-661922LGFZB2GSBGi8meAiAKSWe6jfyIR2k7hpm9E3ZU38Y__z-D6aZqjft4JpLAcpFKEQW4923hhR84zS8vroSBKnXKTYWNda2daBddCALheTBwpUmHV10T1P-xxxsQVbYhmzSQ3pYp3sQ=w1456-h971-s-no?authuser=0" alt="Khatarnath's Kabini Klik 3">
-				<img src="https://lh3.googleusercontent.com/pw/AP1GczNwXy6Sf2xkB02Sk0-36xBiARIfUlDyRzEIpvz21nB5tD5n81tMf_0yNnLp22Hhp5MFqYd_qXcKZYNIQ_RiGtxWReBWdgJnhvoCi-Ks9wKl1qPZYRo9AHkUtoKvUWGeXVZXdOljz8NgKCdzTXXX1nsaZA=w2688-h1792-s-no?authuser=0" alt="Khatarnath's Kabini Klik 3">
-				<img src="https://lh3.googleusercontent.com/pw/AP1GczOHyNiQyQwgYybL_rIB_Wt8mJjD4dtfgQeBtfbZAl-zzsb0yGNjg-yCJJg8C6-ut09q3fmTHjetUI6mj7xIlaCyQNtuRUmolY8aIL4L6sq73bmc-DuKxmG9iqNWm-PXTk9LuZR8iLv5iUK5vDJGSFrZTQ=w2688-h1792-s-no?authuser=0" alt="Khatarnath's Kabini Klik 3">
-				<img src="https://lh3.googleusercontent.com/pw/AP1GczNcjSDsPSYgemK7EcaWddi8eTFWDjrqSVE1SaId0qHOZZrs-Xx8J11XCIOjxLuKr3_zhQx3OkDFCwygUkZx0kbIovY8Ap-GjVy1AMl0r8iOQiYJFdUuFLC9aeGxLtX_9wi9tAB_ECkct0HHJXiEA_w-Ag=w2688-h1792-s-no?authuser=0" alt="Khatarnath's Kabini Klik 3">
-				<img src="https://lh3.googleusercontent.com/pw/AP1GczNzwDl3NsggRUH8OIM7NFf-YaudeYxIF6y7Vi9GzFrI-NWUzqJMeJWj8gi28FCuqEAYJZOgaN0o0NCl-IUwBXcoLod7qAS0AsOA2JVttO1salwXWKQMmY4NQkbfDaicPC4o2LPREKOIz-ab1bf6Wl90jA=w2688-h1792-s-no?authuser=0" alt="Khatarnath's Kabini Klik 3">
-				<img src="Link3" alt="Morepics">
-				</div>
-				<p class="image-note"><em>More kliks coming soon!</em></p>
-			</section>
 
-            <section id="contact" class="tab-content">
-                <h2>Contact Information & RSVP</h2>
-                <h3>Chat with our Kabini AI Assistant!</h3>
-                <p>Have quick questions about Kabini wildlife, safaris, accommodations, or anything else about your trip? Our AI assistant is here to help:</p>
-                <iframe
-                    src="https://www.chatbase.co/chatbot-iframe/337-cJRbLVx23JiEgkB7K"
-                    width="100%"
-                    style="height: 100%; min-height: 700px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;"
-                    frameborder="0"
-                ></iframe>
-                <p style="margin-top: 20px;">If the bot can't answer your question, or for specific trip arrangements, please use the contact details below.</p>
-                
-                <ul>
-                    <li><strong>Trip Coordinator/Contact Person:</strong> Rahul Masurekar, Ananth Murthy</li>
-                    <li><strong>Phone:</strong> +91 98862 20044, +91 99450 55859</li>
-                    <li><strong>Email:</strong> [Your Email Address]</li>
-                    <li><strong>RSVP By:</strong> [Date, e.g., October 15th] to confirm your participation. Remember, safari bookings require early confirmation!</li>
-                </ul>
-                <section id="call-to-action">
-                    <h3>Call to Action:</h3>
-                    <p>We're incredibly excited to embark on this wildlife journey with all of you! Please review the details, and let's get ready for an unforgettable adventure together amidst the wonders of Kabini. Your enthusiasm makes every sighting more special!</p>
-                </section>
+            <section id="khatarnaths-kliks" class="tab-content">
+                <h2>Khatarnath's Kabini Kliks</h2>
+                <p>Here are some amazing captures by Khatarnath from the Kabini trip!</p>
+                <div class="image-gallery">
+                    <img src="Link1" alt="Khatarnath's Kabini Klik 1" onerror="this.onerror=null;this.src='https://placehold.co/280x180/E0E0E0/333333?text=Image+1'">
+                    <img src="Link2" alt="Khatarnath's Kabini Klik 2" onerror="this.onerror=null;this.src='https://placehold.co/280x180/D0D0D0/333333?text=Image+2'">
+                    <img src="Link3" alt="Khatarnath's Kabini Klik 3" onerror="this.onerror=null;this.src='https://placehold.co/280x180/C0C0C0/333333?text=Image+3'">
+                </div>
+                <p class="image-note"><em>More kliks coming soon!</em></p>
+            </section>
+
+            <section id="fun-experiments" class="tab-content">
+                <h2>Fun Experiments: Floating Translucent Silver Spheres</h2>
+                <p>Dive into this interactive 3D animation!</p>
+                <div id="threejs-container"></div>
+                <div class="info-box">
+                    <p>Use your mouse to drag and rotate the scene.</p>
+                    <p>Scroll to zoom in/out.</p>
+                </div>
+
+                <!-- Three.js library -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+                <!-- OrbitControls for camera interaction -->
+                <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+                <script>
+                    // Global variables for Three.js scene components specific to this tab
+                    let scene_three, camera_three, renderer_three, controls_three;
+                    const spheres_three = []; // Array to hold all sphere meshes
+                    let animationFrameId_three = null; // To store requestAnimationFrame ID for stopping
+
+                    // Function to initialize the Three.js scene within a given container
+                    function setupThreeJS(containerId) {
+                        const container = document.getElementById(containerId);
+                        if (!container) {
+                            console.error("Three.js container not found:", containerId);
+                            return;
+                        }
+
+                        // Clear existing canvas if any
+                        while (container.firstChild) {
+                            container.removeChild(container.firstChild);
+                        }
+
+                        // 1. Scene setup
+                        scene_three = new THREE.Scene();
+                        scene_three.background = new THREE.Color(0x1a202c); // Dark background for contrast
+
+                        // 2. Camera setup
+                        // Get container dimensions
+                        const containerWidth = container.clientWidth;
+                        const containerHeight = container.clientHeight;
+
+                        camera_three = new THREE.PerspectiveCamera(75, containerWidth / containerHeight, 0.1, 1000);
+                        camera_three.position.z = 25; // Move camera back to see the spheres
+
+                        // 3. Renderer setup
+                        renderer_three = new THREE.WebGLRenderer({ antialias: true }); // Antialias for smoother edges
+                        renderer_three.setSize(containerWidth, containerHeight);
+                        renderer_three.setPixelRatio(window.devicePixelRatio); // Handle high-DPI screens
+                        container.appendChild(renderer_three.domElement);
+
+                        // 4. Lights setup
+                        const ambientLight = new THREE.AmbientLight(0x404040, 2); // Soft white light, slightly brighter
+                        scene_three.add(ambientLight);
+
+                        const directionalLight = new THREE.DirectionalLight(0xffffff, 2); // White light, brighter
+                        directionalLight.position.set(5, 10, 7); // Position the light
+                        scene_three.add(directionalLight);
+
+                        // 5. Create Spheres
+                        const sphereGeometry = new THREE.SphereGeometry(1, 32, 32); // Radius 1, 32 segments for smoothness
+
+                        const sphereMaterial = new THREE.MeshPhysicalMaterial({
+                            color: 0xc0c0c0,    // Silver color
+                            metalness: 0.9,     // High metalness for metallic look
+                            roughness: 0.2,     // Slightly rough to scatter light, not a perfect mirror
+                            transmission: 0.8,  // High transmission for translucency
+                            transparent: true,  // Must be true for transmission to work
+                            opacity: 0.9,       // Overall opacity
+                            clearcoat: 0.5,     // Adds a clear coating for extra shine
+                            clearcoatRoughness: 0.1 // Smooth clearcoat
+                        });
+
+                        const numberOfSpheres = 50;
+                        for (let i = 0; i < numberOfSpheres; i++) {
+                            const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+
+                            // Randomize position within a bounding box
+                            sphere.position.x = (Math.random() - 0.5) * 40; // -20 to 20
+                            sphere.position.y = (Math.random() - 0.5) * 40; // -20 to 20
+                            sphere.position.z = (Math.random() - 0.5) * 40; // -20 to 20
+
+                            // Store initial random movement directions with a speed factor
+                            const speedFactor = 0.05; // Control overall speed
+                            sphere.userData.direction = new THREE.Vector3(
+                                (Math.random() - 0.5) * speedFactor,
+                                (Math.random() - 0.5) * speedFactor,
+                                (Math.random() - 0.5) * speedFactor
+                            ).normalize().multiplyScalar(speedFactor); // Normalize and apply speed
+
+                            // Store initial random rotation speeds
+                            sphere.userData.rotationSpeed = new THREE.Vector3(
+                                (Math.random() - 0.5) * 0.01,
+                                (Math.random() - 0.5) * 0.01,
+                                (Math.random() - 0.5) * 0.01
+                            );
+
+                            // Assign attendee name to the sphere
+                            const attendeeName = attendeesData[i % attendeesData.length].name;
+                            sphere.userData.attendeeName = attendeeName;
+
+                            // Create a canvas for the text texture for the sprite label
+                            const labelCanvas = document.createElement('canvas');
+                            const context = labelCanvas.getContext('2d');
+                            const fontSize = 24; // Decreased font size
+                            const font = `${fontSize}px Arial`;
+                            context.font = font;
+
+                            const textWidth = context.measureText(attendeeName).width;
+                            // Add padding to canvas dimensions
+                            labelCanvas.width = textWidth + 20; // Reduced padding
+                            labelCanvas.height = fontSize + 10; // Reduced padding
+
+                            // Redraw text with proper dimensions and subtle styling
+                            context.font = font;
+                            context.fillStyle = 'rgba(0, 0, 0, 0.4)'; // Subtle transparent background
+                            context.fillRect(0, 0, labelCanvas.width, labelCanvas.height);
+                            context.fillStyle = 'white'; // White text
+                            context.textAlign = 'center';
+                            context.textBaseline = 'middle';
+                            context.fillText(attendeeName, labelCanvas.width / 2, labelCanvas.height / 2);
+
+                            const labelTexture = new THREE.CanvasTexture(labelCanvas);
+                            labelTexture.needsUpdate = true;
+
+                            const labelMaterial = new THREE.SpriteMaterial({ map: labelTexture });
+                            const labelSprite = new THREE.Sprite(labelMaterial);
+
+                            // Scale sprite based on canvas size, relative to sphere size for subtlety
+                            const scaleFactor = 0.02; // Significantly decreased scale factor for smaller labels
+                            labelSprite.scale.set(labelCanvas.width * scaleFactor, labelCanvas.height * scaleFactor, 1);
+
+                            // Position the label slightly above the sphere
+                            // The Y position is relative to the sphere's center, so add half the sphere's radius and a bit more
+                            labelSprite.position.y = sphereGeometry.parameters.radius + labelSprite.scale.y / 2 + 0.1; // Adjusted offset for smaller labels
+
+                            sphere.add(labelSprite); // Add sprite as child of the sphere
+                            sphere.userData.labelSprite = labelSprite; // Store reference to the sprite
+
+                            scene_three.add(sphere);
+                            spheres_three.push(sphere);
+                        }
+
+                        // 6. OrbitControls for camera interaction
+                        controls_three = new THREE.OrbitControls(camera_three, renderer_three.domElement);
+                        controls_three.enableDamping = true; // Enable damping (inertia)
+                        controls_three.dampingFactor = 0.05; // Damping factor
+                        controls_three.screenSpacePanning = false; // Disable panning to restrict movement
+                        controls_three.minDistance = 5; // Minimum zoom distance
+                        controls_three.maxDistance = 100; // Maximum zoom distance
+
+                        // Resize listener specific to this canvas container
+                        const resizeObserver = new ResizeObserver(entries => {
+                            for (let entry of entries) {
+                                if (entry.target.id === containerId) {
+                                    const width = entry.contentRect.width;
+                                    const height = entry.contentRect.height;
+                                    camera_three.aspect = width / height;
+                                    camera_three.updateProjectionMatrix();
+                                    renderer_three.setSize(width, height);
+                                }
+                            }
+                        });
+                        resizeObserver.observe(container);
+                    }
+
+                    // Function to handle collisions between spheres
+                    function handleSphereCollisions() {
+                        const damping = 0.9; // Energy loss on collision
+                        for (let i = 0; i < spheres_three.length; i++) {
+                            for (let j = i + 1; j < spheres_three.length; j++) {
+                                const sphereA = spheres_three[i];
+                                const sphereB = spheres_three[j];
+
+                                const distance = sphereA.position.distanceTo(sphereB.position);
+                                const minDistance = sphereA.geometry.parameters.radius + sphereB.geometry.parameters.radius;
+
+                                if (distance < minDistance) {
+                                    // Collision detected!
+
+                                    // Calculate collision normal (vector from A to B)
+                                    const normal = new THREE.Vector3().subVectors(sphereB.position, sphereA.position).normalize();
+
+                                    // Calculate relative velocity
+                                    const relativeVelocity = new THREE.Vector3().subVectors(
+                                        sphereB.userData.direction,
+                                        sphereA.userData.direction
+                                    );
+
+                                    // Calculate impulse scalar
+                                    const impulseScalar = relativeVelocity.dot(normal);
+
+                                    // If spheres are moving away from each other, ignore (to prevent double collision)
+                                    if (impulseScalar > 0) continue;
+
+                                    // Apply impulse to change directions
+                                    const impulse = normal.multiplyScalar(-impulseScalar * damping); // Apply damping
+
+                                    sphereA.userData.direction.sub(impulse);
+                                    sphereB.userData.direction.add(impulse);
+
+                                    // Separate spheres slightly to prevent sticking
+                                    const overlap = minDistance - distance;
+                                    const separationVector = normal.clone().multiplyScalar(overlap / 2 + 0.001); // Add a small epsilon
+                                    sphereA.position.sub(separationVector);
+                                    sphereB.position.add(separationVector);
+                                }
+                            }
+                        }
+                    }
+
+                    // Animation loop for Three.js
+                    function animateThreeJS() {
+                        animationFrameId_three = requestAnimationFrame(animateThreeJS);
+
+                        // Update sphere positions
+                        spheres_three.forEach(sphere => {
+                            sphere.position.add(sphere.userData.direction);
+
+                            // Bounce off imaginary boundaries (simple collision)
+                            const boundary = 20; // Half-width of the bounding box
+                            const sphereRadius = sphere.geometry.parameters.radius;
+
+                            if (sphere.position.x > boundary - sphereRadius) {
+                                sphere.position.x = boundary - sphereRadius;
+                                sphere.userData.direction.x *= -1;
+                            } else if (sphere.position.x < -boundary + sphereRadius) {
+                                sphere.position.x = -boundary + sphereRadius;
+                                sphere.userData.direction.x *= -1;
+                            }
+
+                            if (sphere.position.y > boundary - sphereRadius) {
+                                sphere.position.y = boundary - sphereRadius;
+                                sphere.userData.direction.y *= -1;
+                            } else if (sphere.position.y < -boundary + sphereRadius) {
+                                sphere.position.y = -boundary + sphereRadius;
+                                sphere.userData.direction.y *= -1;
+                            }
+
+                            if (sphere.position.z > boundary - sphereRadius) {
+                                sphere.position.z = boundary - sphereRadius;
+                                sphere.userData.direction.z *= -1;
+                            } else if (sphere.position.z < -boundary + sphereRadius) {
+                                sphere.position.z = -boundary + sphereRadius;
+                                sphere.userData.direction.z *= -1;
+                            }
+
+                            // Rotate spheres
+                            sphere.rotation.x += sphere.userData.rotationSpeed.x;
+                            sphere.rotation.y += sphere.userData.rotationSpeed.y;
+                            sphere.rotation.z += sphere.userData.rotationSpeed.z;
+                        });
+
+                        // Handle sphere-sphere collisions
+                        handleSphereCollisions();
+
+                        controls_three.update();
+                        renderer_three.render(scene_three, camera_three);
+                    }
+
+                    // Function to stop Three.js animation and dispose resources
+                    function stopThreeJSAnimation() {
+                        if (animationFrameId_three) {
+                            cancelAnimationFrame(animationFrameId_three);
+                            animationFrameId_three = null;
+                        }
+                        if (renderer_three) {
+                            spheres_three.forEach(sphere => {
+                                // Dispose of sphere geometry and material
+                                if (sphere.geometry) sphere.geometry.dispose();
+                                if (sphere.material) sphere.material.dispose();
+
+                                // Dispose of sprite material and texture
+                                if (sphere.userData.labelSprite) {
+                                    if (sphere.userData.labelSprite.material.map) {
+                                        sphere.userData.labelSprite.material.map.dispose();
+                                    }
+                                    if (sphere.userData.labelSprite.material) {
+                                        sphere.userData.labelSprite.material.dispose();
+                                    }
+                                }
+                                // Remove sprite from sphere if it was added as a child
+                                if (sphere.parent) {
+                                    sphere.parent.remove(sphere);
+                                }
+                            });
+                            renderer_three.dispose();
+                            renderer_three = null;
+                        }
+                        if (scene_three) {
+                            scene_three.clear();
+                            scene_three = null;
+                        }
+                        spheres_three.length = 0; // Clear the array
+                        if (controls_three) {
+                            controls_three.dispose();
+                            controls_three = null;
+                        }
+                    }
+                </script>
             </section>
 
         </div> <a href="#welcome" class="back-to-main" id="backToMainBtn">Back to Main Page</a>
@@ -531,6 +830,9 @@
 
         // --- TAB FUNCTIONALITY ---
         function showTab(tabId) {
+            // Stop any running Three.js animation first
+            stopThreeJSAnimation();
+
             // Remove 'active' class from all tab buttons
             document.querySelectorAll('.tab-button').forEach(button => {
                 button.classList.remove('active');
@@ -558,6 +860,10 @@
                 // Ensure word cloud is regenerated or drawn when attendees tab is active
                 // This prevents issues if the canvas wasn't visible before.
                 generateWordCloud();
+            } else if (tabId === 'fun-experiments') {
+                // If 'Fun Experiments' tab is active, setup and start Three.js animation
+                setupThreeJS('threejs-container');
+                animateThreeJS();
             }
         }
 
@@ -653,3 +959,4 @@
     </script>
 </body>
 </html>
+
