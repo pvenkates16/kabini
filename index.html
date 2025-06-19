@@ -251,7 +251,7 @@
             <a href="#itinerary" class="tab-button" data-tab="itinerary">Activities</a>
             <a href="#stops" class="tab-button" data-tab="stops">Roadside Stops</a>
             <a href="#khatarnaths-kliks" class="tab-button" data-tab="khatarnaths-kliks">Khatarnath's Kabini Kliks</a>
-            <a href="#fun-experiments" class="tab-button" data-tab="fun-experiments">Hawabaazes hanging out</a>
+            <a href="#fun-experiments" class="tab-button" data-tab="fun-experiments">Fun Experiments</a>
             <a href="#contact" class="tab-button" data-tab="contact">Contact Info</a>
         </nav>
 
@@ -454,7 +454,7 @@
 
             <section id="khatarnaths-kliks" class="tab-content">
                 <h2>Khatarnath's Kabini Kliks</h2>
-                <p>Here are some amazing captures by Khatarnath from the Kabini trip!</p>
+                <p>Here are some amazing captures by Khatarnath from previous Kabini trips!</p>
                 <div class="image-gallery">
                     <img src="Link1" alt="Khatarnath's Kabini Klik 1" onerror="this.onerror=null;this.src='https://placehold.co/280x180/E0E0E0/333333?text=Image+1'">
                     <img src="Link2" alt="Khatarnath's Kabini Klik 2" onerror="this.onerror=null;this.src='https://placehold.co/280x180/D0D0D0/333333?text=Image+2'">
@@ -482,6 +482,18 @@
                     let scene_three, camera_three, renderer_three, controls_three;
                     const spheres_three = []; // Array to hold all sphere meshes
                     let animationFrameId_three = null; // To store requestAnimationFrame ID for stopping
+
+                    // Array of image URLs for sphere textures - Replaced problematic links
+                    const imageUrls_three = [
+                        "https://placehold.co/600x400/ADD8E6/000000?text=Elephant", // Placeholder for Elephant
+                        "https://placehold.co/600x400/FFD700/000000?text=Tiger",    // Placeholder for Tiger
+                        "https://placehold.co/600x400/90EE90/000000?text=Bird",       // Placeholder for Bird
+                        "https://placehold.co/600x400/87CEEB/000000?text=Deer",       // Corrected placeholder for Deer
+                        "https://placehold.co/600x400/F08080/000000?text=Gaur",       // Placeholder for Gaur
+                        "https://placehold.co/600x400/20B2AA/FFFFFF?text=Forest",   // Placeholder for Forest scene
+                        "https://placehold.co/600x400/000000/FFFFFF?text=Panther"    // Placeholder for Black Panther
+                    ];
+                    const textureLoader_three = new THREE.TextureLoader();
 
                     // Function to initialize the Three.js scene within a given container
                     function setupThreeJS(containerId) {
@@ -525,19 +537,41 @@
                         // 5. Create Spheres
                         const sphereGeometry = new THREE.SphereGeometry(1, 32, 32); // Radius 1, 32 segments for smoothness
 
-                        const sphereMaterial = new THREE.MeshPhysicalMaterial({
-                            color: 0xc0c0c0,    // Silver color
-                            metalness: 0.9,     // High metalness for metallic look
-                            roughness: 0.2,     // Slightly rough to scatter light, not a perfect mirror
-                            transmission: 0.8,  // High transmission for translucency
-                            transparent: true,  // Must be true for transmission to work
-                            opacity: 0.9,       // Overall opacity
-                            clearcoat: 0.5,     // Adds a clear coating for extra shine
-                            clearcoatRoughness: 0.1 // Smooth clearcoat
-                        });
+                        const baseMaterialProperties = {
+                            metalness: 0.8,
+                            roughness: 0.3,
+                            transmission: 0.15, // Reduced transmission to make texture more visible
+                            transparent: true,
+                            opacity: 0.95, // Increased opacity slightly
+                            clearcoat: 0.5,
+                            clearcoatRoughness: 0.1
+                        };
 
-                        const numberOfSpheres = 50;
+                        // Use the number of attendees for the number of spheres
+                        const numberOfSpheres = attendeesData.length;
                         for (let i = 0; i < numberOfSpheres; i++) {
+                            // Create a new material instance for each sphere
+                            const sphereMaterial = new THREE.MeshPhysicalMaterial(baseMaterialProperties);
+
+                            // Load texture for each sphere
+                            const textureIndex = i % imageUrls_three.length;
+                            const textureUrl = imageUrls_three[textureIndex];
+
+                            textureLoader_three.load(textureUrl,
+                                function(texture) {
+                                    sphereMaterial.map = texture;
+                                    sphereMaterial.needsUpdate = true;
+                                },
+                                undefined,
+                                function(err) {
+                                    console.error('An error happened loading texture:', err, textureUrl);
+                                    // Fallback to a solid color if texture fails to load
+                                    sphereMaterial.color.set(0x808080); // Gray fallback
+                                    sphereMaterial.map = null; // Ensure no broken map is used
+                                    sphereMaterial.needsUpdate = true;
+                                }
+                            );
+
                             const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
 
                             // Randomize position within a bounding box
@@ -561,7 +595,7 @@
                             );
 
                             // Assign attendee name to the sphere
-                            const attendeeName = attendeesData[i % attendeesData.length].name;
+                            const attendeeName = attendeesData[i].name; // Use 'i' directly for attendee name
                             sphere.userData.attendeeName = attendeeName;
 
                             // Create a canvas for the text texture for the sprite label
@@ -733,7 +767,12 @@
                             spheres_three.forEach(sphere => {
                                 // Dispose of sphere geometry and material
                                 if (sphere.geometry) sphere.geometry.dispose();
-                                if (sphere.material) sphere.material.dispose();
+                                if (sphere.material) {
+                                    if (sphere.material.map) {
+                                        sphere.material.map.dispose(); // Dispose texture
+                                    }
+                                    sphere.material.dispose(); // Dispose material
+                                }
 
                                 // Dispose of sprite material and texture
                                 if (sphere.userData.labelSprite) {
@@ -744,7 +783,7 @@
                                         sphere.userData.labelSprite.material.dispose();
                                     }
                                 }
-                                // Remove sprite from sphere if it was added as a child
+                                // Remove sphere from scene
                                 if (sphere.parent) {
                                     sphere.parent.remove(sphere);
                                 }
