@@ -523,6 +523,23 @@
                         scene_three = new THREE.Scene();
                         scene_three.background = new THREE.Color(0x1a202c); // Dark background for contrast
 
+			// **MODIFICATION START**
+			// Load the background texture
+			const backgroundTextureLoader = new THREE.TextureLoader();
+			backgroundTextureLoader.load(
+				'https://lh3.googleusercontent.com/pw/AP1GczOyJBXdYqkYe5_HS2tZK7VRxEYGxZr-gF4SOZF5xwTldo63V_jthK14pbsE3oIf7hRCPz1P7EQG5T0kasDLi6rBgziipCDBRU0Vunb3de73pq4Mne1KEZEI6IZO7cfrjnzcfyNRboH4u5qn6bm1DYbuvg=w2688-h1792-s-no?authuser=0', // Replace with your desired background image URL
+				function(texture) {
+				    scene_three.background = texture;
+				},
+				undefined,
+				function(err) {
+				    console.error('An error happened loading the background texture:', err);
+				    scene_three.background = new THREE.Color(0x1a202c); // Fallback to dark background
+				}
+			);
+			// **MODIFICATION END**
+
+
                         // 2. Camera setup
                         // Get container dimensions
                         const containerWidth = container.clientWidth;
