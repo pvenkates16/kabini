@@ -523,68 +523,21 @@
                         scene_three = new THREE.Scene();
                         scene_three.background = new THREE.Color(0x1a202c); // Dark background for contrast
 
-			// **MODIFICATION START FOR BACKGROUND IMAGE ASPECT RATIO**
+			// **MODIFICATION START**
 			// Load the background texture
 			const backgroundTextureLoader = new THREE.TextureLoader();
 			backgroundTextureLoader.load(
-			    'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Elephants_at_Kabini.jpg/1599px-Elephants_at_Kabini.jpg?20190312045152', // Replace with your desired background image URL
-			    function(texture) {
-				// If a previous background mesh exists, remove and dispose it
-				if (backgroundMesh_three) {
-				    scene_three.remove(backgroundMesh_three);
-				    backgroundMesh_three.geometry.dispose();
-				    if (backgroundMesh_three.material.map) backgroundMesh_three.material.map.dispose();
-				    backgroundMesh_three.material.dispose();
-				    backgroundMesh_three = null;
+				'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Elephants_at_Kabini.jpg/1599px-Elephants_at_Kabini.jpg?20190312045152', // Replace with your desired background image URL
+				function(texture) {
+				    scene_three.background = texture;
+				},
+				undefined,
+				function(err) {
+				    console.error('An error happened loading the background texture:', err);
+				    scene_three.background = new THREE.Color(0x1a202c); // Fallback to dark background
 				}
-
-				texture.minFilter = THREE.LinearFilter;
-				texture.magFilter = THREE.LinearFilter;
-				texture.needsUpdate = true; // Important for loaded textures
-
-				const containerWidth = container.clientWidth;
-				const containerHeight = container.clientHeight;
-				const imageAspect = texture.image.width / texture.image.height;
-				const cameraAspect = containerWidth / containerHeight;
-
-				let planeWidth;
-				let planeHeight;
-				const distance = 100; // Distance of the background plane from the camera
-
-				// Calculate visible height at `distance` from camera
-				const vFOV = camera_three.fov * Math.PI / 180; // convert vertical fov to radians
-				const visibleHeightAtDistance = 2 * Math.tan(vFOV / 2) * distance;
-				const visibleWidthAtDistance = visibleHeightAtDistance * cameraAspect;
-
-				// Determine plane dimensions to cover the view while maintaining image aspect ratio
-				if (imageAspect > cameraAspect) {
-				    // Image is wider than the viewport, so it will fill width and be cropped vertically
-				    planeWidth = visibleWidthAtDistance;
-				    planeHeight = visibleWidthAtDistance / imageAspect;
-				} else {
-				    // Image is taller than the viewport, so it will fill height and be cropped horizontally
-				    planeHeight = visibleHeightAtDistance;
-				    planeWidth = visibleHeightAtDistance * imageAspect;
-				}
-
-				const backgroundGeometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
-				const backgroundMaterial = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide, depthWrite: false }); // depthWrite: false for better blending with transparent objects
-				backgroundMesh_three = new THREE.Mesh(backgroundGeometry, backgroundMaterial);
-				backgroundMesh_three.position.set(0, 0, -distance); // Place behind the spheres and camera
-				scene_three.add(backgroundMesh_three);
-
-				// No longer need to set scene_three.background to the texture directly
-				// If you want a background color for areas outside the plane, set it here:
-				// scene_three.background = new THREE.Color(0x1a202c); 
-
-			    },
-			    undefined, // onProgress callback
-			    function(err) {
-				console.error('An error happened loading the background texture:', err);
-				scene_three.background = new THREE.Color(0x1a202c); // Fallback to dark background color if image fails
-			    }
 			);
-			// **MODIFICATION END FOR BACKGROUND IMAGE ASPECT RATIO**
+			// **MODIFICATION END**
 
 
                         // 2. Camera setup
