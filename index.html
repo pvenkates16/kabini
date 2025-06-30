@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Hawabaaz Getaway: A Kabini Wildlife Escape!</title>
-    <link rel="icon" href="/kabini.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="/kabini.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <!-- Tailwind CSS CDN for basic styling -->
     <script src="https://cdn.tailwindcss.com"></script>
 <style>
@@ -206,12 +206,13 @@
 
         /* Styles for Three.js container within a tab */
         #fun-experiments #threejs-container {
-            position: relative; /* Changed from fixed to relative */
-            width: 100%; /* Fill parent width */
-            height: 400px; /* Set a fixed height for the canvas */
-            background-color: #1a202c; /* Dark background */
-            border-radius: 8px;
-            overflow: hidden; /* Ensure content stays within bounds */
+            width: 100%; /* Or any desired width */
+	    aspect-ratio: 16 / 9; /* For a 16:9 image (e.g., 1920/1080) */
+	    /* If your image is 612x612 (1:1), use: */
+	    /* aspect-ratio: 1 / 1; */
+	    height: auto; /* Ensure height adjusts automatically */
+	    overflow: hidden; /* Prevent content from spilling out */
+	    position: relative; /* If you plan to layer other elements */
         }
 
         #fun-experiments canvas {
