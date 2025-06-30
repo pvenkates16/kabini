@@ -206,13 +206,12 @@
 
         /* Styles for Three.js container within a tab */
         #fun-experiments #threejs-container {
-            width: 100%; /* Or any desired width */
-	    aspect-ratio: 16 / 9; /* For a 16:9 image (e.g., 1920/1080) */
-	    /* If your image is 612x612 (1:1), use: */
-	    /* aspect-ratio: 1 / 1; */
-	    height: auto; /* Ensure height adjusts automatically */
-	    overflow: hidden; /* Prevent content from spilling out */
-	    position: relative; /* If you plan to layer other elements */
+            position: relative; /* Changed from fixed to relative */
+            width: 100%; /* Fill parent width */
+            height: 400px; /* Set a fixed height for the canvas */
+            background-color: #1a202c; /* Dark background */
+            border-radius: 8px;
+            overflow: hidden; /* Ensure content stays within bounds */
         }
 
         #fun-experiments canvas {
