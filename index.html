@@ -363,58 +363,6 @@
             flex-direction: column; /* Stack content vertically */
             padding: 15px; /* Internal padding */
             box-sizing: border-box; /* Include padding and border in the width/height */
-            transition: all 0.3s ease-in-out; /* Smooth transition for size changes */
-        }
-
-        /* Styles for minimized chatbot */
-        #hawabaaz-chatbot-container.minimized {
-            width: 60px; /* Small width for minimized state */
-            height: 60px; /* Small height for minimized state */
-            padding: 0; /* Remove padding when minimized */
-            overflow: hidden; /* Hide overflow content */
-            border-radius: 50%; /* Make it a circle */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Hide chatbot content when minimized */
-        #hawabaaz-chatbot-container.minimized .chatbot-content {
-            display: none;
-        }
-
-        /* Style for the toggle button */
-        #chatbot-toggle-button {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background-color: #2E8B57; /* Sea Green */
-            color: white;
-            border: none;
-            border-radius: 0 8px 0 8px; /* Rounded top-right corner */
-            padding: 5px 10px;
-            cursor: pointer;
-            font-size: 1em;
-            z-index: 1001; /* Above the container */
-            transition: background-color 0.3s ease;
-        }
-
-        #hawabaaz-chatbot-container.minimized #chatbot-toggle-button {
-            position: relative; /* Adjust position when minimized */
-            top: auto;
-            right: auto;
-            border-radius: 50%; /* Make button round when minimized */
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5em; /* Larger icon when minimized */
-        }
-
-
-        #chatbot-toggle-button:hover {
-            background-color: #246a42;
         }
 
         /* Add specific styles for elements inside your chatbot widget if necessary */
@@ -1408,14 +1356,11 @@
     </footer>
 
     <!-- NEW LOCATION FOR YOUR CHATBOT -->
-    <div id="hawabaaz-chatbot-container" class="minimized">
-        <button id="chatbot-toggle-button">💬</button>
-        <div class="chatbot-content">
-            <!-- PASTE YOUR CHATBOT'S ORIGINAL IFRAME CODE HERE -->
-            <iframe src="https://www.chatbase.co/chatbot-iframe/337-cJRbLVx23JiEgkB7K" width="100%"
-                style="height: 100%; border: none; border-radius: 8px; overflow: hidden;"
-                frameborder="0"></iframe>
-        </div>
+    <div id="hawabaaz-chatbot-container">
+        <!-- PASTE YOUR CHATBOT'S ORIGINAL IFRAME CODE HERE -->
+        <iframe src="https://www.chatbase.co/chatbot-iframe/337-cJRbLVx23JiEgkB7K" width="100%"
+            style="height: 100%; border: none; border-radius: 8px; overflow: hidden;"
+            frameborder="0"></iframe>
     </div>
 
     <script>
@@ -1552,26 +1497,6 @@
             // Show the initial tab (e.g., 'welcome' or based on URL hash)
             const initialTab = window.location.hash.substring(1) || 'welcome';
             showTab(initialTab);
-
-            // Chatbot toggle functionality
-            const chatbotContainer = document.getElementById('hawabaaz-chatbot-container');
-            const chatbotToggleButton = document.getElementById('chatbot-toggle-button');
-
-            if (chatbotContainer && chatbotToggleButton) {
-                chatbotToggleButton.addEventListener('click', () => {
-                    chatbotContainer.classList.toggle('minimized');
-                    // Change button text/icon based on state
-                    if (chatbotContainer.classList.contains('minimized')) {
-                        chatbotToggleButton.textContent = '💬'; // Chat icon when minimized
-                    } else {
-                        chatbotToggleButton.textContent = 'X'; // Close icon when maximized
-                    }
-                });
-
-                // Set initial state to minimized and update button text
-                chatbotContainer.classList.add('minimized');
-                chatbotToggleButton.textContent = '💬';
-            }
         });
 
 
