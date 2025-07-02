@@ -305,9 +305,47 @@
             background-color: #f0f0f0;
             max-width: 600px;
             margin: 20px auto;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
 
+        .flex-container {
+            display: flex;
+            /* Optional: Controls how items wrap */
+            flex-wrap: wrap;
+            /* Optional: Aligns items along the main axis */
+            justify-content: center;
+            /* or space-between, center, etc. */
+            /* Optional: Aligns items along the cross axis */
+            align-items: flex-start;
+            /* or center, stretch, etc. */
+            /* Add some spacing for better visualization */
+            gap: 10px;
+            /* Space between flex items */
+        }
+
+        .item {
+            /* Define a fixed or flexible size for your bounding box */
+            width: 600px;
+            /* Example fixed width */
+            height: auto;
+            /* Example fixed height */
+            /* OR for flexible sizing based on content or available space */
+            flex: 0 0 auto;
+            /* Don't grow, don't shrink, size based on content initially */
+            /* flex-basis: 200px; /* Suggests an initial size */
+
+            /* Add borders or background to visualize the bounding box */
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            padding: 10px;
+            box-sizing: border-box;
+            /* Ensures padding and border are included in width/height */
+
+            /* Optional: If content inside needs its own layout (e.g., center text) */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3-cloud@1.2.7/build/d3.layout.cloud.min.js"></script>
@@ -332,7 +370,7 @@
         </nav>
 
         <div id="tab-content-area">
-            <!-- WELCOME SECTION -->
+            <!-- WELCOME TAB -->
             <section id="welcome" class="tab-content active">
                 <h2>Welcome to The Hawabaaz Getaway!</h2>
                 <p>Dear adventurers, prepare for an exhilarating and refreshing wildlife escape designed exclusively for
@@ -367,7 +405,8 @@
                     </div>
                 </div>
                 <!-- Pictures in Welcome page -->
-                <div style="display: flex; justify-content: center; gap: 5px; flex-wrap: wrap; margin-top: 30px; margin-left: auto; margin-right: auto; padding: 0 20px; background-image: url('https://media.istockphoto.com/id/1402801804/photo/closeup-nature-view-of-palms-and-monstera-and-fern-leaf-background.jpg?s=612x612&w=0&k=20&c=0pX8CbzsrqvMQKMa4853JRUw8oGy8NnsOC812H3o9Xo='); background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.3); filter: saturate(0.7);">
+                <div
+                    style="display: flex; justify-content: center; gap: 5px; flex-wrap: wrap; margin-top: 30px; margin-left: auto; margin-right: auto; padding: 0 20px; background-image: url('https://media.istockphoto.com/id/1402801804/photo/closeup-nature-view-of-palms-and-monstera-and-fern-leaf-background.jpg?s=612x612&w=0&k=20&c=0pX8CbzsrqvMQKMa4853JRUw8oGy8NnsOC812H3o9Xo='); background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.3); filter: saturate(0.7);">
 
                     <figure style="width: 600px; margin-left: auto; margin-right: auto; margin-top: 30px;">
                         <img src="baazgroup.jpg" alt="Shillong trip"
@@ -419,41 +458,65 @@
                     </div>
                     <p class="image-note"><em>Haathi, sher, chidiya, sita haran, bhains, lauda lasoon aur chutney</em>
                     </p>
-                    <ul>
-                        <li><strong>Jeep Safaris:</strong> The prime attraction! Explore the Nagarhole National Park for
-                            sightings of tigers, leopards, elephants, gaurs, deer, wild dogs, and more.</li>
-                        <li><strong>Boat Safaris:</strong> Experience wildlife from the Kabini River, often offering
-                            unique perspectives of animals coming to the water's edge and fantastic birdwatching
-                            opportunities.</li>
-                        <li><strong>Nature Walks & Bird Watching:</strong> Guided walks around the lodge property to
-                            observe smaller wildlife, insects, and a vast array of bird species.</li>
-                        <li><strong>Coracle Rides:</strong> A traditional, gentle boat ride on the Kabini River,
-                            offering a unique local experience.</li>
-                        <li><strong>Naturalist Talks:</strong> Engaging sessions by experienced naturalists who share
-                            insights into the local ecosystem and wildlife.</li>
-                        <li><strong>Resort Amenities:</strong> Enjoy swimming pools, spas, and relaxation areas within
-                            your chosen lodge.</li>
-                    </ul>
-                </section>
-                <section id="packing-tips">
-                    <h2>What to Pack & Other Tips</h2>
-                    <ul>
-                        <li><strong>Comfortable Walking Shoes:</strong> Essential for safaris and walks.</li>
-                        <li><strong>Neutral Colored Clothing:</strong> Earthy tones (greens, browns, khakis) are best
-                            for safaris to blend into the environment.</li>
-                        <li><strong>Light Layers:</strong> Mornings and evenings can be cool; afternoons are warm.</li>
-                        <li><strong>Binoculars & Camera:</strong> Must-haves for wildlife enthusiasts!</li>
-                        <li><strong>Hat & Sunglasses:</strong> Protection from the sun during safaris.</li>
-                        <li><strong>Insect Repellent:</strong> Important for outdoor areas.</li>
-                        <li><strong>Personal Medications:</strong> Don't forget any essentials.</li>
-                        <li><strong>Small Backpack/Day Bag:</strong> For water, snacks, and personal items during
-                            excursions.</li>
-                        <li><strong>Power Bank:</strong> For charging phones and other devices.</li>
-                        <li><strong>Positive Attitude & Sense of Adventure!</strong></li>
-                    </ul>
+                    <div class="flex-container">
+                        <div class="item">
+                            <section id="activities-tips">
+                                <h2>Activities</h2>
+                                <ul>
+                                    <li><strong>Jeep Safaris:</strong> The prime attraction! Explore the Nagarhole
+                                        National Park for
+                                        sightings of tigers, leopards, elephants, gaurs, deer, wild dogs, and more.</li>
+                                    <li><strong>Boat Safaris:</strong> Experience wildlife from the Kabini River, often
+                                        offering
+                                        unique perspectives of animals coming to the water's edge and fantastic
+                                        birdwatching
+                                        opportunities.</li>
+                                    <li><strong>Nature Walks & Bird Watching:</strong> Guided walks around the lodge
+                                        property to
+                                        observe smaller wildlife, insects, and a vast array of bird species.</li>
+                                    <li><strong>Coracle Rides:</strong> A traditional, gentle boat ride on the Kabini
+                                        River,
+                                        offering a unique local experience.</li>
+                                    <li><strong>Naturalist Talks:</strong> Engaging sessions by experienced naturalists
+                                        who share
+                                        insights into the local ecosystem and wildlife.</li>
+                                    <li><strong>Resort Amenities:</strong> Enjoy swimming pools, spas, and relaxation
+                                        areas within
+                                        your chosen lodge.</li>
+                                </ul>
+                            </section>
+                        </div>
+                        <div class="item">
+                            <section id="packing-tips">
+                                <h2>What to Pack & Other Tips</h2>
+                                <ul>
+                                    <li><strong>Comfortable Walking Shoes:</strong> Essential for safaris and walks.
+                                    </li>
+                                    <li><strong>Neutral Colored Clothing:</strong> Earthy tones (greens, browns, khakis)
+                                        are best
+                                        for safaris to blend into the environment.</li>
+                                    <li><strong>Light Layers:</strong> Mornings and evenings can be cool; afternoons are
+                                        warm.</li>
+                                    <li><strong>Binoculars & Camera:</strong> Must-haves for wildlife enthusiasts!</li>
+                                    <li><strong>Hat & Sunglasses:</strong> Protection from the sun during safaris.</li>
+                                    <li><strong>Insect Repellent:</strong> Important for outdoor areas.</li>
+                                    <li><strong>Personal Medications:</strong> Don't forget any essentials.</li>
+                                    <li><strong>Small Backpack/Day Bag:</strong> For water, snacks, and personal items
+                                        during
+                                        excursions.</li>
+                                    <li><strong>Power Bank:</strong> For charging phones and other devices.</li>
+                                    <li><strong>Positive Attitude & Sense of Adventure!</strong></li>
+                                </ul>
+                            </section>
+                        </div>
+                    </div>
+
+
+
                 </section>
             </section>
 
+            <!-- OVERVIEW TAB -->
             <section id="overview" class="tab-content">
                 <h2>Trip Overview & Philosophy</h2>
                 <ul>
@@ -510,6 +573,11 @@
                     <p>Here's a map showing the route from Bangalore to Kabini via Mysore, along with some key
                         attractions within a 50 km radius of Kabini. This will help visualize your journey and potential
                         nearby explorations.</p>
+                        <p><br></p>
+                        <p><span class="highlight">Did you know?</span> Ramanagara was where Sholay was filmed. Ramadevara Betta is visible
+                        from the highway. Maybe we can convince one another to take the 3 km detour? The climb itself is
+                        about 350-400 steps (easy-to-moderate), and the detour should take about 1.5 to 2 hours.
+                        </p>
                     <div class="map-container">
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d113947.69766627057!2d76.51869829399455!3d12.316827083042468!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBangalore%2C%20Karnataka%2C%20India!3m2!1d12.9715987!2d77.5945627!4m5!1s0x3baf01f93ee7248f%3A0xa645068a0a75878d!2sKabini%2C%20Karnataka%2C%20India!3m2!1d12.115456299999999!2d76.2917726!5e0!3m2!1sen!2sdk!4v1717311181829!5m2!1sen!2sdk"
@@ -928,7 +996,7 @@
                         scene_three.background = new THREE.Color(0x1a202c); // Dark background for contrast
 
                         // **MODIFICATION START**
-                        // Load the background texture
+                        // Load the background texture, consisting of elephants in a park
                         const backgroundTextureLoader = new THREE.TextureLoader();
                         backgroundTextureLoader.load(
                             'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Elephants_at_Kabini.jpg/1599px-Elephants_at_Kabini.jpg?20190312045152', // Replace with your desired background image URL
@@ -974,7 +1042,7 @@
                             roughness: 0.3,
                             transmission: 0.15, // Reduced transmission to make texture more visible
                             transparent: true,
-                            opacity: 0.95, // Increased opacity slightly
+                            opacity: 0.7, // 0.5 is too washed out, 0.9 seems to in-your-face
                             clearcoat: 0.5,
                             clearcoatRoughness: 0.1
                         };
