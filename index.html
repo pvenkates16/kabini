@@ -26,1535 +26,464 @@
             margin: 20px auto;
             padding: 5px;
             background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
 
         header {
             background-color: #2E8B57;
-            /* Sea Green */
+            /* SeaGreen */
             color: #fff;
-            padding: 25px 0;
+            padding: 20px 0;
             text-align: center;
             border-radius: 8px 8px 0 0;
-            margin-bottom: 20px;
         }
 
-        header h1 {
+        h1 {
             margin: 0;
-            font-size: 2.8em;
-            letter-spacing: 1px;
+            font-size: 2.5em;
         }
 
         h2 {
-            color: #2e7d32;
-            /* Darker Green */
-            border-bottom: 2px solid #c8e6c9;
-            padding-bottom: 8px;
-            margin-top: 35px;
-            font-size: 2em;
-        }
-
-        h3 {
-            color: #4caf50;
-            /* Medium Green */
-            font-size: 1.5em;
-            margin-top: 25px;
-        }
-
-        p {
-            margin-bottom: 12px;
-        }
-
-        ul {
-            list-style-type: disc;
-            margin-left: 25px;
-            margin-bottom: 12px;
-        }
-
-        ol {
-            margin-left: 25px;
-            margin-bottom: 12px;
-        }
-
-        li {
-            margin-bottom: 7px;
-        }
-
-        .highlight {
-            font-weight: bold;
-            color: #bf360c;
-            /* Deep Orange for emphasis */
-        }
-
-        .image-gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
+            color: #2E8B57;
+            border-bottom: 2px solid #2E8B57;
+            padding-bottom: 5px;
             margin-top: 20px;
-            margin-bottom: 30px;
         }
 
-        .image-gallery img {
-            max-width: 100%;
-            width: 280px;
-            /* Fixed width for better layout */
-            height: 180px;
-            /* Fixed height for consistency */
+        .section {
+            padding: 20px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 200px;
             object-fit: cover;
-            /* Ensures images cover the area without distortion */
             border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .image-note {
-            font-style: italic;
-            text-align: center;
-            margin-top: 10px;
-            color: #666;
-            font-size: 0.9em;
-        }
-
-        /* Style for the word cloud container */
-        #word-cloud-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
             margin-top: 20px;
-            margin-bottom: 30px;
         }
 
-        .map-container {
-            width: 100%;
-            height: 500px;
-            /* Adjust height as needed */
-            margin-top: 20px;
-            margin-bottom: 30px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            overflow: hidden;
-            /* Ensures the iframe fits within the rounded corners */
-        }
-
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
+        .highlight-item {
+            background-color: #e6ffe6;
+            /* Light Green */
+            padding: 20px;
+            border-left: 5px solid #2E8B57;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
         footer {
             text-align: center;
-            padding: 20px;
-            margin-top: 35px;
-            color: #777;
-            font-size: 0.9em;
-            border-top: 1px solid #e0e0e0;
+            padding: 20px 0;
+            margin-top: 30px;
+            background-color: #2E8B57;
+            color: #fff;
+            border-radius: 0 0 8px 8px;
         }
 
-        /* New style for attendee checkboxes */
-        .attendee-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
+        /* Tabs Styling */
+        .tabs {
+            display: flex;
             margin-top: 20px;
-        }
-
-        .attendee-item {
-            display: flex;
-            align-items: center;
-            background-color: #e8f5e9;
-            padding: 8px 12px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        .attendee-item input[type="checkbox"] {
-            margin-right: 10px;
-            transform: scale(1.2);
-        }
-
-        /* --- TAB STYLES --- */
-        .tabs-container {
             border-bottom: 1px solid #ccc;
-            margin-bottom: 20px;
-            display: flex;
-            /* Use flexbox for horizontal tabs */
-            flex-wrap: wrap;
-            /* Allow tabs to wrap if screen is small */
-            justify-content: center;
-            /* Align tabs to the left */
-            gap: 5px;
-            /* Space between tabs */
         }
 
         .tab-button {
-            background-color: #e0e0e0;
-            border: none;
-            padding: 12px 20px;
+            padding: 10px 15px;
             cursor: pointer;
-            font-size: 1.1em;
-            transition: background-color 0.3s, color 0.3s;
-            border-radius: 5px 5px 0 0;
-            /* Rounded top corners */
-            text-decoration: none;
-            /* Remove underline for links */
-            color: #555;
-            flex-grow: 0;
-            /* Don't allow tabs to grow */
-            /* max-width: 180px; */
-            /* Remove max-width to allow tabs to take their content's width */
-            white-space: nowrap;
-            /* Prevent text from wrapping */
-            text-align: center;
-        }
-
-        .tab-button:hover {
-            background-color: #d0d0d0;
-            color: #333;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            background-color: #f0f0f0;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            margin-right: 5px;
         }
 
         .tab-button.active {
             background-color: #2E8B57;
-            /* Sea Green */
-            color: #fff;
-            font-weight: bold;
-            border-bottom: 3px solid #bf360c;
-            /* Highlight active tab */
-            pointer-events: none;
-            /* Prevent clicking active tab */
+            color: white;
+            border-color: #2E8B57;
         }
 
         .tab-content {
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
             display: none;
-            /* Hidden by default */
-            padding-top: 20px;
-            /* Space from tabs */
         }
 
         .tab-content.active {
             display: block;
-            /* Show active tab content */
-        }
-
-        /* Style for the "Back to Main Page" button/link */
-        .back-to-main {
-            display: block;
-            /* Makes it a block element */
-            width: fit-content;
-            /* Adjust width to content */
-            margin: 20px auto 0 auto;
-            /* Center it below the content */
-            padding: 10px 20px;
-            background-color: #bf360c;
-            /* Deep Orange */
-            color: #fff;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-
-        .back-to-main:hover {
-            background-color: #a02d09;
-        }
-
-        /* Styles for Three.js container within a tab */
-        #fun-experiments #threejs-container {
-            position: relative;
-            /* Changed from fixed to relative */
-            width: 100%;
-            /* Fill parent width */
-            height: 400px;
-            /* Set a fixed height for the canvas */
-            background-color: #1a202c;
-            /* Dark background */
-            border-radius: 8px;
-            overflow: hidden;
-            /* Ensure content stays within bounds */
-        }
-
-        #fun-experiments canvas {
-            display: block;
-            width: 100% !important;
-            /* Override inline styles to ensure responsiveness */
-            height: 100% !important;
-            border-radius: 8px;
-        }
-
-        #fun-experiments .info-box {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            padding: 8px 15px;
-            border-radius: 6px;
-            font-size: 0.8em;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            z-index: 10;
-        }
-
-        .info-box {
-            border: 2px solid #555;
-            border-radius: 8px;
-            padding: 20px;
-            background-color: #f0f0f0;
-            max-width: 600px;
-            margin: 20px auto;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .flex-container {
-            display: flex;
-            /* Optional: Controls how items wrap */
-            flex-wrap: wrap;
-            /* Optional: Aligns items along the main axis */
-            justify-content: center;
-            /* or space-between, center, etc. */
-            /* Optional: Aligns items along the cross axis */
-            align-items: flex-start;
-            /* or center, stretch, etc. */
-            /* Add some spacing for better visualization */
-            gap: 10px;
-            /* Space between flex items */
-        }
-
-        .item {
-            /* Define a fixed or flexible size for your bounding box */
-            width: 600px;
-            /* Example fixed width */
-            height: auto;
-            /* Example fixed height */
-            /* OR for flexible sizing based on content or available space */
-            flex: 0 0 auto;
-            /* Don't grow, don't shrink, size based on content initially */
-            /* flex-basis: 200px; /* Suggests an initial size */
-
-            /* Add borders or background to visualize the bounding box */
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-            padding: 10px;
-            box-sizing: border-box;
-            /* Ensures padding and border are included in width/height */
-
-            /* Optional: If content inside needs its own layout (e.g., center text) */
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         /* NEW STYLES FOR THE CHATBOT CONTAINER */
         #hawabaaz-chatbot-container {
-            position: fixed; /* Ensures it stays in place when scrolling */
-            bottom: 20px;    /* Distance from the bottom of the viewport */
-            right: 20px;     /* Distance from the right of the viewport */
-            width: 300px;    /* Adjust width as needed */
-            height: 400px;   /* Adjust height as needed */
-            background-color: #f9f9f9; /* Light background for the chatbot */
-            border: 1px solid #ccc; /* Border around the chatbot */
-            border-radius: 8px; /* Rounded corners */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Soft shadow */
-            z-index: 1000;   /* Ensures it stays on top of other content */
-            display: flex;   /* Use flexbox for internal content alignment */
-            flex-direction: column; /* Stack content vertically */
-            padding: 15px; /* Internal padding */
-            box-sizing: border-box; /* Include padding and border in the width/height */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column; /* Stack header and content vertically */
+            box-sizing: border-box;
+            /* Initial height for expanded state */
+            height: 400px;
+            transition: height 0.3s ease-out; /* Smooth transition for container height */
+            overflow: hidden; /* Hide content that overflows during transition */
         }
 
-        /* Add specific styles for elements inside your chatbot widget if necessary */
-        #hawabaaz-chatbot-widget {
-            flex-grow: 1; /* Allow content to fill available space */
-            overflow-y: auto; /* Enable scrolling for chat messages */
-            margin-bottom: 10px;
-        }
-
-        #hawabaaz-chatbot-container input[type="text"],
-        #hawabaaz-chatbot-container button {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-        }
-
-        #hawabaaz-chatbot-container button {
-            background-color: #2E8B57; /* Sea Green */
-            color: white;
+        /* Styles for the chatbot header */
+        #chatbot-header {
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            background-color: #2E8B57;
+            color: white;
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0; /* Prevent header from shrinking */
         }
 
-        #hawabaaz-chatbot-container button:hover {
-            background-color: #246a42;
+        /* Styles for the chatbot content wrapper */
+        #chatbot-content {
+            flex-grow: 1; /* Allow content to grow and fill remaining space */
+            height: calc(100% - 40px); /* Initial height for the content area (approx. 40px for header) */
+            transition: height 0.3s ease-out; /* Smooth transition for content height */
+            overflow: hidden; /* Hide iframe content when collapsing */
+            /* No padding here, iframe takes full space */
+        }
+
+        /* Styles for the collapsed state of the container */
+        #hawabaaz-chatbot-container.collapsed {
+            height: 40px; /* Height of the header only */
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        /* Style for the chatbot content when the container is collapsed */
+        #hawabaaz-chatbot-container.collapsed #chatbot-content {
+            height: 0; /* Collapse content to 0 height */
+        }
+
+        /* Style for the toggle icon */
+        #toggle-icon {
+            transition: transform 0.3s ease; /* Smooth rotation for the icon */
+        }
+
+        /* Style for the rotated toggle icon */
+        #toggle-icon.rotated {
+            transform: rotate(180deg); /* Rotate arrow when collapsed */
         }
     </style>
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3-cloud@1.2.7/build/d3.layout.cloud.min.js"></script>
+    <!-- D3.js for Word Cloud -->
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-cloud/1.2.5/d3.layout.cloud.min.js"></script>
+
 </head>
 
-<body>
+<body class="bg-gray-100 text-gray-800">
     <div class="container">
         <header>
-            <h1>The Hawabaaz Getaway: A Kabini Wildlife Escape!</h1>
+            <h1>The Hawabaaz Getaway</h1>
+            <p class="text-lg">Your Ultimate Wildlife Escape in Kabini!</p>
         </header>
 
-        <nav class="tabs-container">
-            <a href="#welcome" class="tab-button active" data-tab="welcome">Welcome</a>
-            <a href="#overview" class="tab-button" data-tab="overview">Overview</a>
-            <a href="#attendees" class="tab-button" data-tab="attendees">Attendees</a>
-            <a href="#accommodations" class="tab-button" data-tab="accommodations">Accommodations</a>
-            <a href="#itinerary" class="tab-button" data-tab="itinerary">Activities</a>
-            <a href="#stops" class="tab-button" data-tab="stops">Roadside Stops</a>
-            <a href="#khatarnaths-kliks" class="tab-button" data-tab="khatarnaths-kliks">Khatarnath's Kabini Kliks</a>
-            <a href="#fun-experiments" class="tab-button" data-tab="fun-experiments">Hawabaaz Interactions</a>
-            <!-- Removed the chatbot tab link -->
-        </nav>
-
-        <div id="tab-content-area">
-            <!-- WELCOME TAB -->
-            <section id="welcome" class="tab-content active">
-                <h2>Welcome to The Hawabaaz Getaway!</h2>
-                <p>Dear adventurers, prepare for an exhilarating and refreshing wildlife escape designed exclusively for
-                    our cherished group! We've crafted a fantastic trip from <span class="highlight"> November 25th to
-                        28th</span> , so say yes to thrilling safaris, serene nature, and abundant quality time
-                    together. Get ready to witness the wonders of Kabini and create unforgettable memories!</p>
-
-                <!-- Two side by side boxes -->
-                <div style="display: flex; gap: 20px; margin-top: 20px;">
-                    <div
-                        style="flex: 1; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
-                        <h2>Destination & Package Includes</h2>
-                        <ul>
-                            <li><strong>Destination:</strong> <span style="font-weight: bold; color: #bf360c;">Kabini,
-                                    Karnataka</span> (Renowned for its rich wildlife, including tigers, leopards,
-                                elephants, and a diverse birdlife, offering a serene escape amidst nature.)</li>
-                            <li><strong>Package Includes:</strong> Airport pickup on arrival, and a jolly ride in a
-                                comfort wagon, with added spirits, lunch, and conversation with old buddies</li>
-                        </ul>
-                    </div>
-                    <div
-                        style="flex: 1; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
-                        <h2>Classic Stories Collection</h2>
-                        <ul>
-                            <li>हरमुनिया</li>
-                            <li>भालू फूँक</li>
-                            <li>पपीता</li>
-                            <li>डंडा है या छेदा</li>
-                            <li>ఎర్ర పూకు, వెర्र పూకు</li>
-                        </ul>
-                        <p>Remind me if I've forgotten any highlights.</p>
-                    </div>
-                </div>
-                <!-- Pictures in Welcome page -->
-                <div
-                    style="display: flex; justify-content: center; gap: 5px; flex-wrap: wrap; margin-top: 30px; margin-left: auto; margin-right: auto; padding: 0 20px; background-image: url('https://media.istockphoto.com/id/1402801804/photo/closeup-nature-view-of-palms-and-monstera-and-fern-leaf-background.jpg?s=612x612&w=0&k=20&c=0pX8CbzsrqvMQKMa4853JRUw8oGy8NnsOC812H3o9Xo='); background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.3); filter: saturate(0.7);">
-
-                    <figure style="width: 600px; margin-left: auto; margin-right: auto; margin-top: 30px;">
-                        <img src="baazgroup.jpg" alt="Shillong trip"
-                            style="width:100%; height: 400px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); display: block;">
-                        <figcaption
-                            style="text-align: right; margin-top: 5px; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
-                            Shillong group</figcaption>
-                    </figure>
-
-                    <figure style="width: 600px; margin-left: auto; margin-right: auto; margin-top: 30px;">
-                        <img src="76365977-b114-477a-a2b0-4f4a666d6934.jpeg" alt="Tiger, Nipun Photo"
-                            style="width:100%; height: 400px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); display: block;">
-                        <figcaption
-                            style="text-align: right; margin-top: 5px; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
-                            Courtesy Nipun, Rajat's friend!</figcaption>
-                    </figure>
-
-                    <figure style="width: 600px; margin-left: auto; margin-right: auto; margin-top: 30px;">
-                        <img src="https://natureexplorers.in/wp-content/uploads/2022/07/leapord_kabini.jpg"
-                            alt="Kabini Leopard"
-                            style="width:100%; height: 400px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); display: block;">
-                        <figcaption
-                            style="text-align: right; margin-top: 5px; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
-                            https://natureexplorers.in</figcaption>
-                    </figure>
-                    <figure style="width: 600px; margin-left: auto; margin-right: auto; margin-top: 30px;">
-                        <img src="nakedpattaya.jpeg" alt="Shillong trip"
-                            style="width:100%; height: 400px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); display: block;">
-                        <figcaption
-                            style="text-align: right; margin-top: 5px; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
-                            Pattaya debauch</figcaption>
-                    </figure>
-                </div>
-                <section id="sightseeing-highlights">
-                    <h2>Sightseeing & Activity Highlights</h2>
-                    <p>Get ready for incredible encounters with nature! Below are some highlights of what you can expect
-                        during your Kabini adventure:</p>
-                    <div class="image-gallery">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Elephants_at_Kabini.jpg/1599px-Elephants_at_Kabini.jpg?20190312045152"
-                            alt="Elephant in Kabini forest during safari">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_murky_morning_for_the_backwater_female_tiger_%2851340324701%29.jpg/1600px-A_murky_morning_for_the_backwater_female_tiger_%2851340324701%29.jpg?20210928140749"
-                            alt="Tiger in its natural habitat">
-                        <img src="https://cdn.prod.website-files.com/65aa483b5ed7ebb96ac699bd/67286699b194c0a472b7643f_65f03a718a06fb1da05afbf4_greater-flameback-pair.jpeg"
-                            alt="Colorful birds perched on a branch">
-                        <img src="https://c8.alamy.com/comp/2BCBBDM/a-female-spotted-deer-feeding-her-fawn-at-nagarhole-national-park-kabini-karnataka-india-2BCBBDM.jpg"
-                            alt="Herd of deer in the forest">
-                        <img src="https://cdn.prod.website-files.com/65aa483b5ed7ebb96ac699bd/67286ca186705e69a6ef446a_65f043526343cbb813332585_gaur-male.jpeg"
-                            alt="Hamar bhains ko danda nahi marne ka hai">
-                    </div>
-                    <p class="image-note"><em>Haathi, sher, chidiya, sita haran, bhains, lauda lasoon aur chutney</em>
-                    </p>
-                    <div class="flex-container">
-                        <div class="item">
-                            <section id="activities-tips">
-                                <h2>Activities</h2>
-                                <ul>
-                                    <li><strong>Jeep Safaris:</strong> The prime attraction! Explore the Nagarhole
-                                        National Park for
-                                        sightings of tigers, leopards, elephants, gaurs, deer, wild dogs, and more.</li>
-                                    <li><strong>Boat Safaris:</strong> Experience wildlife from the Kabini River, often
-                                        offering
-                                        unique perspectives of animals coming to the water's edge and fantastic
-                                        birdwatching
-                                        opportunities.</li>
-                                    <li><strong>Nature Walks & Bird Watching:</strong> Guided walks around the lodge
-                                        property to
-                                        observe smaller wildlife, insects, and a vast array of bird species.</li>
-                                    <li><strong>Coracle Rides:</strong> A traditional, gentle boat ride on the Kabini
-                                        River,
-                                        offering a unique local experience.</li>
-                                    <li><strong>Naturalist Talks:</strong> Engaging sessions by experienced naturalists
-                                        who share
-                                        insights into the local ecosystem and wildlife.</li>
-                                    <li><strong>Resort Amenities:</strong> Enjoy swimming pools, spas, and relaxation
-                                        areas within
-                                        your chosen lodge.</li>
-                                </ul>
-                            </section>
-                        </div>
-                        <div class="item">
-                            <section id="packing-tips">
-                                <h2>What to Pack & Other Tips</h2>
-                                <ul>
-                                    <li><strong>Comfortable Walking Shoes:</strong> Essential for safaris and walks.
-                                    </li>
-                                    <li><strong>Neutral Colored Clothing:</strong> Earthy tones (greens, browns, khakis)
-                                        are best
-                                        for safaris to blend into the environment.</li>
-                                    <li><strong>Light Layers:</strong> Mornings and evenings can be cool; afternoons are
-                                        warm.</li>
-                                    <li><strong>Binoculars & Camera:</strong> Must-haves for wildlife enthusiasts!</li>
-                                    <li><strong>Hat & Sunglasses:</strong> Protection from the sun during safaris.</li>
-                                    <li><strong>Insect Repellent:</strong> Important for outdoor areas.</li>
-                                    <li><strong>Personal Medications:</strong> Don't forget any essentials.</li>
-                                    <li><strong>Small Backpack/Day Bag:</strong> For water, snacks, and personal items
-                                        during
-                                        excursions.</li>
-                                    <li><strong>Power Bank:</strong> For charging phones and other devices.</li>
-                                    <li><strong>Positive Attitude & Sense of Adventure!</strong></li>
-                                </ul>
-                            </section>
-                        </div>
-                    </div>
-
-
-
-                </section>
+        <main class="p-5">
+            <section id="introduction" class="section">
+                <h2>Welcome to Kabini!</h2>
+                <p>Nestled on the banks of the Kabini River, this enchanting destination in Karnataka, India, is a
+                    paradise for wildlife enthusiasts and nature lovers. Known for its lush forests, diverse fauna, and
+                    serene backwaters, Kabini offers an unforgettable experience away from the bustling city life.
+                    Prepare to be mesmerized by its untouched beauty and the thrill of spotting majestic creatures in
+                    their natural habitat.</p>
             </section>
 
-            <!-- OVERVIEW TAB -->
-            <section id="overview" class="tab-content">
-                <h2>Trip Overview & Philosophy</h2>
-                <ul>
-                    <li><strong>Dates: </strong><span class="highlight">November 25th to November 28th</span>.</li>
-                    <li><strong>Group Size:</strong> Our beloved group of 60-year-olds!</li>
-                    <li><strong>Goal:</strong> To immerse ourselves in nature, experience thrilling wildlife encounters,
-                        relax in a serene environment, and most importantly, maximize our shared moments.</li>
-                </ul>
-                <h3>Maximizing Time Together - Our Constraints:</h3>
-                <ul>
-                    <li><strong>Shared Accommodation:</strong> We will all stay at a single, comfortable wildlife resort
-                        or lodge. This central base ensures easy communication, spontaneous gatherings, and collective
-                        experiences.</li>
-                    <li><strong>Pre-booked Transport:</strong> All local transport, including Bangalore-Kabini transfers
-                        and safari pickups, will be pre-arranged (e.g., a comfortable tempo traveller or multiple
-                        spacious SUVs/vans) to minimize waiting times and ensure we travel as a cohesive unit.</li>
-                    <li><strong>Group Dining:</strong> All meals will be planned at the resort's dining facilities,
-                        fostering shared culinary experiences and conversations. Dietary preferences will be
-                        accommodated.</li>
-                    <li><strong>Curated Activities:</strong> Safaris and other major activities will be pre-booked for
-                        the entire group, guaranteeing everyone participates in the core experiences together.</li>
-                    <li><strong>Flexible Free Time:</strong> While activities are planned, ample free time will be built
-                        in for relaxation, quiet conversations, or enjoying resort amenities together.</li>
-                    <li><strong>Accessibility & Comfort:</strong> All chosen venues and activities will prioritize easy
-                        accessibility and comfort, minimizing strenuous physical demands. Safari vehicles will be chosen
-                        for ease of entry/exit.</li>
-                </ul>
-                <section id="destination-transit">
-                    <h2>Destination Choice & Transit from Bangalore</h2>
+            <section id="gallery" class="section">
+                <h2>Photo Gallery</h2>
+                <div class="gallery">
+                    <img src="https://www.tripsavvy.com/thmb/eT77WwX00s8_K_6wY4bVd0n0828=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-488663470-58c06e123df78c353c7c2299.jpg"
+                        alt="Kabini River">
+                    <img src="https://media.istockphoto.com/id/1321040682/photo/indian-leopard-panthera-pardus-pardus-melas-also-knows-as-black-panther-kabini-india.jpg?s=612x612&w=0&k=20&c=X7wB1fD39L_hTf6g4hT_E_iXm3_1kUv1Gq2n9R8Ea-M="
+                        alt="Black Panther Kabini">
+                    <img src="https://www.kabiniforest.com/images/kabini-wildlife.jpg" alt="Kabini Wildlife">
+                    <img src="https://www.tripsavvy.com/thmb/eT77WwX00s8_K_6wY4bVd0n0828=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-488663470-58c06e123df78c353c7c2299.jpg"
+                        alt="Kabini River">
+                    <img src="https://media.istockphoto.com/id/1321040682/photo/indian-leopard-panthera-pardus-pardus-melas-also-knows-as-black-panther-kabini-india.jpg?s=612x612&w=0&k=20&c=X7wB1fD39L_hTf6g4hT_E_iXm3_1kUv1Gq2n9R8Ea-M="
+                        alt="Black Panther Kabini">
+                    <img src="https://www.kabiniforest.com/images/kabini-wildlife.jpg" alt="Kabini Wildlife">
+                </div>
+            </section>
+
+            <section id="highlights" class="section">
+                <h2>Experience Highlights</h2>
+                <div class="highlights-grid">
+                    <div class="highlight-item">
+                        <h3>Wildlife Safaris</h3>
+                        <p>Embark on thrilling jeep safaris and boat safaris to witness the majestic wildlife,
+                            including tigers, leopards, elephants, and a plethora of bird species.</p>
+                    </div>
+                    <div class="highlight-item">
+                        <h3>Nature Walks</h3>
+                        <p>Explore the serene trails around your resort with expert naturalists, discovering the
+                            smaller wonders of the forest.</p>
+                    </div>
+                    <div class="highlight-item">
+                        <h3>Boat Rides on Kabini River</h3>
+                        <p>Enjoy peaceful boat rides, offering unique perspectives of the riverside wildlife and the
+                            stunning landscapes, especially at sunset.</p>
+                    </div>
+                    <div class="highlight-item">
+                        <h3>Local Culture & Cuisine</h3>
+                        <p>Immerse yourself in the local culture, interact with the indigenous communities, and savor
+                            authentic South Indian delicacies.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="accommodation" class="section">
+                <h2>Accommodation & Packages</h2>
+                <div class="tabs">
+                    <button class="tab-button active" data-tab="tab1">Luxury Resorts</button>
+                    <button class="tab-button" data-tab="tab2">Eco-Lodges</button>
+                    <button class="tab-button" data-tab="tab3">Custom Packages</button>
+                </div>
+
+                <div id="tab1" class="tab-content active">
+                    <h3>Luxury Resorts</h3>
+                    <p>Indulge in unparalleled luxury at our hand-picked resorts, offering world-class amenities,
+                        spacious rooms, and breathtaking views of the Kabini River or the surrounding forests. Enjoy
+                        private balconies, infinity pools, and gourmet dining experiences designed to elevate your
+                        stay.</p>
+                    <p>Our luxury partners include:</p>
                     <ul>
-                        <li><strong>Destination:</strong> <span class="highlight">Kabini, Karnataka</span> (Renowned for
-                            its rich wildlife, including tigers, leopards, elephants, and a diverse birdlife, offering a
-                            serene escape amidst nature.)</li>
+                        <li>The Serai Kabini</li>
+                        <li>Kaav Safari Lodge</li>
+                        <li>Evolve Back Kabini (formerly Orange County)</li>
                     </ul>
-                    <ul>
-                        <li><strong>Package Includes:</strong> Airport pickup on arrival, and a jolly ride in a comfort
-                            wagon, with added spirits, lunch, and conversation with old buddies </li>
-                    </ul>
-                    <h3>Transit from Bangalore:</h3>
-                    <ul>
-                        <li><strong>Mode of Transport:</strong> Comfortable, air-conditioned mini-bus (e.g., a Tempo
-                            Traveller or similar) or multiple large SUVs/sedans, ensuring collective travel.</li>
-                        <li><strong>Travel Time:</strong> Approximately 5-6 hours (depending on traffic and road
-                            conditions).</li>
-                        <li><strong>Departure Point in Bangalore:</strong> A central, easily accessible pick-up point
-                            will be arranged (e.g., a common landmark or multiple pick-ups if feasible).</li>
-                        <li><strong>Onboard Comfort:</strong> The vehicle will be equipped with comfortable seating,
-                            ample legroom, and provisions for water and light snacks. Scheduled comfort breaks will be
-                            taken.</li>
-                    </ul>
-                </section>
-                <section id="kabini-map">
-                    <h2>Kabini and Surrounds: Route & Attractions</h2>
-                    <p>Here's a map showing the route from Bangalore to Kabini via Mysore, along with some key
-                        attractions within a 50 km radius of Kabini. This will help visualize your journey and potential
-                        nearby explorations.</p>
-                        <p><br></p>
-                        <p><span class="highlight">Did you know?</span> Ramanagara was where Sholay was filmed. Ramadevara Betta is visible
-                        from the highway. Maybe we can convince one another to take the 3 km detour? The climb itself is
-                        about 350-400 steps (easy-to-moderate), and the detour should take about 1.5 to 2 hours.
-                        </p>
-                    <div class="map-container">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d113947.69766627057!2d76.51869829399455!3d12.316827083042468!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBangalore%2C%20Karnataka%2C%20India!3m2!1d12.9715987!2d77.5945627!4m5!1s0x3baf01f93ee7248f%3A0xa645068a0a75878d!2sKabini%2C%20Karnataka%2C%20India!3m2!1d12.115456299999999!2d76.2917726!5e0!3m2!1sen!2sdk!4v1717311181829!5m2!1sen!2sdk"
-                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
-                    </div>
-                    <p class="image-note"><em>The map shows the route from Bangalore to Kabini (via Mysore) and general
-                            points of interest in the Kabini region, including Nagarhole National Park. Zoom in and out
-                            to explore further.</em></p>
-                </section>
-            </section>
-
-            <section id="attendees" class="tab-content">
-                <h2>Attendees Confirmation</h2>
-                <p>Please use the checkboxes below to confirm attendance. All attendees are marked as 'True' by default,
-                    except for "Anyone else?".</p>
-                <div class="attendee-list" id="attendeeCheckboxes">
-                </div>
-                <section id="attendees-word-cloud">
-                    <h2>Hawabaaz Attendees (Word Cloud)</h2>
-                    <p>Initial hand raisers</p>
-                    <div id="word-cloud-container">
-                        <canvas id="wordCloudCanvas" width="800" height="400"
-                            style="border:1px solid #ccc; background-color: #f9f9f9;"></canvas>
-                    </div>
-                    <p class="image-note"><em>Note: This word cloud is generated dynamically using JavaScript. If it
-                            doesn't appear immediately, try refreshing the page.</em></p>
-                </section>
-            </section>
-
-            <section id="accommodations" class="tab-content">
-                <h2>Accommodation: Sandesh Water Edge</h2>
-                <p>Our hawabaazes will be staying at the beautiful Sandesh Water Edge. Here are some images showcasing
-                    the rooms and views:</p>
-                <!-- Pics of rooms -->
-                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 10px;">
-                    <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/635732479.jpg?k=925d56b960ba5973cb4dffe1e88bea9903817dee5c673571674242c2dbc088c3&o=&hp=1"
-                        alt="Rooms and Views at Sandesh Water Edge"
-                        style="flex: 1 1 600px; max-width:600px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                    <img src="https://sandeshwateredge.com/wp-content/uploads/elementor/thumbs/0768-r09ui4jwquhunwdd5u0j90kdonfozrybgnixalv4io.jpg"
-                        alt="Rooms and Views at Sandesh Water Edge"
-                        style="flex: 1 1 600px; max-width:600px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                    <img src="https://sandeshwateredge.com/wp-content/uploads/elementor/thumbs/DJI_20241111085146_0014_D-scaled-qxzzi7j1cynq60stg0ocxxw7qkzqgoe8ieztq9eops.jpg"
-                        alt="Rooms and Views at Sandesh Water Edge"
-                        style="flex: 1 1 600px; max-width:600px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                    <img src="https://sandeshwateredge.com/wp-content/uploads/2025/01/DSC_2064-Panorama-1.jpg"
-                        alt="Rooms and Views at Sandesh Water Edge"
-                        style="flex: 1 1 600px; max-width:600px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                    <img src="https://sandeshwateredge.com/wp-content/uploads/2025/01/DSC_2071-Panorama-1.jpg"
-                        alt="Rooms and Views at Sandesh Water Edge"
-                        style="flex: 1 1 600px; max-width:600px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                    <img src="https://sandeshwateredge.com/wp-content/uploads/2025/01/DSC_2085-Panorama-1.jpg"
-                        alt="Rooms and Views at Sandesh Water Edge"
-                        style="flex: 1 1 600px; max-width:600px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                    <img src="https://sandeshwateredge.com/wp-content/uploads/2024/12/1-228-2048x1362.jpg"
-                        alt="Rooms and Views at Sandesh Water Edge"
-                        style="flex: 1 1 600px; max-width:600px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                    <img src="https://sandeshwateredge.com/wp-content/uploads/2024/12/1-94-2048x1362.jpg"
-                        alt="Rooms and Views at Sandesh Water Edge"
-                        style="flex: 1 1 600px; max-width:600px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                    <img src="https://sandeshwateredge.com/wp-content/uploads/2024/12/1-91-2048x1363.jpg"
-                        alt="Rooms and Views at Sandesh Water Edge"
-                        style="flex: 1 1 600px; max-width:600px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                    <img src="https://sandeshwateredge.com/wp-content/uploads/elementor/thumbs/free-photo-of-people-riding-a-cart-on-a-road-r06xyu1wtgdfxlq74rpxd2734miqlwfjbymydcdgoc.jpeg"
-                        alt="Rooms and Views at Sandesh Water Edge"
-                        style="flex: 1 1 600px; max-width:600px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                    <img src="https://sandeshwateredge.com/wp-content/uploads/2024/12/1-284-2048x1362.jpg"
-                        alt="Rooms and Views at Sandesh Water Edge"
-                        style="flex: 1 1 600px; max-width:600px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                    <img src="https://sandeshwateredge.com/wp-content/uploads/2024/12/ROO_2804-2048x1362.jpg"
-                        alt="Rooms and Views at Sandesh Water Edge"
-                        style="flex: 1 1 600px; max-width:600px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                    <img src="" alt="Rooms and Views at Sandesh Water Edge"
-                        style="flex: 1 1 600px; max-width:600px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                    <img src="" alt="Rooms and Views at Sandesh Water Edge"
-                        style="flex: 1 1 600px; max-width:600px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
                 </div>
 
-                <p>Sandesh Water Edge offers luxurious accommodations with stunning views. More details about the
-                    resort, including dining and other amenities, can be found on their official website.</p>
-                <section id="restaurants-bars">
-                    <h2>Dining at Sandesh Water Edge</h2>
-                    <p>Sandesh Water Edge boasts a variety of dining options. Please check with the resort directly for
-                        specific details regarding restaurants, bars, and lounges.</p>
-                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 10px;">
-                        <img src="https://sandeshwateredge.com/wp-content/uploads/2025/01/DSC_2443-Panorama-1.jpg"
-                            alt="Dining" style="width:100%;max-width:600px;">
-                        <img src="https://sandeshwateredge.com/wp-content/uploads/2025/01/DSC_2464-Panorama-1.jpg"
-                            alt="Dining" style="width:100%;max-width:600px;">
-                        <img src="https://sandeshwateredge.com/wp-content/uploads/2025/01/DSC_2478-Panorama-1.jpg"
-                            alt="Dining" style="width:100%;max-width:600px;">
-                        <img src="https://sandeshwateredge.com/wp-content/uploads/2025/01/0134.jpg" alt="Dining"
-                            style="width:100%;max-width:600px;">
-                    </div>
-                </section>
-            </section>
-
-            <section id="itinerary" class="tab-content">
-                <h2>Proposed 4-Day Itinerary & Activities</h2>
-                <p>(Note: This is a sample itinerary for 4 days. Safari timings are fixed by forest department and
-                    depend on availability. <span class="highlight">Safari bookings must be made well in
-                        advance.</span>)</p>
-
-                <div id="itinerary" class="tab-pane">
-                    <h2>Our Exciting 4-Day Itinerary!</h2>
-                    <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-                        <div
-                            style="flex: 1 1 calc(33% - 40px); min-width: 300px; height: 400; padding: 20px; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); background-color: #fff;">
-                            <h3>Day 1: Arrival & First Safari Thrill</h3>
-                            <ul>
-                                <li><strong>Morning (8:00 AM):</strong> Depart from Bangalore.</li>
-                                <li><strong>Afternoon (1:00 PM):</strong> Arrive at Kabini resort, check-in, and have
-                                    group lunch.</li>
-                                <li><strong>Late Afternoon (3:00 PM):</strong> <span class="highlight">Afternoon Boat
-                                        Safari or Jeep Safari</span> (depending on booking and preference). Experience
-                                    the rich biodiversity around Kabini River and Nagarhole.</li>
-                                <li><strong>Evening (6:30 PM):</strong> Return to resort, relax.</li>
-                                <li><strong>Dinner (8:00 PM):</strong> Group dinner at the resort, followed by a
-                                    naturalist's talk or wildlife documentary.</li>
-                            </ul>
-                        </div>
-
-                        <div
-                            style="flex: 1 1 calc(33% - 40px); min-width: 200px; height: 400; padding: 20px; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); background-color: #fff;">
-                            <h3>Day 2: Deep Dive into the Wild</h3>
-                            <ul>
-                                <li><strong>Early Morning (6:00 AM):</strong> Wake up for <span
-                                        class="highlight">Morning Jeep Safari</span> into Nagarhole National Park. Look
-                                    out for tigers, leopards, elephants, gaurs, deer, and various bird species.</li>
-                                <li><strong>Morning (9:30 AM):</strong> Return to resort for breakfast.</li>
-                                <li><strong>Late Morning/Lunch (11:00 AM - 2:00 PM):</strong> Leisure time, relax by the
-                                    river, enjoy resort amenities, or take a gentle walk around the lodge property.
-                                    Group lunch.</li>
-                                <li><strong>Afternoon (3:00 PM):</strong> <span class="highlight">Afternoon Boat Safari
-                                        or Jeep Safari</span>. Another opportunity for incredible wildlife sightings.
-                                </li>
-                                <li><strong>Evening (6:30 PM):</strong> Return, relax.</li>
-                                <li><strong>Dinner (8:00 PM):</strong> Group dinner, perhaps a bonfire (if permitted by
-                                    resort and weather).</li>
-                            </ul>
-                        </div>
-
-                        <div
-                            style="flex: 1 1 calc(33% - 40px); min-width: 200px; height: 400; padding: 20px; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); background-color: #fff;">
-                            <h3>Day 3: Nature's Embrace</h3>
-                            <ul>
-                                <li><strong>Morning (9:30 AM):</strong> Leisurely breakfast.</li>
-                                <li><strong>Late Morning (11:00 AM):</strong> Final relaxation, perhaps some last-minute
-                                    souvenir shopping at the resort.</li>
-                                <li><strong>Lunch (1:00 PM):</strong> Group lunch at the resort.</li>
-                                <li><strong>Afternoon (2:00 PM):</strong> Masti and daaru!</li>
-                                <li><strong>Evening (6:30 PM):</strong> More of the same.</li>
-                                <li><strong>Dinner (8:00 PM):</strong> Group dinner, perhaps a bonfire (if permitted by
-                                    resort and weather).</li>
-                                <li><strong>Dinner (29:00 AM):</strong> Philosophy, ulaari, and general mayhem.</li>
-                            </ul>
-                        </div>
-
-                        <div
-                            style="flex: 1 1 calc(33% - 40px); min-width: 200px; height: 400; padding: 20px; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); background-color: #fff;">
-                            <h3>Day 4: Optional Excursion & Relaxation & Optional Departure</h3>
-                            <ul>
-                                <li><strong>Morning (8:00 AM):</strong> Optional nature walk or bird watching session
-                                    with a naturalist.</li>
-                                <li><strong>Morning (10:00 AM):</strong> Return for breakfast.</li>
-                                <li><strong>Late Morning (11:00 AM - 1:00 PM):</strong> Enjoy resort amenities like the
-                                    swimming pool or spa, or simply relax by the riverside.</li>
-                                <li><strong>Lunch (1:00 PM):</strong> Group lunch at the resort.</li>
-                                <li><strong>Afternoon (3:00 PM):</strong> Free time for personal activities or quiet
-                                    reflection amidst nature.</li>
-                                <li><strong>Evening (7:00 PM):</strong> Special farewell dinner with local cuisine and
-                                    cultural performance (if available).</li>
-                                <li><strong>Night:</strong> Stargazing session (weather permitting).</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div id="tab2" class="tab-content">
+                    <h3>Eco-Lodges</h3>
+                    <p>For those seeking a more immersive and sustainable experience, our eco-lodges provide a unique
+                        opportunity to connect with nature without compromising on comfort. Built with eco-friendly
+                        materials and practices, these lodges blend seamlessly with the environment.</p>
+                    <p>Highlights include:</p>
+                    <ul>
+                        <li>Jungle Lodges & Resorts (Kabini River Lodge)</li>
+                        <li>Waterwoods Lodge & Resort</li>
+                        <li>Cicada Resorts, Kabini</li>
+                    </ul>
                 </div>
 
-
-
-                <section id="beyond-28th">
-                    <h2>Extend Your Adventure: Beyond November 28th</h2>
-                    <p>Should any of you wish to extend your stay beyond November 28th and continue exploring the beauty
-                        of Karnataka, here are a few excellent options for individual or smaller group excursions:</p>
-                    <h3>Explore Mysore (approx. 1.5-2 hours from Kabini):</h3>
-                    <ul>
-                        <li><strong>Mysore Palace:</strong> A magnificent historical palace, a UNESCO World Heritage
-                            site, and one of India's most visited attractions. The illumination on Sunday evenings is
-                            spectacular.</li>
-                        <li><strong>Chamundi Hills:</strong> Visit the Chamundeshwari Temple atop the hills, offering
-                            panoramic views of Mysore city.</li>
-                        <li><strong>Brindavan Gardens:</strong> Famous for its musical fountains and illuminated
-                            terraces, especially beautiful in the evening.</li>
-                        <li><strong>Mysore Zoo:</strong> One of the oldest and most well-maintained zoos in India, home
-                            to a wide variety of species.</li>
-                        <li><strong>Local Markets & Shopping:</strong> Explore Devaraja Market for a sensory overload of
-                            flowers, spices, and local crafts, or shop for Mysore silk sarees and sandalwood products.
-                        </li>
-                    </ul>
-                    <h3>Visit Ooty & Coonoor (approx. 3-4 hours from Kabini):</h3>
-                    <ul>
-                        <li><strong>Nilgiri Mountain Railway (Toy Train):</strong> A UNESCO World Heritage site,
-                            offering a picturesque journey through the hills.</li>
-                        <li><strong>Botanical Gardens & Rose Garden, Ooty:</strong> Beautifully maintained gardens
-                            showcasing a vast array of flora.</li>
-                        <li><strong>Doddabetta Peak, Ooty:</strong> The highest point in the Nilgiris, providing
-                            stunning views.</li>
-                        <li><strong>Tea Plantations, Coonoor:</strong> Enjoy scenic drives through tea estates and visit
-                            a tea factory.</li>
-                    </ul>
-                    <h3>Bandipur National Park (Adjacent to Nagarhole, easy transit from Kabini):</h3>
-                    <ul>
-                        <li>If your thirst for wildlife isn't quenched, Bandipur offers more safari opportunities and is
-                            known for its tiger and elephant populations. Many resorts offer combined packages or can
-                            arrange safaris here.</li>
-                    </ul>
-                    <h3>Wayanad, Kerala (approx. 2-3 hours from Kabini):</h3>
-                    <ul>
-                        <li>Just across the border in Kerala, Wayanad offers lush green landscapes, waterfalls (like
-                            Soochipara Falls), spice plantations, historical caves (Edakkal Caves), and serene trekking
-                            paths.</li>
-                    </ul>
-                    <p class="highlight">Please note: If you plan to extend, it's advisable to make arrangements for
-                        accommodation and transport in advance, especially during the peak season. We can help provide
-                        contacts for local tour operators if needed.</p>
-                </section>
-            </section>
-
-            <section id="stops" class="tab-content">
-                <h2>Dosa Delights: Stops Between Bangalore and Kabini</h2>
-                <p>The journey from Bangalore to Kabini, while scenic, is also a great opportunity to savor some
-                    authentic South Indian flavors, especially delicious dosas! While many smaller eateries exist, here
-                    are a few well-regarded options along the route, particularly around Mysore, which is roughly
-                    halfway.</p>
-                <ul>
-                    <li><strong>Hotel Mylari, Mysore:</strong> A legendary spot in Mysore, famous for its unique, soft,
-                        and buttery dosas. It's a small, no-frills place, but the taste is unforgettable. Be prepared
-                        for a wait, especially during peak hours.</li>
-                    <li><strong>Vinayaka Mylari, Mysore:</strong> Often confused with Hotel Mylari, this is another
-                        popular spot with a similar style of dosa. Also highly recommended for a quick and delicious
-                        breakfast or snack.</li>
-                    <li><strong>Local Darshinis/Hotels in Ramanagara or Maddur:</strong> As you drive through towns like
-                        Ramanagara or Maddur (famous for Maddur Vada), you'll find numerous smaller "Darshini" style
-                        restaurants. These are typically self-service and offer a quick, authentic, and budget-friendly
-                        dosa experience. Look for places that seem busy with locals – that's often a good sign!</li>
-                    <li><strong>Kamath Lokaruchi, Ramanagara:</strong> A larger, more established restaurant on the
-                        Bangalore-Mysore highway, offering a wide range of South Indian dishes, including good dosas.
-                        It's a reliable stop for a clean restroom break and a decent meal.</li>
-                    <li><strong>Shivalli, Channapatna:</strong> Done it many times. Always good. A lot of South Indian fare
-                        and high quality, and as usual, very well priced.<br></li>
-                </ul>
-                <p>It's best to factor in a short stop for these culinary gems. A quick 30-45 minute break can enhance
-                    your road trip experience significantly!</p>
-                <p><br></p>
-                <p>And a treat for Sholay fans! Kitne aadmi thhe?</p>    
-                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 10px;">
-                    <img src="https://thrillingtravel.in/wp-content/uploads/2020/12/Ramanagara-hills-bengaluru-daytrip.jpg"
-                        alt="Sholay!" style="width:100%;max-width:600px;">
-                    <img src="https://media-cdn.tripadvisor.com/media/photo-s/09/ee/5b/6f/kamat-lokaruchi.jpg"
-                        alt="Lokaruchi" style="width:100%;max-width:600px;">
-                    <img src="https://i0.wp.com/banjaranfoodie.com/wp-content/uploads/2021/11/mylari.jpg?fit=1200%2C800&ssl=1"
-                        alt="Mylari" style="width:100%;max-width:600px;">
-                    <img src="https://www.vegrecipesofindia.com/wp-content/uploads/2018/09/maddur-vada-recipe-1.jpg"
-                        alt="Maddur" style="width:100%;max-width:600px;">
-                    <img src="https://media.istockphoto.com/id/1205482272/photo/medu-wada-with-sambar-and-chutney-south-indian-breakfast-or-snack-dish-on-banana-leaf.jpg?s=612x612&w=0&k=20&c=e0f0_ik1YETKco-jJwbbh3vP_GrOD-oh2KucGSUbQOg="
-                        alt="Local Darshinis" style="width:100%;max-width:600px;">
-                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4npSEPPlqDELqY5zrqZca26JGt44X264MXf5EbI0Kn1El3gpA-ecqgu8qJsTAA01W9ekgwybc-aalx0wlAhpoK1uLm66n8vQ09vCh_25CCZbnHWhJdGpZTWg1sXrOBjooc4J6CyWtE=s1360-w1360-h1020"
-                        alt="Shivalli" style="width:100%;max-width:600px;">
+                <div id="tab3" class="tab-content">
+                    <h3>Custom Packages</h3>
+                    <p>Tailor your Kabini adventure to your specific desires. Whether you're planning a romantic
+                        honeymoon, a family vacation, or an adventurous solo trip, our team can customize packages that
+                        include your preferred accommodation, safari types, and unique experiences like bird watching
+                        tours or guided treks. Contact us to design your dream getaway!</p>
                 </div>
             </section>
 
-            <section id="contact" class="tab-content">
-                <h2>Contact Information & RSVP</h2>
-                <p style="margin-top: 20px;">For specific trip arrangements, please use the contact details below.</p>
-
-                <ul>
-                    <li><strong>Trip Coordinator/Contact Person:</strong> Rahul Masurekar, Ananth Murthy. As a unit,
-                        they are called Muskerekar!</li>
-                    <li><strong>Phone:</strong> +91 98862 20044, +91 99450 55859</li>
-                    <li><strong>Email:</strong> [Your Email Address]</li>
-                    <li><strong>RSVP By:</strong> July 15th, 2025 to confirm your participation. Rooms may be running
-                        out!</li>
-                </ul>
-                <section id="call-to-action">
-                    <h3>Call to Action:</h3>
-                    <p>We're incredibly excited to embark on this wildlife journey with all of you! Please review the
-                        details, and let's get ready for an unforgettable adventure together amidst the wonders of
-                        Kabini. Your enthusiasm makes every sighting more special!</p>
-                </section>
-            </section>
-
-
-            <section id="khatarnaths-kliks" class="tab-content">
-                <h2>Khatarnath's Kabini Kliks</h2>
-                <p>Here are some amazing captures by Khatarnath from previous Kabini trips!</p>
-                <div class="image-gallery">
-                    <figure>
-                        <img src="kabini-leopards.jpg" alt="Khatarnath's Kabini Klik 1"
-                            onerror="this.onerror=null;this.src='https://placehold.co/280x180/E0E0E0/333333?text=Image+1'">
-                        <figcaption>Chhokra pakad liya hai!</figcaption>
-                    </figure>
-                    <figure>
-                        <img src="https://lh3.googleusercontent.com/pw/AP1GczO5dAcPWhe2VP18a2SJPZDHDFWCUGpn-JQI6rqhVW_ymJUn-OXmNcGWylYKR6nJ_7L0ugFmsmLKYsfHf1YQiYxkno-QAOaVb8yL9v0-0zDbs3tFMT-XtCbPet7DJqbECO2LEAWvDGQXw9dbg-f6tKQwSA=w1617-h1078-s-no?authuser=0 alt="
-                            Khatarnath's Kabini Klik 2"
-                            onerror="this.onerror=null;this.src='https://placehold.co/280x180/D0D0D0/333333?text=Image+2'">
-                        <figcaption>Hum boss hain!</figcaption>
-                    </figure>
-                    <figure>
-                        <img src="https://lh3.googleusercontent.com/pw/AP1GczMbV1Tk3sU9azZGmd9HDamVNRLa3sSd6HxYTJI7S4LesnEvkTz8dk8_wieRUjohxe_yQ72rzCZMUE2R1wZJ9Vr5Np2ZdGvohhkqB9RjeVqxeq76xMoVsSFjsa0pJtel4v7j2oiwc1XcwGVCJmS7WbLwYg=w2688-h1792-s-no?authuser=0"
-                            alt="Khatarnath's Kabini Klik 3"
-                            onerror="this.onerror=null;this.src='https://placehold.co/280x180/C0C0C0/333333?text=Image+3'">
-                        <figcaption>You lookin' at me?</figcaption>
-                    </figure>
-                    <img src="https://lh3.googleusercontent.com/pw/AP1GczOybvpmP0Ax0A-gtdfRcym4h8Fwi-peB7mRbc7NVYXIWoASN7kBtKePkl6UbANqSQl5A7wVchj9SGJ8KX233-rFAlL25Ov2nnoePj0t1slMNd_4v9KYva7Z8EmstGo8uS5zyqG_xAuuoUkKPBSXhOzlMQ=w2688-h1792-s-no?authuser=0"
-                        alt="Khatarnath's Kabini Klik 3"
-                        onerror="this.onerror=null;this.src='https://placehold.co/280x180/C0C0C0/333333?text=Image+3'">
-                    <img src="https://lh3.googleusercontent.com/pw/AP1GczP7r69qnnK9Z25ht3JYlss9I61qfEXAE7dlvIeqDO0d3oA5E3hPOA3xTeQqfb1wO8Sg6YQibVO-u1sqAnPmFjIZMObCABGyEpU92i_R50KDZVuZOzexEUK3JzGgkW1DT_QWgW4sGSKtJVwiMHfX1CkF7Q=w2688-h1792-s-no?authuser=0"
-                        alt="Khatarnath's Kabini Klik 3"
-                        onerror="this.onerror=null;this.src='https://placehold.co/280x180/C0C0C0/333333?text=Image+3'">
-                    <img src="https://lh3.googleusercontent.com/pw/AP1GczOjOMPdjv1g3gSd0PqrZiVqMPqUm2Qn0xK4EzZOEHigtQZ0T7JirDjdl0hAykvfRbyk3h4MGIKG_jT4DybJEq7_1EDHJCPhHpNqnhnkBG4Q6_jJOUWlUK6amltB6flMcszT-dQHu8YIA3PkvT49pThhIA=w2688-h1792-s-no?authuser=0"
-                        alt="Khatarnath's Kabini Klik 3"
-                        onerror="this.onerror=null;this.src='https://placehold.co/280x180/C0C0C0/333333?text=Image+3'">
-                    <img src="https://lh3.googleusercontent.com/pw/AP1GczPx_EQLZpX9TvcXCNjRQx9_3Ao0dkmmpYfF4aPkdXWB-6y9cvLpSzUE1PSkl_kjnPkADwTeHt2vTGcycQA-kyjiee9DyhocuZwQrj0X2XLS1ozpQZfcVa-q3W4v12L6G5foz73G3F1g1uv5AhQUNJDHBg=w2688-h1792-s-no?authuser=0"
-                        alt="Khatarnath's Kabini Klik 3"
-                        onerror="this.onerror=null;this.src='https://placehold.co/280x180/C0C0C0/333333?text=Image+3'">
-                    <figure>
-                        <img src="https://lh3.googleusercontent.com/pw/AP1GczNFi9JgLeuaQpcmKm54Gj0rLRwl-ekqhK9n-q9EOF6TMCo3LHIm0kq_uEfUx9oaFY-bebk5GR62FWJOSdOdUIHpwfulFuJrHVqB-QcYt-kh8K9GpEMgfbVqZC9AB1hjANalL_YWEKNGZRUAY0hDC9duNQ=w2688-h1792-s-no?authuser=0"
-                            alt="Khatarnath's Kabini Klik 3"
-                            onerror="this.onerror=null;this.src='https://placehold.co/280x180/C0C0C0/333333?text=Image+3'">
-                        <figcaption>Mere bhains ko danda kisne mara, BC!?</figcaption>
-                    </figure>
-                    <img src="https://lh3.googleusercontent.com/pw/AP1GczP6qxiee1VwfcC2eUtAwBqu1lb6z0NqROWetRcgCneKMX7a9uEQnVq2k2jOhXnjtV7VH8or_5ShsRm8vVjuAfl1h7p_Mk2oaU8Ml6qEI8X0dcGBmgdsSnZVIeV-W0zZ5oR2qHWczLSDNQonNuGGVlO-TQ=w2688-h1792-s-no?authuser=0"
-                        alt="Khatarnath's Kabini Klik 3"
-                        onerror="this.onerror=null;this.src='https://placehold.co/280x180/C0C0C0/333333?text=Image+3'">
-                    <img src="https://lh3.googleusercontent.com/pw/AP1GczN9fJkiZ1ycRGshP6ZFhQE-azZ6x0pEiU5p2s21j08C08xqTZ4JXNSeBqMk99O9murHAuBwmjUj0VWp1oNmjrVRzuzWgoNlRSYp98g-pQZEojqH_wGIe3ZXih1c43FSPd6MsZxf0vQM3kbb6QCUpIgeGw=w2688-h1792-s-no?authuser=0"
-                        alt="Khatarnath's Kabini Klik 3"
-                        onerror="this.onerror=null;this.src='https://placehold.co/280x180/C0C0C0/333333?text=Image+3'">
-                    <img src="https://lh3.googleusercontent.com/pw/AP1GczOZhd_4bAlxosPuk9d9yAsLtkT-va9N-HYph6Ho84IjXWQB4HRAV3ociM5-CHLB8J4wzrxHJ90YseVlrU-wXWxCerCb0cCatoBP2gdv13UkS_sjZRnnd4N0W1BXdoM8swnzVLpL-oL7fDCnAA9LmdUpxw=w2688-h1792-s-no?authuser=0"
-                        alt="Khatarnath's Kabini Klik 3"
-                        onerror="this.onerror=null;this.src='https://placehold.co/280x180/C0C0C0/333333?text=Image+3'">
-                    <img src="https://lh3.googleusercontent.com/pw/AP1GczOctkllAj-661922LGFZB2GSBGi8meAiAKSWe6jfyIR2k7hpm9E3ZU38Y__z-D6aZqjft4JpLAcpFKEQW4923hhR84zS8vroSBKnXKTYWNda2daBddCALheTBwpUmHV10T1P-xxxsQVbYhmzSQ3pYp3sQ=w1456-h971-s-no?authuser=0"
-                        alt="Khatarnath's Kabini Klik 3"
-                        onerror="this.onerror=null;this.src='https://placehold.co/280x180/C0C0C0/333333?text=Image+3'">
-                    <img src="https://lh3.googleusercontent.com/pw/AP1GczNwXy6Sf2xkB02Sk0-36xBiARIfUlDyRzEIpvz21nB5tD5n81tMf_0yNnLp22Hhp5MFqYd_qXcKZYNIQ_RiGtxWReBWdgJnhvoCi-Ks9wKl1qPZYRo4AHkUtoKvUWGeXVZXdOljz8NgKCdzTXXX1nsaZA=w2688-h1792-s-no?authuser=0"
-                        alt="Khatarnath's Kabini Klik 3"
-                        onerror="this.onerror=null;this.src='https://placehold.co/280x180/C0C0C0/333333?text=Image+3'">
-                    <img src="https://lh3.googleusercontent.com/pw/AP1GczPj9UyshuUMFPgfiJVfqi6nH9hww_Ge6IllVPs-YAcmKP2dzJYxVOkQo7aqzCI5qLSdJvTKByPOvS0iTj47Qq1hQSWzzE3NWrroLAzAgoEn1ErSjAUUvJzCpOSPzU7uNvkb9IQfx84FOk2JLpEvK1lppQ=w2688-h1792-s-no?authuser=0"
-                        alt="Khatarnath's Kabini Klik 3"
-                        onerror="this.onerror=null;this.src='https://placehold.co/280x180/C0C0C0/333333?text=Image+3'">
-                    <img src="https://lh3.googleusercontent.com/pw/AP1GczNcjSDsPSYgemK7EcaWddi8eTFWDjrqSVE1SaId0qHOZZrs-Xx8J11XCIOjxLuKr3_zhQx3OkDFCwygUkZx0kbIovY8Ap-GjVy1AMl0r8iOQiYJFdUuFLC9aeGxLtX_9wi9tAB_ECkct0HHJXiEA_w-Ag=w2688-h1792-s-no?authuser=0"
-                        alt="Khatarnath's Kabini Klik 3"
-                        onerror="this.onerror=null;this.src='https://placehold.co/280x180/C0C0C0/333333?text=Image+3'">
-                    <img src="https://lh3.googleusercontent.com/pw/AP1GczPttgy7t2l8Jxen-y_VtjlhafYViGarcCj0I0ZKNK9KgGLmzreddgBX0beIg5Yo4dlM54DGd-vUUxbaqTFifRmmF3MgARIXXuGhN232H6qblLxyKoY9BCx1UtBdHMVSzr0s-nA3-z930FWWJD4Vs6CIc7A=w2688-h1792-s-no?authuser=0"
-                        alt="Khatarnath's Kabini Klik 3"
-                        onerror="this.onerror=null;this.src='https://placehold.co/280x180/C0C0C0/333333?text=Image+3'">
-                    <figure>
-                        <img src="https://lh3.googleusercontent.com/pw/AP1GczNOqXNqzELYLlkYjX44HgOZEVgsCkR3EIQeJit9kupk3MnShuVjING9Y2riDNc7qLUaxf4mV9lPx3DpK0_Nqi2oTQ8iASEPGMZePcGsADE4Kg985wEc7L4BUnY_FzYMgDZahIwNQIzU7lJxy5-b0blbvA=w2688-h1792-s-no?authuser=0"
-                            alt="Khatarnath's Kabini Klik 3"
-                            onerror="this.onerror=null;this.src='https://placehold.co/280x180/C0C0C0/333333?text=Image+3'">
-                        <figcaption>Awww, doggies!</figcaption>
-                    </figure>
-                    <img src="https://lh3.googleusercontent.com/pw/AP1GczPegYs9Z6NybITHP-hqVS6P8ZWC7xnvQvIQDd6fYMDuO-vvfVdzW8OyxHVUTqB13y-_KPkPrsxxVpPdUkYtclbOMIPF8jo7-JF2F95-0_KAWk_HzFDFmPzo5pqgPHiNucLtxmHZ1pDaZeOw05Gm6_-2kg=w2688-h1792-s-no?authuser=0"
-                        alt="Khatarnath's Kabini Klik 3"
-                        onerror="this.onerror=null;this.src='https://placehold.co/280x180/C0C0C0/333333?text=Image+3'">
-                    <img src="https://lh3.googleusercontent.com/pw/AP1GczP3WBbr8qQFbHaZUv2s0J_gkGY3RT7W4E_m2tOP4Y_oS6noB3BhYhs4wBXiLU2lCCyCJhw2qFqbvJKF6Rgu33irKVOmCFCN6Gx9pv6cJC11MPQQqDgVVezAIcXcN64KTw0v7oLhkWWL3PeqzWuwds5xSw=w2688-h1792-s-no?authuser=0"
-                        alt="Khatarnath's Kabini Klik 3"
-                        onerror="this.onerror=null;this.src='https://placehold.co/280x180/C0C0C0/333333?text=Image+3'">
+            <section id="word-cloud-section" class="section">
+                <h2>What travelers say about Kabini</h2>
+                <p>Here's what our visitors frequently mention about their Kabini experience:</p>
+                <div style="text-align: center;">
+                    <canvas id="wordCloudCanvas" width="600" height="400"
+                        style="border:1px solid #ccc; background-color:#f9f9f9;"></canvas>
                 </div>
-                <p class="image-note"><em>More kliks coming soon!</em></p>
             </section>
 
-            <section id="fun-experiments" class="tab-content">
-                <h2>Hawabaaz Interactions: Floating Translucent Silver Spheres</h2>
-                <p>Dive into this interactive 3D animation!</p>
-                <div id="threejs-container"></div>
-                <div class="info-box">
-                    <p>Use your mouse to drag and rotate the scene.</p>
-                    <p>Scroll to zoom in/out.</p>
-                </div>
-
-                <!-- Three.js library -->
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-                <!-- OrbitControls for camera interaction -->
-                <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-
-                <script>
-                    // Global variables for Three.js scene components specific to this tab
-                    let scene_three, camera_three, renderer_three, controls_three;
-                    const spheres_three = []; // Array to hold all sphere meshes
-                    let animationFrameId_three = null; // To store requestAnimationFrame ID for stopping
-
-                    // Array of image URLs for sphere textures - Replaced problematic links
-                    const imageUrls_three = [
-                        "https://sceneloc8.com/wp-content/uploads/2025/02/Shooting-deer-in-Kabini-forests.jpg"    // Placeholder for Black Panther
-                    ];
-                    const textureLoader_three = new THREE.TextureLoader();
-
-                    // Function to initialize the Three.js scene within a given container
-                    function setupThreeJS(containerId) {
-                        const container = document.getElementById(containerId);
-                        if (!container) {
-                            console.error("Three.js container not found:", containerId);
-                            return;
-                        }
-
-                        // Clear existing canvas if any
-                        while (container.firstChild) {
-                            container.removeChild(container.firstChild);
-                        }
-
-                        // 1. Scene setup
-                        scene_three = new THREE.Scene();
-                        scene_three.background = new THREE.Color(0x1a202c); // Dark background for contrast
-
-                        // **MODIFICATION START**
-                        // Load the background texture, consisting of elephants in a park
-                        const backgroundTextureLoader = new THREE.TextureLoader();
-                        backgroundTextureLoader.load(
-                            'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Elephants_at_Kabini.jpg/1599px-Elephants_at_Kabini.jpg?20190312045152', // Replace with your desired background image URL
-                            function (texture) {
-                                scene_three.background = texture;
-                            },
-                            undefined,
-                            function (err) {
-                                console.error('An error happened loading the background texture:', err);
-                                scene_three.background = new THREE.Color(0x1a202c); // Fallback to dark background
-                            }
-                        );
-                        // **MODIFICATION END**
-
-
-                        // 2. Camera setup
-                        // Get container dimensions
-                        const containerWidth = container.clientWidth;
-                        const containerHeight = container.clientHeight;
-
-                        camera_three = new THREE.PerspectiveCamera(50, containerWidth / containerHeight, 0.1, 1000);
-                        camera_three.position.z = 25; // Move camera back to see the spheres
-
-                        // 3. Renderer setup
-                        renderer_three = new THREE.WebGLRenderer({ antialias: true }); // Antialias for smoother edges
-                        renderer_three.setSize(containerWidth, containerHeight);
-                        renderer_three.setPixelRatio(window.devicePixelRatio); // Handle high-DPI screens
-                        container.appendChild(renderer_three.domElement);
-
-                        // 4. Lights setup
-                        const ambientLight = new THREE.AmbientLight(0x404040, 2); // Soft white light, slightly brighter
-                        scene_three.add(ambientLight);
-
-                        const directionalLight = new THREE.DirectionalLight(0xffffff, 2); // White light, brighter
-                        directionalLight.position.set(5, 10, 7); // Position the light
-                        scene_three.add(directionalLight);
-
-                        // 5. Create Spheres
-                        const sphereGeometry = new THREE.SphereGeometry(1, 32, 32); // Radius 1, 32 segments for smoothness
-
-                        const baseMaterialProperties = {
-                            metalness: 0.8,
-                            roughness: 0.3,
-                            transmission: 0.15, // Reduced transmission to make texture more visible
-                            transparent: true,
-                            opacity: 0.7, // 0.5 is too washed out, 0.9 seems to in-your-face
-                            clearcoat: 0.5,
-                            clearcoatRoughness: 0.1
-                        };
-
-                        // Use the number of attendees for the number of spheres
-                        const numberOfSpheres = attendeesData.length;
-                        for (let i = 0; i < numberOfSpheres; i++) {
-                            // Create a new material instance for each sphere
-                            const sphereMaterial = new THREE.MeshPhysicalMaterial(baseMaterialProperties);
-
-                            // Load texture for each sphere
-                            const textureIndex = i % imageUrls_three.length;
-                            const textureUrl = imageUrls_three[textureIndex];
-
-                            textureLoader_three.load(textureUrl,
-                                function (texture) {
-                                    sphereMaterial.map = texture;
-                                    sphereMaterial.needsUpdate = true;
-                                },
-                                undefined,
-                                function (err) {
-                                    console.error('An error happened loading texture:', err, textureUrl);
-                                    // Fallback to a solid color if texture fails to load
-                                    sphereMaterial.color.set(0x808080); // Gray fallback
-                                    sphereMaterial.map = null; // Ensure no broken map is used
-                                    sphereMaterial.needsUpdate = true;
-                                }
-                            );
-
-                            const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-
-                            // Randomize position within a bounding box
-                            sphere.position.x = (Math.random() - 0.5) * 40; // -20 to 20
-                            sphere.position.y = (Math.random() - 0.5) * 40; // -20 to 20
-                            sphere.position.z = (Math.random() - 0.5) * 40; // -20 to 20
-
-                            // Store initial random movement directions with a speed factor
-                            const speedFactor = 0.10; // Control overall speed
-                            sphere.userData.direction = new THREE.Vector3(
-                                (Math.random() - 0.5) * speedFactor,
-                                (Math.random() - 0.5) * speedFactor,
-                                (Math.random() - 0.5) * speedFactor
-                            ).normalize().multiplyScalar(speedFactor); // Normalize and apply speed
-
-                            // Store initial random rotation speeds
-                            sphere.userData.rotationSpeed = new THREE.Vector3(
-                                (Math.random() - 0.5) * 0.01,
-                                (Math.random() - 0.5) * 0.01,
-                                (Math.random() - 0.5) * 0.01
-                            );
-
-                            // Assign attendee name to the sphere
-                            const attendeeName = attendeesData[i].name; // Use 'i' directly for attendee name
-                            sphere.userData.attendeeName = attendeeName;
-
-                            // Create a canvas for the text texture for the sprite label
-                            const labelCanvas = document.createElement('canvas');
-                            const context = labelCanvas.getContext('2d');
-                            const fontSize = 24; // Decreased font size
-                            const font = `${fontSize}px Arial`;
-                            context.font = font;
-
-                            const textWidth = context.measureText(attendeeName).width;
-                            // Add padding to canvas dimensions
-                            labelCanvas.width = textWidth + 20; // Reduced padding
-                            labelCanvas.height = fontSize + 10; // Reduced padding
-
-                            // Redraw text with proper dimensions and subtle styling
-                            context.font = font;
-                            context.fillStyle = 'rgba(0, 0, 0, 0.4)'; // Subtle transparent background
-                            context.fillRect(0, 0, labelCanvas.width, labelCanvas.height);
-                            context.fillStyle = 'white'; // White text
-                            context.textAlign = 'center';
-                            context.textBaseline = 'middle';
-                            context.fillText(attendeeName, labelCanvas.width / 2, labelCanvas.height / 2);
-
-                            const labelTexture = new THREE.CanvasTexture(labelCanvas);
-                            labelTexture.needsUpdate = true;
-
-                            const labelMaterial = new THREE.SpriteMaterial({ map: labelTexture });
-                            const labelSprite = new THREE.Sprite(labelMaterial);
-
-                            // Scale sprite based on canvas size, relative to sphere size for subtlety
-                            const scaleFactor = 0.02; // Significantly decreased scale factor for smaller labels
-                            labelSprite.scale.set(labelCanvas.width * scaleFactor, labelCanvas.height * scaleFactor, 1);
-
-                            // Position the label slightly above the sphere
-                            // The Y position is relative to the sphere's center, so add half the sphere's radius and a bit more
-                            labelSprite.position.y = sphereGeometry.parameters.radius + labelSprite.scale.y / 2 + 0.1; // Adjusted offset for smaller labels
-
-                            sphere.add(labelSprite); // Add sprite as child of the sphere
-                            sphere.userData.labelSprite = labelSprite; // Store reference to the sprite
-
-                            scene_three.add(sphere);
-                            spheres_three.push(sphere);
-                        }
-
-                        // 6. OrbitControls for camera interaction
-                        controls_three = new THREE.OrbitControls(camera_three, renderer_three.domElement);
-                        controls_three.enableDamping = true; // Enable damping (inertia)
-                        controls_three.dampingFactor = 0.05; // Damping factor
-                        controls_three.screenSpacePanning = false; // Disable panning to restrict movement
-                        controls_three.minDistance = 5; // Minimum zoom distance
-                        controls_three.maxDistance = 100; // Maximum zoom distance
-
-                        // Resize listener specific to this canvas container
-                        const resizeObserver = new ResizeObserver(entries => {
-                            for (let entry of entries) {
-                                if (entry.target.id === containerId) {
-                                    const width = entry.contentRect.width;
-                                    const height = entry.contentRect.height;
-                                    camera_three.aspect = width / height;
-                                    camera_three.updateProjectionMatrix();
-                                    renderer_three.setSize(width, height);
-                                }
-                            }
-                        });
-                        resizeObserver.observe(container);
-                    }
-
-                    // Function to handle collisions between spheres
-                    function handleSphereCollisions() {
-                        const damping = 0.9; // Energy loss on collision
-                        for (let i = 0; i < spheres_three.length; i++) {
-                            for (let j = i + 1; j < spheres_three.length; j++) {
-                                const sphereA = spheres_three[i];
-                                const sphereB = spheres_three[j];
-
-                                const distance = sphereA.position.distanceTo(sphereB.position);
-                                const minDistance = sphereA.geometry.parameters.radius + sphereB.geometry.parameters.radius;
-
-                                if (distance < minDistance) {
-                                    // Collision detected!
-
-                                    // Calculate collision normal (vector from A to B)
-                                    const normal = new THREE.Vector3().subVectors(sphereB.position, sphereA.position).normalize();
-
-                                    // Calculate relative velocity
-                                    const relativeVelocity = new THREE.Vector3().subVectors(
-                                        sphereB.userData.direction,
-                                        sphereA.userData.direction
-                                    );
-
-                                    // Calculate impulse scalar
-                                    const impulseScalar = relativeVelocity.dot(normal);
-
-                                    // If spheres are moving away from each other, ignore (to prevent double collision)
-                                    if (impulseScalar > 0) continue;
-
-                                    // Apply impulse to change directions
-                                    const impulse = normal.multiplyScalar(-impulseScalar * damping); // Apply damping
-
-                                    sphereA.userData.direction.sub(impulse);
-                                    sphereB.userData.direction.add(impulse);
-
-                                    // Separate spheres slightly to prevent sticking
-                                    const overlap = minDistance - distance;
-                                    const separationVector = normal.clone().multiplyScalar(overlap / 2 + 0.001); // Add a small epsilon
-                                    sphereA.position.sub(separationVector);
-                                    sphereB.position.add(separationVector);
-                                }
-                            }
-                        }
-                    }
-
-                    // Animation loop for Three.js
-                    function animateThreeJS() {
-                        animationFrameId_three = requestAnimationFrame(animateThreeJS);
-
-                        // Update sphere positions
-                        spheres_three.forEach(sphere => {
-                            sphere.position.add(sphere.userData.direction);
-
-                            // Bounce off imaginary boundaries (simple collision)
-                            const boundary = 20; // Half-width of the bounding box
-                            const sphereRadius = sphere.geometry.parameters.radius;
-
-                            if (sphere.position.x > boundary - sphereRadius) {
-                                sphere.position.x = boundary - sphereRadius;
-                                sphere.userData.direction.x *= -1;
-                            } else if (sphere.position.x < -boundary + sphereRadius) {
-                                sphere.position.x = -boundary + sphereRadius;
-                                sphere.userData.direction.x *= -1;
-                            }
-
-                            if (sphere.position.y > boundary - sphereRadius) {
-                                sphere.position.y = boundary - sphereRadius;
-                                sphere.userData.direction.y *= -1;
-                            } else if (sphere.position.y < -boundary + sphereRadius) {
-                                sphere.position.y = -boundary + sphereRadius;
-                                sphere.userData.direction.y *= -1;
-                            }
-
-                            if (sphere.position.z > boundary - sphereRadius) {
-                                sphere.position.z = boundary - sphereRadius;
-                                sphere.userData.direction.z *= -1;
-                            } else if (sphere.position.z < -boundary + sphereRadius) {
-                                sphere.position.z = -boundary + sphereRadius;
-                                sphere.userData.direction.z *= -1;
-                            }
-
-                            // Rotate spheres
-                            sphere.rotation.x += sphere.userData.rotationSpeed.x;
-                            sphere.rotation.y += sphere.userData.rotationSpeed.y;
-                            sphere.rotation.z += sphere.userData.rotationSpeed.z;
-                        });
-
-                        // Handle sphere-sphere collisions
-                        handleSphereCollisions();
-
-                        controls_three.update();
-                        renderer_three.render(scene_three, camera_three);
-                    }
-
-                    // Function to stop Three.js animation and dispose resources
-                    function stopThreeJSAnimation() {
-                        if (animationFrameId_three) {
-                            cancelAnimationFrame(animationFrameId_three);
-                            animationFrameId_three = null;
-                        }
-                        if (renderer_three) {
-                            spheres_three.forEach(sphere => {
-                                // Dispose of sphere geometry and material
-                                if (sphere.geometry) sphere.geometry.dispose();
-                                if (sphere.material) {
-                                    if (sphere.material.map) {
-                                        sphere.material.map.dispose(); // Dispose texture
-                                    }
-                                    sphere.material.dispose(); // Dispose material
-                                }
-
-                                // Dispose of sprite material and texture
-                                if (sphere.userData.labelSprite) {
-                                    if (sphere.userData.labelSprite.material.map) {
-                                        sphere.userData.labelSprite.material.map.dispose();
-                                    }
-                                    if (sphere.userData.labelSprite.material) {
-                                        sphere.userData.labelSprite.material.dispose();
-                                    }
-                                }
-                                // Remove sphere from scene
-                                if (sphere.parent) {
-                                    sphere.parent.remove(sphere);
-                                }
-                            });
-                            renderer_three.dispose();
-                            renderer_three = null;
-                        }
-                        if (scene_three) {
-                            scene_three.clear();
-                            scene_three = null;
-                        }
-                        spheres_three.length = 0; // Clear the array
-                        if (controls_three) {
-                            controls_three.dispose();
-                            controls_three = null;
-                        }
-                    }
-                </script>
+            <section id="booking" class="section">
+                <h2>Plan Your Escape</h2>
+                <p>Ready to embark on an unforgettable journey to Kabini? Contact us today to book your dream wildlife
+                    getaway. Our expert team is here to assist you with personalized itineraries and seamless
+                    arrangements.</p>
+                <p>Email: <a href="mailto:info@hawabaazgetaway.com"
+                        class="text-green-700 hover:underline">info@hawabaazgetaway.com</a></p>
+                <p>Phone: +91-98765-43210</p>
+                <p>Follow us on social media for the latest updates and stunning wildlife photos!</p>
             </section>
+        </main>
 
-        </div> <a ico="#welcome" class="back-to-main" id="backToMainBtn">Back to Main Page</a>
-
+        <footer>
+            <p>&copy; 2025 The Hawabaaz Getaway. All rights reserved.</p>
+        </footer>
     </div>
-    <footer style="margin-top: 50px;">
-        <p>© 2025 The Hawabaaz Getaway. All rights reserved.</p>
-    </footer>
 
     <!-- NEW LOCATION FOR YOUR CHATBOT -->
     <div id="hawabaaz-chatbot-container">
-        <!-- PASTE YOUR CHATBOT'S ORIGINAL IFRAME CODE HERE -->
-        <iframe src="https://www.chatbase.co/chatbot-iframe/337-cJRbLVx23JiEgkB7K" width="100%"
-            style="height: 100%; border: none; border-radius: 8px; overflow: hidden;"
-            frameborder="0"></iframe>
+        <div id="chatbot-header" style="cursor: pointer; background-color: #2E8B57; color: white; padding: 10px; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; align-items: center;">
+            <span>Hawabaaz Chatbot</span>
+            <span id="toggle-icon">&#9660;</span> <!-- Down arrow -->
+        </div>
+        <div id="chatbot-content"> <!-- Wrapper for the iframe -->
+            <iframe id="chatbot-iframe" src="https://www.chatbase.co/chatbot-iframe/337-cJRbLVx23JiEgkB7K" width="100%"
+                style="height: 100%; border: none; border-radius: 0 0 8px 8px; overflow: hidden;"
+                frameborder="0"></iframe>
+        </div>
     </div>
 
     <script>
-        console.log("Script starting...");
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tab switching logic
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
 
-        const attendeesData = [
-            { name: "Rahul", isPresent: true },
-            { name: "Prabhu", isPresent: true },
-            { name: "Ramani", isPresent: true },
-            { name: "Minocha", isPresent: true },
-            { name: "VG", isPresent: true },
-            { name: "Khatarnath", isPresent: true },
-            { name: "Pawan", isPresent: true },
-            { name: "Rajiv Chandra", isPresent: true },
-            { name: "Arore", isPresent: true },
-            { name: "Murthy", isPresent: true },
-            { name: "Gajju", isPresent: true },
-            { name: "Khalid", isPresent: true },
-            { name: "Venky", isPresent: true },
-            { name: "Jamil", isPresent: true },
-            { name: "Batra", isPresent: true },
-            { name: "Dudduboss", isPresent: true },
-            { name: "Tapu", isPresent: true },
-            { name: "Richie", isPresent: true },
-            { name: "Manoj Gupta", isPresent: true },
-            { name: "Vijeta", isPresent: true },
-            { name: "Gokhale", isPresent: true },
-            { name: "Benny", isPresent: true },
-            { name: "This could be you!", isPresent: false },
-            { name: "This could be you!", isPresent: false }
-        ];
-        console.log("Attendees data:", attendeesData);
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
 
-        // Function to create checkboxes
-        function createAttendeeCheckboxes() {
-            const container = document.getElementById("attendeeCheckboxes");
-            if (container) {
-                attendeesData.forEach(attendee => {
-                    const div = document.createElement("div");
-                    div.classList.add("attendee-item");
-
-                    const checkbox = document.createElement("input");
-                    checkbox.type = "checkbox";
-                    checkbox.id = `attendee_${attendee.name.replace(/\s+/g, '_')}`;
-                    checkbox.name = "attendee";
-                    checkbox.value = attendee.name;
-                    checkbox.checked = attendee.isPresent;
-                    checkbox.disabled = true; // Make checkboxes read-only
-
-                    checkbox.addEventListener('change', (event) => {
-                        attendee.isPresent = event.target.checked;
-                        console.log(`${attendee.name} attendance status: ${attendee.isPresent}`);
-                    });
-
-                    const label = document.createElement("label");
-                    label.htmlFor = checkbox.id;
-                    label.textContent = attendee.name;
-
-                    div.appendChild(checkbox);
-                    div.appendChild(label);
-                    container.appendChild(div);
-                });
-            } else {
-                console.error("Attendee checkboxes container not found!");
-            }
-        }
-
-        // --- TAB FUNCTIONALITY ---
-        function showTab(tabId) {
-            // Stop any running Three.js animation first
-            stopThreeJSAnimation();
-
-            // Remove 'active' class from all tab buttons
-            document.querySelectorAll('.tab-button').forEach(button => {
-                button.classList.remove('active');
-            });
-
-            // Hide all tab content sections
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-
-            // Add 'active' class to the clicked tab button
-            const activeTabButton = document.querySelector(`.tab-button[data-tab="${tabId}"]`);
-            if (activeTabButton) {
-                activeTabButton.classList.add('active');
-            }
-
-            // Show the corresponding tab content
-            const activeTabContent = document.getElementById(tabId);
-            if (activeTabContent) {
-                activeTabContent.classList.add('active');
-            }
-
-            // If the active tab is 'attendees', generate word cloud
-            if (tabId === 'attendees') {
-                // Ensure word cloud is regenerated or drawn when attendees tab is active
-                // This prevents issues if the canvas wasn't visible before.
-                generateWordCloud();
-            } else if (tabId === 'fun-experiments') {
-                // If 'Hawabaaz Interactions' tab is active, setup and start Three.js animation
-                setupThreeJS('threejs-container');
-                animateThreeJS();
-            }
-        }
-
-        // Event listener for tab buttons
-        document.addEventListener('DOMContentLoaded', () => {
-            // Create checkboxes first
-            createAttendeeCheckboxes();
-
-            document.querySelectorAll('.tab-button').forEach(button => {
-                button.addEventListener('click', function (event) {
-                    event.preventDefault(); // Prevent default link behavior
-                    const tabId = this.dataset.tab; // Get the data-tab attribute value
-                    showTab(tabId);
+                    // Add active class to the clicked button and its corresponding content
+                    button.classList.add('active');
+                    const targetTab = button.dataset.tab;
+                    document.getElementById(targetTab).classList.add('active');
                 });
             });
 
-            // Handle "Back to Main Page" button click
-            const backToMainBtn = document.getElementById('backToMainBtn');
-            if (backToMainBtn) {
-                backToMainBtn.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    showTab('welcome'); // Go back to the 'welcome' tab
-                });
-            }
+            // Chatbot collapsible logic
+            const chatbotContainer = document.getElementById('hawabaaz-chatbot-container');
+            const chatbotHeader = document.getElementById('chatbot-header');
+            const toggleIcon = document.getElementById('toggle-icon');
+            const chatbotContent = document.getElementById('chatbot-content'); // Reference to the new wrapper div
 
-            // Show the initial tab (e.g., 'welcome' or based on URL hash)
-            const initialTab = window.location.hash.substring(1) || 'welcome';
-            showTab(initialTab);
-        });
+            // Store the initial expanded height of the content area
+            // We'll calculate this dynamically based on the container's full height minus header height
+            let initialChatbotContentHeight = 400 - chatbotHeader.offsetHeight; // Assuming container is 400px initially
 
+            // Set initial state (expanded by default)
+            chatbotContainer.classList.remove('collapsed');
+            toggleIcon.classList.remove('rotated');
+            chatbotContent.style.height = initialChatbotContentHeight + 'px'; // Set content height explicitly
+            chatbotContainer.style.height = '400px'; // Set container height explicitly
 
-        // --- WORD CLOUD GENERATION LOGIC (moved into a function) ---
-        function generateWordCloud() {
-            console.log("Generating word cloud...");
-
-            // Check if d3 and d3.layout.cloud are defined
-            if (typeof d3 === 'undefined') {
-                console.error("D3.js library is not loaded or defined.");
-                return;
-            }
-            if (typeof d3.layout === 'undefined' || typeof d3.layout.cloud === 'undefined') {
-                console.error("D3-cloud library (d3.layout.cloud) is not loaded or defined.");
-                return;
-            }
-
-            // Prepare data for d3-cloud (each name gets an arbitrary value for size)
-            const words = attendeesData.map(function (d) {
-                return { text: d.name, size: 10 + Math.random() * 30 }; // Random size for visual variety
-            });
-            console.log("Words array for d3-cloud:", words);
-
-            const margin = { top: 10, right: 10, bottom: 10, left: 10 },
-                width = 800 - margin.left - margin.right,
-                height = 400 - margin.top - margin.bottom;
-
-            const fill = d3.scaleOrdinal(d3.schemeCategory10); // Use D3's color scheme
-
-            const layout = d3.layout.cloud()
-                .size([width, height])
-                .words(words)
-                .padding(5)
-                .rotate(function () { return ~~(Math.random() * 2) * 90; })
-                .font("Impact")
-                .fontSize(function (d) { return d.size; })
-                .on("end", draw);
-
-            layout.start();
-
-            function draw(words) {
-                console.log("Draw function called. Words to draw:", words);
-                const canvas = document.getElementById("wordCloudCanvas");
-                if (!canvas) {
-                    console.error("Canvas element for word cloud not found!");
-                    return;
+            chatbotHeader.addEventListener('click', function () {
+                if (chatbotContainer.classList.contains('collapsed')) {
+                    // Expand the chatbot
+                    chatbotContainer.classList.remove('collapsed');
+                    toggleIcon.classList.remove('rotated');
+                    chatbotContainer.style.height = '400px'; // Restore full container height
+                    chatbotContent.style.height = initialChatbotContentHeight + 'px'; // Restore content height
+                    chatbotContent.addEventListener('transitionend', function handler() {
+                        chatbotContent.style.height = 'auto'; // Allow content to adjust if needed
+                        chatbotContent.removeEventListener('transitionend', handler);
+                    }, { once: true }); // Use { once: true } for single execution
+                } else {
+                    // Collapse the chatbot
+                    initialChatbotContentHeight = chatbotContent.offsetHeight; // Capture current height before collapsing
+                    chatbotContainer.classList.add('collapsed');
+                    toggleIcon.classList.add('rotated');
+                    chatbotContainer.style.height = chatbotHeader.offsetHeight + 'px'; // Set container height to header height
+                    chatbotContent.style.height = '0px'; // Animate content to 0 height
                 }
-                const ctx = canvas.getContext("2d");
-                ctx.clearRect(0, 0, width, height); // Clear previous drawing
-                ctx.translate(width / 2, height / 2); // Center the drawing
+            });
 
-                words.forEach(function (d) {
-                    ctx.save();
-                    ctx.translate(d.x, d.y);
-                    ctx.rotate(d.rotate * Math.PI / 180);
-                    ctx.textAlign = "center";
-                    ctx.font = d.size + "px " + d.font;
-                    ctx.fillStyle = fill(d.text);
-                    ctx.fillText(d.text, 0, 0);
-                    ctx.restore();
-                });
-                console.log("Word cloud drawing complete.");
+            // Update initialChatbotContentHeight on window resize
+            window.addEventListener('resize', () => {
+                // Only recalculate if not collapsed, or if we need to ensure correct expansion
+                if (!chatbotContainer.classList.contains('collapsed')) {
+                    // Temporarily remove height to get natural height, then restore
+                    chatbotContent.style.height = 'auto';
+                    initialChatbotContentHeight = chatbotContent.offsetHeight;
+                    chatbotContent.style.height = initialChatbotContentHeight + 'px';
+                }
+            });
+
+
+            // D3 Word Cloud Logic
+            // This script should be placed after the canvas element in the HTML
+            // and after D3.js and d3-cloud.js are loaded.
+            const textData = "Kabini wildlife safari tiger leopard elephant birds nature river serene forest adventure photography getaway amazing experience beautiful peaceful thrilling majestic sightings incredible diverse fauna flora tranquil unforgettable paradise jeep boat trails naturalists lodges resorts culture cuisine journey escape explore conservation tourism responsible sustainable"; // Example text data
+
+            // Parse and count words
+            const words = textData.split(/\s+/g)
+                .reduce((acc, word) => {
+                    word = word.toLowerCase();
+                    if (word.length > 3) { // Filter out short words
+                        acc[word] = (acc[word] || 0) + 1;
+                    }
+                    return acc;
+                }, {});
+
+            const wordList = Object.keys(words).map(word => ({
+                text: word,
+                size: words[word] * 10 + 10 // Scale font size based on frequency
+            }));
+
+            // Call the drawWordCloud function
+            drawWordCloud(wordList);
+
+            function drawWordCloud(words) {
+                const width = 600;
+                const height = 400;
+
+                const fill = d3.scale.category20(); // Use D3's color scheme
+
+                const layout = d3.layout.cloud()
+                    .size([width, height])
+                    .words(words)
+                    .padding(5)
+                    .rotate(function () { return ~~(Math.random() * 2) * 90; })
+                    .font("Impact")
+                    .fontSize(function (d) { return d.size; })
+                    .on("end", draw);
+
+                layout.start();
+
+                function draw(words) {
+                    console.log("Draw function called. Words to draw:", words);
+                    const canvas = document.getElementById("wordCloudCanvas");
+                    if (!canvas) {
+                        console.error("Canvas element for word cloud not found!");
+                        return;
+                    }
+                    const ctx = canvas.getContext("2d");
+                    ctx.clearRect(0, 0, width, height); // Clear previous drawing
+                    ctx.translate(width / 2, height / 2); // Center the drawing
+
+                    words.forEach(function (d) {
+                        ctx.save();
+                        ctx.translate(d.x, d.y);
+                        ctx.rotate(d.rotate * Math.PI / 180);
+                        ctx.textAlign = "center";
+                        ctx.font = d.size + "px " + d.font;
+                        ctx.fillStyle = fill(d.text);
+                        ctx.fillText(d.text, 0, 0);
+                        ctx.restore();
+                    });
+                    console.log("Word cloud drawing complete.");
+                }
             }
-        }
+        });
     </script>
 </body>
 
 </html>
+
