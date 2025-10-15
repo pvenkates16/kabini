@@ -1827,7 +1827,7 @@
                         controls_three.screenSpacePanning = false;
                         controls_three.minDistance = 5;
                         controls_three.maxDistance = 100 * 1.5;
-                        controls_three.maxPolarAngle = Math.PI / 2;
+                        controls_three.maxPolarAngle = Math.PI / 1.8; // allow panning to the sky, but just a little
                     
                         const resizeObserver = new ResizeObserver(entries => {
                             for (let entry of entries) {
