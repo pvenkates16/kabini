@@ -372,7 +372,7 @@
             /* Width of the button */
             height: 60px;
             /* Height of the button */
-            background-color: #2E8B57;
+            background-color: #FF6347;
             /* Sea Green */
             color: white;
             border: none;
@@ -389,12 +389,27 @@
             z-index: 1001;
             /* Higher z-index to be on top of the container */
             transition: background-color 0.3s ease, transform 0.3s ease;
+	    animation: pulse 2s infinite; /* Add the pulse animation */
         }
 
-        .chatbot-icon:hover {
-            background-color: #246a42;
-            transform: scale(1.05);
+        .chatbot-icon:hover,
+        .chatbot-icon:focus {
+           background-color: #E5533F; /* Slightly darker coral on hover/focus */
+           transform: scale(1.1); /* Scale up on hover/focus */
         }
+
+        /* Define the pulse animation */
+        @keyframes pulse {
+          0% {
+              box-shadow: 0 0 0 0 rgba(255, 99, 71, 0.7);
+          }
+          70% {
+              box-shadow: 0 0 0 10px rgba(255, 99, 71, 0);
+          }
+          100% {
+              box-shadow: 0 0 0 0 rgba(255, 99, 71, 0);
+          }
+       }
 
         #hawabaaz-chatbot-container {
             position: fixed;
