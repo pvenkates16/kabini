@@ -1652,42 +1652,44 @@
                             console.error("Three.js container not found:", containerId);
                             return;
                         }
-                        
+                    
                         // Clear existing canvas if any
                         while (container.firstChild) {
                             container.removeChild(container.firstChild);
                         }
-                        
+                    
                         // 1. Scene setup
                         scene_three = new THREE.Scene();
                         scene_three.background = new THREE.Color(0x1a202c); // Dark background for contrast
-                        
+                    
                         const backgroundTextureLoader = new THREE.TextureLoader();
                         backgroundTextureLoader.load(
                             'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Elephants_at_Kabini.jpg/1599px-Elephants_at_Kabini.jpg?20190312045152',
                             function(texture) {
                                 const imageAspect = texture.image.width / texture.image.height;
                                 const screenAspect = container.clientWidth / container.clientHeight;
-                        
+                    
                                 let planeWidth, planeHeight;
+                    
+                                // Adjust plane dimensions to cover the container while maintaining aspect ratio
                                 if (imageAspect > screenAspect) {
-                                    planeWidth = 100;
-                                    planeHeight = 100 / imageAspect;
-                                } else {
-                                    planeWidth = 100 * imageAspect;
+                                    planeWidth = screenAspect * 100;
                                     planeHeight = 100;
+                                } else {
+                                    planeWidth = 100;
+                                    planeHeight = 100 / screenAspect;
                                 }
-                        
+                    
                                 const backgroundPlaneGeometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
                                 const backgroundPlaneMaterial = new THREE.MeshBasicMaterial({
                                     map: texture,
                                     side: THREE.DoubleSide
                                 });
                                 const backgroundPlane = new THREE.Mesh(backgroundPlaneGeometry, backgroundPlaneMaterial);
-                        
+                    
                                 backgroundPlane.position.z = -50;
                                 scene_three.add(backgroundPlane);
-                        
+                    
                                 camera_three.position.z = Math.max(planeWidth, planeHeight) / 2 + 10;
                             },
                             undefined,
@@ -1696,13 +1698,13 @@
                                 scene_three.background = new THREE.Color(0x1a202c);
                             }
                         );
-                        
+                    
                         // 2. Camera setup
                         const containerWidth = container.clientWidth;
                         const containerHeight = container.clientHeight;
-                        
+                    
                         camera_three = new THREE.PerspectiveCamera(50, containerWidth / containerHeight, 0.1, 1000);
-                        
+                    
                         // 3. Renderer setup
                         renderer_three = new THREE.WebGLRenderer({
                             antialias: true
@@ -1710,18 +1712,18 @@
                         renderer_three.setSize(containerWidth, containerHeight);
                         renderer_three.setPixelRatio(window.devicePixelRatio);
                         container.appendChild(renderer_three.domElement);
-                        
+                    
                         // 4. Lights setup
                         const ambientLight = new THREE.AmbientLight(0x404040, 2);
                         scene_three.add(ambientLight);
-                        
+                    
                         const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
                         directionalLight.position.set(5, 10, 7);
                         scene_three.add(directionalLight);
-                        
+                    
                         // 5. Create Spheres
                         const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
-                        
+                    
                         const baseMaterialProperties = {
                             metalness: 0.8,
                             roughness: 0.3,
@@ -1731,16 +1733,16 @@
                             clearcoat: 0.5,
                             clearcoatRoughness: 0.1
                         };
-                        
+                    
                         const imageUrls_three = ["https://sceneloc8.com/wp-content/uploads/2025/02/Shooting-deer-in-Kabini-forests.jpg"];
                         const textureLoader_three = new THREE.TextureLoader();
-                        
+                    
                         const numberOfSpheres = attendeesData.length;
                         for (let i = 0; i < numberOfSpheres; i++) {
                             const sphereMaterial = new THREE.MeshPhysicalMaterial(baseMaterialProperties);
                             const textureIndex = i % imageUrls_three.length;
                             const textureUrl = imageUrls_three[textureIndex];
-                        
+                    
                             textureLoader_three.load(textureUrl,
                                 function(texture) {
                                     sphereMaterial.map = texture;
@@ -1754,39 +1756,39 @@
                                     sphereMaterial.needsUpdate = true;
                                 }
                             );
-                        
+                    
                             const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-                        
+                    
                             sphere.position.x = (Math.random() - 0.5) * 40;
                             sphere.position.y = (Math.random() - 0.5) * 40;
                             sphere.position.z = (Math.random() - 0.5) * 40;
-                        
+                    
                             const speedFactor = 0.10;
                             sphere.userData.direction = new THREE.Vector3(
                                 (Math.random() - 0.5) * speedFactor,
                                 (Math.random() - 0.5) * speedFactor,
                                 (Math.random() - 0.5) * speedFactor
                             ).normalize().multiplyScalar(speedFactor);
-                        
+                    
                             sphere.userData.rotationSpeed = new THREE.Vector3(
                                 (Math.random() - 0.5) * 0.01,
                                 (Math.random() - 0.5) * 0.01,
                                 (Math.random() - 0.5) * 0.01
                             );
-                        
+                    
                             const attendeeName = attendeesData[i].name;
                             sphere.userData.attendeeName = attendeeName;
-                        
+                    
                             const labelCanvas = document.createElement('canvas');
                             const context = labelCanvas.getContext('2d');
                             const fontSize = 24;
                             const font = `${fontSize}px Arial`;
                             context.font = font;
-                        
+                    
                             const textWidth = context.measureText(attendeeName).width;
                             labelCanvas.width = textWidth + 20;
                             labelCanvas.height = fontSize + 10;
-                        
+                    
                             context.font = font;
                             context.fillStyle = 'rgba(0, 0, 0, 0.4)';
                             context.fillRect(0, 0, labelCanvas.width, labelCanvas.height);
@@ -1794,27 +1796,27 @@
                             context.textAlign = 'center';
                             context.textBaseline = 'middle';
                             context.fillText(attendeeName, labelCanvas.width / 2, labelCanvas.height / 2);
-                        
+                    
                             const labelTexture = new THREE.CanvasTexture(labelCanvas);
                             labelTexture.needsUpdate = true;
-                        
+                    
                             const labelMaterial = new THREE.SpriteMaterial({
                                 map: labelTexture
                             });
                             const labelSprite = new THREE.Sprite(labelMaterial);
-                        
+                    
                             const scaleFactor = 0.02;
                             labelSprite.scale.set(labelCanvas.width * scaleFactor, labelCanvas.height * scaleFactor, 1);
-                        
+                    
                             labelSprite.position.y = sphereGeometry.parameters.radius + labelSprite.scale.y / 2 + 0.1;
-                        
+                    
                             sphere.add(labelSprite);
                             sphere.userData.labelSprite = labelSprite;
-                        
+                    
                             scene_three.add(sphere);
                             spheres_three.push(sphere);
                         }
-                        
+                    
                         // 6. OrbitControls for camera interaction
                         controls_three = new THREE.OrbitControls(camera_three, renderer_three.domElement);
                         controls_three.enableDamping = true;
@@ -1822,7 +1824,7 @@
                         controls_three.screenSpacePanning = false;
                         controls_three.minDistance = 5;
                         controls_three.maxDistance = 100;
-                        
+                    
                         const resizeObserver = new ResizeObserver(entries => {
                             for (let entry of entries) {
                                 if (entry.target.id === containerId) {
@@ -1836,7 +1838,7 @@
                         });
                         resizeObserver.observe(container);
                     }
-                    
+                                        
                     // Function to handle collisions between spheres
                     function handleSphereCollisions() {
                         const damping = 0.9; // Energy loss on collision
