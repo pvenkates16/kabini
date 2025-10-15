@@ -409,7 +409,7 @@
           100% {
               box-shadow: 0 0 0 0 rgba(255, 99, 71, 0);
           }
-       }
+      }
 
         #hawabaaz-chatbot-container {
             position: fixed;
@@ -1652,174 +1652,177 @@
                             console.error("Three.js container not found:", containerId);
                             return;
                         }
-
+                        
                         // Clear existing canvas if any
                         while (container.firstChild) {
                             container.removeChild(container.firstChild);
                         }
-
+                        
                         // 1. Scene setup
                         scene_three = new THREE.Scene();
                         scene_three.background = new THREE.Color(0x1a202c); // Dark background for contrast
-
-                        // **MODIFICATION START**
-                        // Load the background texture, consisting of elephants in a park
+                        
                         const backgroundTextureLoader = new THREE.TextureLoader();
                         backgroundTextureLoader.load(
-                            'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Elephants_at_Kabini.jpg/1599px-Elephants_at_Kabini.jpg?20190312045152', // Replace with your desired background image URL
-                            function (texture) {
-                                scene_three.background = texture;
+                            'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Elephants_at_Kabini.jpg/1599px-Elephants_at_Kabini.jpg?20190312045152',
+                            function(texture) {
+                                const imageAspect = texture.image.width / texture.image.height;
+                                const screenAspect = container.clientWidth / container.clientHeight;
+                        
+                                let planeWidth, planeHeight;
+                                if (imageAspect > screenAspect) {
+                                    planeWidth = 100;
+                                    planeHeight = 100 / imageAspect;
+                                } else {
+                                    planeWidth = 100 * imageAspect;
+                                    planeHeight = 100;
+                                }
+                        
+                                const backgroundPlaneGeometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
+                                const backgroundPlaneMaterial = new THREE.MeshBasicMaterial({
+                                    map: texture,
+                                    side: THREE.DoubleSide
+                                });
+                                const backgroundPlane = new THREE.Mesh(backgroundPlaneGeometry, backgroundPlaneMaterial);
+                        
+                                backgroundPlane.position.z = -50;
+                                scene_three.add(backgroundPlane);
+                        
+                                camera_three.position.z = Math.max(planeWidth, planeHeight) / 2 + 10;
                             },
                             undefined,
-                            function (err) {
+                            function(err) {
                                 console.error('An error happened loading the background texture:', err);
-                                scene_three.background = new THREE.Color(0x1a202c); // Fallback to dark background
+                                scene_three.background = new THREE.Color(0x1a202c);
                             }
                         );
-                        // **MODIFICATION END**
-
-
+                        
                         // 2. Camera setup
-                        // Get container dimensions
                         const containerWidth = container.clientWidth;
                         const containerHeight = container.clientHeight;
-
+                        
                         camera_three = new THREE.PerspectiveCamera(50, containerWidth / containerHeight, 0.1, 1000);
-                        camera_three.position.z = 25; // Move camera back to see the spheres
-
+                        
                         // 3. Renderer setup
                         renderer_three = new THREE.WebGLRenderer({
                             antialias: true
-                        }); // Antialias for smoother edges
+                        });
                         renderer_three.setSize(containerWidth, containerHeight);
-                        renderer_three.setPixelRatio(window.devicePixelRatio); // Handle high-DPI screens
+                        renderer_three.setPixelRatio(window.devicePixelRatio);
                         container.appendChild(renderer_three.domElement);
-
+                        
                         // 4. Lights setup
-                        const ambientLight = new THREE.AmbientLight(0x404040, 2); // Soft white light, slightly brighter
+                        const ambientLight = new THREE.AmbientLight(0x404040, 2);
                         scene_three.add(ambientLight);
-
-                        const directionalLight = new THREE.DirectionalLight(0xffffff, 2); // White light, brighter
-                        directionalLight.position.set(5, 10, 7); // Position the light
+                        
+                        const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+                        directionalLight.position.set(5, 10, 7);
                         scene_three.add(directionalLight);
-
+                        
                         // 5. Create Spheres
-                        const sphereGeometry = new THREE.SphereGeometry(1, 32, 32); // Radius 1, 32 segments for smoothness
-
+                        const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
+                        
                         const baseMaterialProperties = {
                             metalness: 0.8,
                             roughness: 0.3,
-                            transmission: 0.15, // Reduced transmission to make texture more visible
+                            transmission: 0.15,
                             transparent: true,
-                            opacity: 0.7, // 0.5 is too washed out, 0.9 seems to in-your-face
+                            opacity: 0.7,
                             clearcoat: 0.5,
                             clearcoatRoughness: 0.1
                         };
-
-                        // Use the number of attendees for the number of spheres
+                        
+                        const imageUrls_three = ["https://sceneloc8.com/wp-content/uploads/2025/02/Shooting-deer-in-Kabini-forests.jpg"];
+                        const textureLoader_three = new THREE.TextureLoader();
+                        
                         const numberOfSpheres = attendeesData.length;
                         for (let i = 0; i < numberOfSpheres; i++) {
-                            // Create a new material instance for each sphere
                             const sphereMaterial = new THREE.MeshPhysicalMaterial(baseMaterialProperties);
-
-                            // Load texture for each sphere
                             const textureIndex = i % imageUrls_three.length;
                             const textureUrl = imageUrls_three[textureIndex];
-
+                        
                             textureLoader_three.load(textureUrl,
-                                function (texture) {
+                                function(texture) {
                                     sphereMaterial.map = texture;
                                     sphereMaterial.needsUpdate = true;
                                 },
                                 undefined,
-                                function (err) {
+                                function(err) {
                                     console.error('An error happened loading texture:', err, textureUrl);
-                                    // Fallback to a solid color if texture fails to load
-                                    sphereMaterial.color.set(0x808080); // Gray fallback
-                                    sphereMaterial.map = null; // Ensure no broken map is used
+                                    sphereMaterial.color.set(0x808080);
+                                    sphereMaterial.map = null;
                                     sphereMaterial.needsUpdate = true;
                                 }
                             );
-
+                        
                             const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-
-                            // Randomize position within a bounding box
-                            sphere.position.x = (Math.random() - 0.5) * 40; // -20 to 20
-                            sphere.position.y = (Math.random() - 0.5) * 40; // -20 to 20
-                            sphere.position.z = (Math.random() - 0.5) * 40; // -20 to 20
-
-                            // Store initial random movement directions with a speed factor
-                            const speedFactor = 0.10; // Control overall speed
+                        
+                            sphere.position.x = (Math.random() - 0.5) * 40;
+                            sphere.position.y = (Math.random() - 0.5) * 40;
+                            sphere.position.z = (Math.random() - 0.5) * 40;
+                        
+                            const speedFactor = 0.10;
                             sphere.userData.direction = new THREE.Vector3(
                                 (Math.random() - 0.5) * speedFactor,
                                 (Math.random() - 0.5) * speedFactor,
                                 (Math.random() - 0.5) * speedFactor
-                            ).normalize().multiplyScalar(speedFactor); // Normalize and apply speed
-
-                            // Store initial random rotation speeds
+                            ).normalize().multiplyScalar(speedFactor);
+                        
                             sphere.userData.rotationSpeed = new THREE.Vector3(
                                 (Math.random() - 0.5) * 0.01,
                                 (Math.random() - 0.5) * 0.01,
                                 (Math.random() - 0.5) * 0.01
                             );
-
-                            // Assign attendee name to the sphere
-                            const attendeeName = attendeesData[i].name; // Use 'i' directly for attendee name
+                        
+                            const attendeeName = attendeesData[i].name;
                             sphere.userData.attendeeName = attendeeName;
-
-                            // Create a canvas for the text texture for the sprite label
+                        
                             const labelCanvas = document.createElement('canvas');
                             const context = labelCanvas.getContext('2d');
-                            const fontSize = 24; // Decreased font size
+                            const fontSize = 24;
                             const font = `${fontSize}px Arial`;
                             context.font = font;
-
+                        
                             const textWidth = context.measureText(attendeeName).width;
-                            // Add padding to canvas dimensions
-                            labelCanvas.width = textWidth + 20; // Reduced padding
-                            labelCanvas.height = fontSize + 10; // Reduced padding
-
-                            // Redraw text with proper dimensions and subtle styling
+                            labelCanvas.width = textWidth + 20;
+                            labelCanvas.height = fontSize + 10;
+                        
                             context.font = font;
-                            context.fillStyle = 'rgba(0, 0, 0, 0.4)'; // Subtle transparent background
+                            context.fillStyle = 'rgba(0, 0, 0, 0.4)';
                             context.fillRect(0, 0, labelCanvas.width, labelCanvas.height);
-                            context.fillStyle = 'white'; // White text
+                            context.fillStyle = 'white';
                             context.textAlign = 'center';
                             context.textBaseline = 'middle';
                             context.fillText(attendeeName, labelCanvas.width / 2, labelCanvas.height / 2);
-
+                        
                             const labelTexture = new THREE.CanvasTexture(labelCanvas);
                             labelTexture.needsUpdate = true;
-
+                        
                             const labelMaterial = new THREE.SpriteMaterial({
                                 map: labelTexture
                             });
                             const labelSprite = new THREE.Sprite(labelMaterial);
-
-                            // Scale sprite based on canvas size, relative to sphere size for subtlety
-                            const scaleFactor = 0.02; // Significantly decreased scale factor for smaller labels
+                        
+                            const scaleFactor = 0.02;
                             labelSprite.scale.set(labelCanvas.width * scaleFactor, labelCanvas.height * scaleFactor, 1);
-
-                            // Position the label slightly above the sphere
-                            // The Y position is relative to the sphere's center, so add half the sphere's radius and a bit more
-                            labelSprite.position.y = sphereGeometry.parameters.radius + labelSprite.scale.y / 2 + 0.1; // Adjusted offset for smaller labels
-
-                            sphere.add(labelSprite); // Add sprite as child of the sphere
-                            sphere.userData.labelSprite = labelSprite; // Store reference to the sprite
-
+                        
+                            labelSprite.position.y = sphereGeometry.parameters.radius + labelSprite.scale.y / 2 + 0.1;
+                        
+                            sphere.add(labelSprite);
+                            sphere.userData.labelSprite = labelSprite;
+                        
                             scene_three.add(sphere);
                             spheres_three.push(sphere);
                         }
-
+                        
                         // 6. OrbitControls for camera interaction
                         controls_three = new THREE.OrbitControls(camera_three, renderer_three.domElement);
-                        controls_three.enableDamping = true; // Enable damping (inertia)
-                        controls_three.dampingFactor = 0.05; // Damping factor
-                        controls_three.screenSpacePanning = false; // Disable panning to restrict movement
-                        controls_three.minDistance = 5; // Minimum zoom distance
-                        controls_three.maxDistance = 100; // Maximum zoom distance
-
-                        // Resize listener specific to this canvas container
+                        controls_three.enableDamping = true;
+                        controls_three.dampingFactor = 0.05;
+                        controls_three.screenSpacePanning = false;
+                        controls_three.minDistance = 5;
+                        controls_three.maxDistance = 100;
+                        
                         const resizeObserver = new ResizeObserver(entries => {
                             for (let entry of entries) {
                                 if (entry.target.id === containerId) {
@@ -1833,7 +1836,7 @@
                         });
                         resizeObserver.observe(container);
                     }
-
+                    
                     // Function to handle collisions between spheres
                     function handleSphereCollisions() {
                         const damping = 0.9; // Energy loss on collision
