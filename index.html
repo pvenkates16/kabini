@@ -1666,7 +1666,7 @@
                         const roomTextureUrls = [
                             'deer.jpeg', // Right wall (+x)
                             'elephant.jpg', // Left wall (-x)
-                            'night-sky.pg', // Ceiling (+y)
+                            'night-sky.jpg', // Ceiling (+y)
                             'snacks.jpg', // Floor (-y)
                             'booze.jpg', // Back wall (-z)
                             '76365977-b114-477a-a2b0-4f4a666d6934.jpeg' // Front wall (+z)
@@ -1827,7 +1827,7 @@
                         controls_three.screenSpacePanning = false;
                         controls_three.minDistance = 5;
                         controls_three.maxDistance = 100 * 1.5;
-                        controls_three.maxPolarAngle = Math.PI / 1.8; // allow panning to the sky, but just a little
+                        controls_three.maxPolarAngle = Math.PI / 1.5; // allow panning to the sky, but just a little
                     
                         const resizeObserver = new ResizeObserver(entries => {
                             for (let entry of entries) {
