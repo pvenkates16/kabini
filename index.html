@@ -30,6 +30,10 @@
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
 
+        .collapsed {
+            max-height: 50px !important; /* Adjust height to just show the button */
+        }
+
         header {
             background-color: #2E8B57;
             /* Sea Green */
@@ -353,7 +357,8 @@
             bottom: 20px;    /* Distance from the bottom of the viewport */
             right: 20px;     /* Distance from the right of the viewport */
             width: 300px;    /* Adjust width as needed */
-            height: 400px;   /* Adjust height as needed */
+            height: auto;   /* Adjust height as needed */
+            max-height: 400px;
             background-color: #f9f9f9; /* Light background for the chatbot */
             border: 1px solid #ccc; /* Border around the chatbot */
             border-radius: 8px; /* Rounded corners */
@@ -363,6 +368,7 @@
             flex-direction: column; /* Stack content vertically */
             padding: 15px; /* Internal padding */
             box-sizing: border-box; /* Include padding and border in the width/height */
+            transition: max-height 0.3s ease-in-out; /* New: transition on max-height */
         }
 
         /* Add specific styles for elements inside your chatbot widget if necessary */
@@ -1932,8 +1938,11 @@
 
     <!-- NEW LOCATION FOR YOUR CHATBOT -->
     <div id="hawabaaz-chatbot-container">
+        <button id="toggleChatbot" style="padding: 5px; border: 1px solid #ccc; background-color: #2E8B57; color: white; border-radius: 5px 5px 0 0; cursor: pointer;">
+          Chatbot ▽
+        </button>
         <!-- PASTE YOUR CHATBOT'S ORIGINAL IFRAME CODE HERE -->
-        <iframe src="https://www.chatbase.co/chatbot-iframe/337-cJRbLVx23JiEgkB7K" width="100%"
+        <iframe id="chatbotIframe" src="https://www.chatbase.co/chatbot-iframe/337-cJRbLVx23JiEgkB7K" width="100%"
             style="height: 100%; border: none; border-radius: 8px; overflow: hidden;"
             frameborder="0"></iframe>
     </div>
@@ -2067,6 +2076,18 @@
             // Show the initial tab (e.g., 'welcome' or based on URL hash)
             const initialTab = window.location.hash.substring(1) || 'welcome';
             showTab(initialTab);
+            const toggleButton = document.getElementById('toggleChatbot');
+            const chatbotContainer = document.getElementById('hawabaaz-chatbot-container');
+            const chatbotIframe = document.getElementById('chatbotIframe');
+
+            toggleButton.addEventListener('click', () => {
+                chatbotContainer.classList.toggle('collapsed');
+                if (chatbotContainer.classList.contains('collapsed')) {
+                    toggleButton.innerHTML = 'Chatbot ▲';
+                } else {
+                    toggleButton.innerHTML = 'Chatbot ▽';
+                }
+});
         });
 
 
