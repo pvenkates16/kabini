@@ -1659,55 +1659,56 @@
                     
                         // 1. Scene setup
                         scene_three = new THREE.Scene();
+                        scene_three.background = new THREE.Color(0x1a202c); // Dark background fallback
                     
+                        // 2. Load Textures for the Room
                         const roomTextureLoader = new THREE.TextureLoader();
                         const roomTextureUrls = [
                             'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Indian_Leopard_%28Panthera_pardus_fusca%29_at_Nagarahole_Tiger_Reserve.jpg/1920px-Indian_Leopard_%28Panthera_pardus_fusca%29_at_Nagarahole_Tiger_Reserve.jpg', // Right wall (+x)
                             'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nilgiri_langur_%28Semnopithecus_johnii%29.jpg/1920px-Nilgiri_langur_%28Semnopithecus_johnii%29.jpg', // Left wall (-x)
                             'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Bandipur_Tiger_Reserve_Tiger.jpg/1920px-Bandipur_Tiger_Reserve_Tiger.jpg', // Ceiling (+y)
                             'https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Black_panther_at_Nagarhole.jpg/1920px-Black_panther_at_Nagarhole.jpg', // Floor (-y)
-                            'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Elephants_at_Kabini.jpg/1599px-Elephants_at_Kabini.jpg?20190312045152', // Back wall (-z)
+                            'https://upload.wikimedia.org/wikipedia/commons/commons/thumb/9/9b/Elephants_at_Kabini.jpg/1599px-Elephants_at_Kabini.jpg?20190312045152', // Back wall (-z)
                             'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Gaur_%28Bos_gaurus%29_at_Nagarhole.jpg/1920px-Gaur_%28Bos_gaurus%29_at_Nagarhole.jpg' // Front wall (+z)
                         ];
                     
-                        // Create a Promise to handle all textures being loaded before creating the room
                         const texturePromises = roomTextureUrls.map(url => {
-                            return new Promise((resolve, reject) => {
-                                roomTextureLoader.load(url, resolve, undefined, reject);
+                            return new Promise(resolve => {
+                                roomTextureLoader.load(url,
+                                    (texture) => {
+                                        resolve(new THREE.MeshBasicMaterial({
+                                            map: texture,
+                                            side: THREE.BackSide
+                                        }));
+                                    },
+                                    undefined,
+                                    (err) => {
+                                        console.error('An error occurred loading a room texture:', url, err);
+                                        resolve(new THREE.MeshBasicMaterial({
+                                            color: 0x555555,
+                                            side: THREE.BackSide
+                                        }));
+                                    }
+                                );
                             });
                         });
                     
                         Promise.all(texturePromises)
-                            .then(textures => {
-                                const roomMaterials = textures.map(texture => {
-                                    texture.wrapS = THREE.RepeatWrapping;
-                                    texture.wrapT = THREE.RepeatWrapping;
-                                    return new THREE.MeshBasicMaterial({
-                                        map: texture,
-                                        side: THREE.BackSide
-                                    });
-                                });
-                    
-                                // Create the room
+                            .then(roomMaterials => {
                                 const roomSize = 100;
                                 const roomGeometry = new THREE.BoxGeometry(roomSize, roomSize, roomSize);
                                 const room = new THREE.Mesh(roomGeometry, roomMaterials);
                                 scene_three.add(room);
-                            })
-                            .catch(err => {
-                                console.error('An error occurred loading one or more room textures:', err);
-                                // Fallback to a solid background color
-                                scene_three.background = new THREE.Color(0x1a202c);
                             });
                     
-                        // 2. Camera setup
+                        // 3. Camera setup
                         const containerWidth = container.clientWidth;
                         const containerHeight = container.clientHeight;
                     
                         camera_three = new THREE.PerspectiveCamera(50, containerWidth / containerHeight, 0.1, 1000);
                         camera_three.position.z = 25;
                     
-                        // 3. Renderer setup
+                        // 4. Renderer setup
                         renderer_three = new THREE.WebGLRenderer({
                             antialias: true
                         });
@@ -1715,7 +1716,7 @@
                         renderer_three.setPixelRatio(window.devicePixelRatio);
                         container.appendChild(renderer_three.domElement);
                     
-                        // 4. Lights setup
+                        // 5. Lights setup
                         const ambientLight = new THREE.AmbientLight(0x404040, 2);
                         scene_three.add(ambientLight);
                     
@@ -1723,7 +1724,7 @@
                         directionalLight.position.set(5, 10, 7);
                         scene_three.add(directionalLight);
                     
-                        // 5. Create Spheres (No change from your current implementation, but included for completeness)
+                        // 6. Create Spheres (No change from your current implementation, but included for completeness)
                         const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
                         const baseMaterialProperties = {
                             metalness: 0.8,
@@ -1819,8 +1820,7 @@
                             spheres_three.push(sphere);
                         }
                     
-                    
-                        // 6. OrbitControls for camera interaction
+                        // 7. OrbitControls for camera interaction
                         controls_three = new THREE.OrbitControls(camera_three, renderer_three.domElement);
                         controls_three.enableDamping = true;
                         controls_three.dampingFactor = 0.05;
@@ -1842,7 +1842,7 @@
                         });
                         resizeObserver.observe(container);
                     }
-                                                            
+                                                                                
                     // Function to handle collisions between spheres
                     function handleSphereCollisions() {
                         const damping = 0.9; // Energy loss on collision
