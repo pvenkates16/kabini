@@ -271,7 +271,7 @@
             /* Changed from fixed to relative */
             width: 100%;
             /* Fill parent width */
-	    aspect-ratio: 16/9;
+            aspect-ratio: 16/9;
             background-color: #1a202c;
             /* Dark background */
             border-radius: 8px;
@@ -388,27 +388,32 @@
             z-index: 1001;
             /* Higher z-index to be on top of the container */
             transition: background-color 0.3s ease, transform 0.3s ease;
-	    animation: pulse 2s infinite; /* Add the pulse animation */
+            animation: pulse 2s infinite;
+            /* Add the pulse animation */
         }
 
         .chatbot-icon:hover,
         .chatbot-icon:focus {
-           background-color: #E5533F; /* Slightly darker coral on hover/focus */
-           transform: scale(1.1); /* Scale up on hover/focus */
+            background-color: #E5533F;
+            /* Slightly darker coral on hover/focus */
+            transform: scale(1.1);
+            /* Scale up on hover/focus */
         }
 
         /* Define the pulse animation */
         @keyframes pulse {
-          0% {
-              box-shadow: 0 0 0 0 rgba(255, 99, 71, 0.7);
-          }
-          70% {
-              box-shadow: 0 0 0 10px rgba(255, 99, 71, 0);
-          }
-          100% {
-              box-shadow: 0 0 0 0 rgba(255, 99, 71, 0);
-          }
-      }
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 99, 71, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 99, 71, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 99, 71, 0);
+            }
+        }
 
         #hawabaaz-chatbot-container {
             position: fixed;
@@ -442,10 +447,29 @@
             visibility: visible;
             pointer-events: auto;
         }
+
+        /* Styles for editable table inputs */
+        #attendeeTable tbody td,
+        #attendeeTable thead th {
+            border: 1px solid #e5e7eb;
+        }
+
+        #attendeeTable input[type="text"],
+        #attendeeTable input[type="checkbox"] {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        #attendeeTable input[type="checkbox"] {
+            width: auto;
+            margin: 0 auto;
+        }
     </style>
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3-cloud@1.2.7/build/d3.layout.cloud.min.js"></script>
-</head>
+    </head>
 
 <body>
     <div class="container">
@@ -462,8 +486,8 @@
             <a href="#stops" class="tab-button" data-tab="stops">Roadside Stops</a>
             <a href="#khatarnaths-kliks" class="tab-button" data-tab="khatarnaths-kliks">Khatarnath's Kabini Kliks</a>
             <a href="#previous-kekok-pics" class="tab-button" data-tab="previous-kekok-pics">Previous Kekok Pics</a>
-            <a href="#fun-experiments" class="tab-button" data-tab="fun-experiments">Hawabaaz Room</a>
-            </nav>
+            <a href="#fun-experiments" class="tab-button" data-tab="fun-experiments">Hawabaaz Interactions</a>
+        </nav>
 
         <div id="tab-content-area">
             <section id="welcome" class="tab-content active">
@@ -493,7 +517,7 @@
                             <li>भालू फूँक</li>
                             <li>पपीता</li>
                             <li>डंडा है या छेदा</li>
-                            <li>ఎర్ర పూకు, వెర्र పూకు</li>
+                            <li>ఎర్ర పూకు, వెर्र పూకు</li>
                         </ul>
                         <p>Remind me if I've forgotten any highlights.</p>
                     </div>
@@ -680,23 +704,47 @@
                 </section>
             </section>
 
+            
             <section id="attendees" class="tab-content">
-                <h2>Attendees Confirmation</h2>
-                <p>Please use the checkboxes below to confirm attendance. All attendees are marked as 'True' by default,
-                    except for "Anyone else?".</p>
-                <div class="attendee-list" id="attendeeCheckboxes">
+                <h2>BLR airport Arrival/Departure Details</h2>
+                <p>Coach has been booked for the journey from BLR airport to Kabini on Nov 25, and return on Nov 28th</p>
+                <p>Below are the confirmed travel details for attendees arriving in Bangalore (BLR) for the onward journey to Kabini, and return.</p>
+                
+                <div style="overflow-x: auto; margin-top: 20px;">
+                    <table id="attendeeTable" class="min-w-full divide-y divide-gray-200" style="table-layout: auto;">
+                        <thead>
+                            <tr class="bg-gray-50">
+                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-2/12">
+                                    Name
+                                </th>
+                                <th class="px-1 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">
+                                    Arr. Date
+                                </th>
+                                <th class="px-1 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">
+                                    Arr. Time
+                                </th>
+                                <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">
+                                    Arr. Mode
+                                </th>
+                                <th class="px-1 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">
+                                    Dep. Date
+                                </th>
+                                <th class="px-1 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">
+                                    Dep. Time
+                                </th>
+                                <th class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">
+                                    Dep. Mode
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="attendeeTableBody" class="bg-white divide-y divide-gray-200">
+                        </tbody>
+                    </table>
                 </div>
-                <section id="attendees-word-cloud">
-                    <h2>Hawabaaz Attendees (Word Cloud)</h2>
-                    <p>Initial hand raisers</p>
-                    <div id="word-cloud-container">
-                        <canvas id="wordCloudCanvas" width="800" height="400"
-                            style="border:1px solid #ccc; background-color: #f9f9f9;"></canvas>
-                    </div>
-                    <p class="image-note"><em>Note: This word cloud is generated dynamically using JavaScript. If it
-                            doesn't appear immediately, try refreshing the page.</em></p>
-                </section>
+            
             </section>
+
+
 
             <section id="accommodations" class="tab-content">
                 <h2>Accommodation: Sandesh Water Edge</h2>
@@ -795,7 +843,7 @@
                             <ul>
                                 <li><strong>Early Morning (6:00 AM):</strong> Wake up for <span
                                         class="highlight">Morning Jeep Safari</span> into Nagarhole National Park. Look
-                                    out for tigers, leopards, elephants, gaurs, deer, and various bird species.</li>
+                                    out for tigers, leopards, elephants, gaurs, deer, wild dogs, and various bird species.</li>
                                 <li><strong>Morning (9:30 AM):</strong> Return to resort for breakfast.</li>
                                 <li><strong>Late Morning/Lunch (11:00 AM - 2:00 PM):</strong> Leisure time, relax by the
                                     river, enjoy resort amenities, or take a gentle walk around the lodge property.
@@ -1651,16 +1699,16 @@
                             console.error("Three.js container not found:", containerId);
                             return;
                         }
-                    
+
                         // Clear existing canvas if any
                         while (container.firstChild) {
                             container.removeChild(container.firstChild);
                         }
-                    
+
                         // 1. Scene setup
                         scene_three = new THREE.Scene();
                         scene_three.background = new THREE.Color(0x1a202c); // Dark background fallback
-                    
+
                         // 2. Load Textures for the Room
                         const roomTextureLoader = new THREE.TextureLoader();
                         const roomTextureUrls = [
@@ -1671,7 +1719,7 @@
                             'booze.jpg', // Back wall (-z)
                             '76365977-b114-477a-a2b0-4f4a666d6934.jpeg' // Front wall (+z)
                         ];
-                    
+
                         const texturePromises = roomTextureUrls.map(url => {
                             return new Promise(resolve => {
                                 roomTextureLoader.load(url,
@@ -1692,7 +1740,7 @@
                                 );
                             });
                         });
-                    
+
                         Promise.all(texturePromises)
                             .then(roomMaterials => {
                                 const roomSize = 100;
@@ -1700,14 +1748,14 @@
                                 const room = new THREE.Mesh(roomGeometry, roomMaterials);
                                 scene_three.add(room);
                             });
-                    
+
                         // 3. Camera setup
                         const containerWidth = container.clientWidth;
                         const containerHeight = container.clientHeight;
-                    
+
                         camera_three = new THREE.PerspectiveCamera(50, containerWidth / containerHeight, 0.1, 1000);
                         camera_three.position.z = 25;
-                    
+
                         // 4. Renderer setup
                         renderer_three = new THREE.WebGLRenderer({
                             antialias: true
@@ -1715,15 +1763,15 @@
                         renderer_three.setSize(containerWidth, containerHeight);
                         renderer_three.setPixelRatio(window.devicePixelRatio);
                         container.appendChild(renderer_three.domElement);
-                    
+
                         // 5. Lights setup
                         const ambientLight = new THREE.AmbientLight(0x404040, 2);
                         scene_three.add(ambientLight);
-                    
+
                         const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
                         directionalLight.position.set(5, 10, 7);
                         scene_three.add(directionalLight);
-                    
+
                         // 6. Create Spheres (No change from your current implementation, but included for completeness)
                         const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
                         const baseMaterialProperties = {
@@ -1735,16 +1783,16 @@
                             clearcoat: 0.5,
                             clearcoatRoughness: 0.1
                         };
-                    
+
                         const imageUrls_three = ["https://sceneloc8.com/wp-content/uploads/2025/02/Shooting-deer-in-Kabini-forests.jpg"];
                         const textureLoader_three = new THREE.TextureLoader();
-                    
+
                         const numberOfSpheres = attendeesData.length;
                         for (let i = 0; i < numberOfSpheres; i++) {
                             const sphereMaterial = new THREE.MeshPhysicalMaterial(baseMaterialProperties);
                             const textureIndex = i % imageUrls_three.length;
                             const textureUrl = imageUrls_three[textureIndex];
-                    
+
                             textureLoader_three.load(textureUrl,
                                 function(texture) {
                                     sphereMaterial.map = texture;
@@ -1758,40 +1806,40 @@
                                     sphereMaterial.needsUpdate = true;
                                 }
                             );
-                    
+
                             const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-                    
+
                             const offset = 100 / 2 - 5;
                             sphere.position.x = (Math.random() - 0.5) * offset * 2;
                             sphere.position.y = (Math.random() - 0.5) * offset * 2;
                             sphere.position.z = (Math.random() - 0.5) * offset * 2;
-                    
+
                             const speedFactor = 0.10;
                             sphere.userData.direction = new THREE.Vector3(
                                 (Math.random() - 0.5) * speedFactor,
                                 (Math.random() - 0.5) * speedFactor,
                                 (Math.random() - 0.5) * speedFactor
                             ).normalize().multiplyScalar(speedFactor);
-                    
+
                             sphere.userData.rotationSpeed = new THREE.Vector3(
                                 (Math.random() - 0.5) * 0.01,
                                 (Math.random() - 0.5) * 0.01,
                                 (Math.random() - 0.5) * 0.01
                             );
-                    
+
                             const attendeeName = attendeesData[i].name;
                             sphere.userData.attendeeName = attendeeName;
-                    
+
                             const labelCanvas = document.createElement('canvas');
                             const context = labelCanvas.getContext('2d');
                             const fontSize = 24;
                             const font = `${fontSize}px Arial`;
                             context.font = font;
-                    
+
                             const textWidth = context.measureText(attendeeName).width;
                             labelCanvas.width = textWidth + 20;
                             labelCanvas.height = fontSize + 10;
-                    
+
                             context.font = font;
                             context.fillStyle = 'rgba(0, 0, 0, 0.4)';
                             context.fillRect(0, 0, labelCanvas.width, labelCanvas.height);
@@ -1799,27 +1847,27 @@
                             context.textAlign = 'center';
                             context.textBaseline = 'middle';
                             context.fillText(attendeeName, labelCanvas.width / 2, labelCanvas.height / 2);
-                    
+
                             const labelTexture = new THREE.CanvasTexture(labelCanvas);
                             labelTexture.needsUpdate = true;
-                    
+
                             const labelMaterial = new THREE.SpriteMaterial({
                                 map: labelTexture
                             });
                             const labelSprite = new THREE.Sprite(labelMaterial);
-                    
+
                             const scaleFactor = 0.02;
                             labelSprite.scale.set(labelCanvas.width * scaleFactor, labelCanvas.height * scaleFactor, 1);
-                    
+
                             labelSprite.position.y = sphereGeometry.parameters.radius + labelSprite.scale.y / 2 + 0.1;
-                    
+
                             sphere.add(labelSprite);
                             sphere.userData.labelSprite = labelSprite;
-                    
+
                             scene_three.add(sphere);
                             spheres_three.push(sphere);
                         }
-                    
+
                         // 7. OrbitControls for camera interaction
                         controls_three = new THREE.OrbitControls(camera_three, renderer_three.domElement);
                         controls_three.enableDamping = true;
@@ -1828,7 +1876,7 @@
                         controls_three.minDistance = 5;
                         controls_three.maxDistance = 100 * 1.5;
                         controls_three.maxPolarAngle = Math.PI / 1.5; // allow panning to the sky, but just a little
-                    
+
                         const resizeObserver = new ResizeObserver(entries => {
                             for (let entry of entries) {
                                 if (entry.target.id === containerId) {
@@ -1842,7 +1890,7 @@
                         });
                         resizeObserver.observe(container);
                     }
-                                                                                                    
+
                     // Function to handle collisions between spheres
                     function handleSphereCollisions() {
                         const damping = 0.9; // Energy loss on collision
@@ -1992,7 +2040,8 @@
     </footer>
 
     <div id="hawabaaz-chatbot-container">
-        <iframe id="chatbotIframe" src="https://www.chatbase.co/chatbot-iframe/337-cJRbLVx23JiEgkB7K" width="100%" style="height: 100%; border: none; border-radius: 8px; overflow: hidden;" frameborder="0"></iframe>
+        <iframe id="chatbotIframe" src="https://www.chatbase.co/chatbot-iframe/337-cJRbLVx23JiEgkB7K" width="100%"
+            style="height: 100%; border: none; border-radius: 8px; overflow: hidden;" frameborder="0"></iframe>
     </div>
     <button id="toggleChatbot" class="chatbot-icon" aria-label="Open Chatbot">
         💬
@@ -2002,63 +2051,154 @@
     <script>
         console.log("Script starting...");
 
-        const attendeesData = [
-            { name: "Rahul", isPresent: true },
-            { name: "Prabhu", isPresent: true },
-            { name: "Ramani", isPresent: true },
-            { name: "Minocha", isPresent: true },
-            { name: "VG", isPresent: true },
-            { name: "Khatarnath", isPresent: true },
-            { name: "Pawan", isPresent: true },
-            { name: "Rajiv Chandra", isPresent: true },
-            { name: "Arore", isPresent: true },
-            { name: "Murthy", isPresent: true },
-            { name: "Gajju", isPresent: true },
-            { name: "Khalid", isPresent: true },
-            { name: "Venky", isPresent: true },
-            { name: "Jamil", isPresent: true },
-            { name: "Batra", isPresent: true },
-            { name: "Dudduboss", isPresent: true },
-            { name: "Richie", isPresent: true },
-            { name: "Manoj Gupta", isPresent: true },
-            { name: "Vijeta", isPresent: true },
-            { name: "Benny", isPresent: true },
-            { name: "This could have been you!", isPresent: false }
-        ];
+        // Attendee arrival/departure info
+	const attendeesData = [
+	    { name: "Rahul", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
+	    { name: "Prabhu", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
+	    { name: "Ramani", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
+	    { name: "Minocha", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
+	    { name: "VG", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
+	    { name: "Khatarnath", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
+	    { name: "Pawan", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
+	    { name: "Rajiv Chandra", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
+	    { name: "Arore", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
+	    { name: "Murthy", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
+	    { name: "Gajju", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
+	    { name: "Khalid", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
+	    { name: "Venky", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
+	    { name: "Jamil", isPresent: true, blrMode: "6E771", blrTime: "09:15 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "6E451", blrDepTime: "5:30 PM", blrDepartureDate: "Nov 28th" },
+	    { name: "Batra", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
+	    { name: "Dudduboss", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
+	    { name: "Richie", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
+	    { name: "Manoj Gupta", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
+	    { name: "Vijeta", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
+	    { name: "Benny", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" }
+	];
         console.log("Attendees data:", attendeesData);
 
-        // Function to create checkboxes
-        function createAttendeeCheckboxes() {
-            const container = document.getElementById("attendeeCheckboxes");
-            if (container) {
-                attendeesData.forEach(attendee => {
-                    const div = document.createElement("div");
-                    div.classList.add("attendee-item");
+        // This function is no longer needed
+        function updateAttendeeData(index, field, value) {
+            // function stub for backward compatibility in case other scripts use it
+            console.log("Attendee data update function stub executed.");
+        }
 
-                    const checkbox = document.createElement("input");
-                    checkbox.type = "checkbox";
-                    checkbox.id = `attendee_${attendee.name.replace(/\s+/g, '_')}`;
-                    checkbox.name = "attendee";
-                    checkbox.value = attendee.name;
-                    checkbox.checked = attendee.isPresent;
-                    checkbox.disabled = true; // Make checkboxes read-only
-
-                    checkbox.addEventListener('change', (event) => {
-                        attendee.isPresent = event.target.checked;
-                        console.log(`${attendee.name} attendance status: ${attendee.isPresent}`);
-                    });
-
-                    const label = document.createElement("label");
-                    label.htmlFor = checkbox.id;
-                    label.textContent = attendee.name;
-
-                    div.appendChild(checkbox);
-                    div.appendChild(label);
-                    container.appendChild(div);
-                });
-            } else {
-                console.error("Attendee checkboxes container not found!");
+        // Helper function to create a flight link element if a mode looks like a flight number
+        function createFlightLinkElement(modeText) {
+            // Regular expression to identify a flight code (e.g., 6E771, 6E451)
+            const flightRegex = /^[A-Z0-9]{2,3}\d{2,4}$/i;
+            const trimmedMode = modeText.trim();
+            
+            if (flightRegex.test(trimmedMode)) {
+                const flightNumber = trimmedMode;
+                // Construct the URL using the flight number in lowercase
+                const flightLink = `https://www.flightradar24.com/data/flights/${flightNumber.toLowerCase()}`;
+                
+                const link = document.createElement('a');
+                link.href = flightLink;
+                link.textContent = flightNumber;
+                link.target = "_blank"; // Opens in a new tab
+                link.style.color = '#bf360c'; // Deep Orange highlight
+                link.style.fontWeight = 'bold';
+                link.style.textDecoration = 'underline'; // Added underline for clarity
+                return link; // Returns the clickable link element
             }
+            return trimmedMode; // Returns the original text if it's not a flight (e.g., "Car")
+        }
+
+// --- UPDATED: Function to render the read-only arrival table with dynamic flight links ---
+	function renderAttendeeTable() {
+	    const tableBody = document.getElementById("attendeeTableBody");
+	    if (!tableBody) return;
+
+	    // Clear existing content
+	    tableBody.innerHTML = '';
+
+	    // Filter for only present attendees, or use all for full manifest
+	    // Assuming 'attendeesData' is globally defined
+	    const displayAttendees = attendeesData.filter(d => d.isPresent);
+
+	    displayAttendees.forEach((attendee) => {
+		const row = tableBody.insertRow();
+		row.className = "hover:bg-green-50";
+
+		// 1. Name: Increased padding and font weight, allow wrapping if needed.
+		let nameCell = row.insertCell();
+		nameCell.className = "px-6 py-4 font-semibold text-gray-900"; // Removed whitespace-nowrap
+		nameCell.textContent = attendee.name;
+
+		// --- ARRIVAL DETAILS ---
+
+		// 2. BLR Arrival Date: Narrower column
+		let arrivalDateCell = row.insertCell();
+		arrivalDateCell.className = "px-3 py-4 text-sm text-gray-700 whitespace-nowrap"; // Reduced horizontal padding
+		arrivalDateCell.textContent = attendee.blrArrivalDate;
+
+		// 3. BLR Arrival Time: Narrower column
+		let arrivalTimeCell = row.insertCell();
+		arrivalTimeCell.className = "px-3 py-4 text-sm font-bold text-gray-700 whitespace-nowrap"; // Reduced horizontal padding
+		arrivalTimeCell.textContent = attendee.blrTime;
+
+		// 4. Arrival Mode: Normal width - APPLY DYNAMIC LINKING
+		let arrivalModeCell = row.insertCell();
+		arrivalModeCell.className = "px-4 py-4 text-sm text-gray-700 whitespace-nowrap";
+        
+        const arrivalLinkOrText = createFlightLinkElement(attendee.blrMode);
+        if (typeof arrivalLinkOrText === 'string') {
+            arrivalModeCell.textContent = arrivalLinkOrText;
+        } else {
+            // It's a link element, append it
+            arrivalModeCell.appendChild(arrivalLinkOrText);
+        }
+
+		// --- DEPARTURE DETAILS ---
+
+		// 5. BLR Departure Date: Narrower column
+		let departureDateCell = row.insertCell();
+		departureDateCell.className = "px-3 py-4 text-sm text-gray-700 whitespace-nowrap"; // Reduced horizontal padding
+		departureDateCell.textContent = attendee.blrDepartureDate;
+
+		// 6. BLR Departure Time: Narrower column
+		let departureTimeCell = row.insertCell();
+		departureTimeCell.className = "px-3 py-4 text-sm font-bold text-gray-700 whitespace-nowrap"; // Reduced horizontal padding
+		departureTimeCell.textContent = attendee.blrDepTime;
+		
+		// 7. Departure Mode: Normal width - APPLY DYNAMIC LINKING
+		let departureModeCell = row.insertCell();
+		departureModeCell.className = "px-4 py-4 text-sm text-gray-700 whitespace-nowrap";
+        
+        const departureLinkOrText = createFlightLinkElement(attendee.blrDepMode);
+        if (typeof departureLinkOrText === 'string') {
+            departureModeCell.textContent = departureLinkOrText;
+        } else {
+            // It's a link element, append it
+            departureModeCell.appendChild(departureLinkOrText);
+        }
+	    });
+	}
+
+        // Function to save data (REMOVED logic as table is read-only)
+        function saveData() {
+            alert("This table is now read-only and displays confirmed details.");
         }
 
         // --- TAB FUNCTIONALITY ---
@@ -2088,11 +2228,9 @@
                 activeTabContent.classList.add('active');
             }
 
-            // If the active tab is 'attendees', generate word cloud
+            // If the active tab is 'attendees', render table
             if (tabId === 'attendees') {
-                // Ensure word cloud is regenerated or drawn when attendees tab is active
-                // This prevents issues if the canvas wasn't visible before.
-                generateWordCloud();
+                renderAttendeeTable(); // Call to ensure the table is drawn with current data
             } else if (tabId === 'fun-experiments') {
                 // If 'Hawabaaz Interactions' tab is active, setup and start Three.js animation
                 setupThreeJS('threejs-container');
@@ -2102,8 +2240,8 @@
 
         // Event listener for tab buttons
         document.addEventListener('DOMContentLoaded', () => {
-            // Create checkboxes first
-            createAttendeeCheckboxes();
+            // Initial render of the attendee table
+            renderAttendeeTable();
 
             document.querySelectorAll('.tab-button').forEach(button => {
                 button.addEventListener('click', function(event) {
@@ -2142,78 +2280,44 @@
             });
         });
 
-
-        // --- WORD CLOUD GENERATION LOGIC (moved into a function) ---
-        function generateWordCloud() {
-            console.log("Generating word cloud...");
-
-            // Check if d3 and d3.layout.cloud are defined
-            if (typeof d3 === 'undefined') {
-                console.error("D3.js library is not loaded or defined.");
-                return;
+        // Function to stop Three.js animation and dispose resources (retained from previous modification)
+        function stopThreeJSAnimation() {
+            if (animationFrameId_three) {
+                cancelAnimationFrame(animationFrameId_three);
+                animationFrameId_three = null;
             }
-            if (typeof d3.layout === 'undefined' || typeof d3.layout.cloud === 'undefined') {
-                console.error("D3-cloud library (d3.layout.cloud) is not loaded or defined.");
-                return;
-            }
-
-            // Prepare data for d3-cloud (each name gets an arbitrary value for size)
-            const words = attendeesData.map(function(d) {
-                return {
-                    text: d.name,
-                    size: 10 + Math.random() * 30
-                }; // Random size for visual variety
-            });
-            console.log("Words array for d3-cloud:", words);
-
-            const margin = {
-                    top: 10,
-                    right: 10,
-                    bottom: 10,
-                    left: 10
-                },
-                width = 800 - margin.left - margin.right,
-                height = 400 - margin.top - margin.bottom;
-
-            const fill = d3.scaleOrdinal(d3.schemeCategory10); // Use D3's color scheme
-
-            const layout = d3.layout.cloud()
-                .size([width, height])
-                .words(words)
-                .padding(5)
-                .rotate(function() {
-                    return ~~(Math.random() * 2) * 90;
-                })
-                .font("Impact")
-                .fontSize(function(d) {
-                    return d.size;
-                })
-                .on("end", draw);
-
-            layout.start();
-
-            function draw(words) {
-                console.log("Draw function called. Words to draw:", words);
-                const canvas = document.getElementById("wordCloudCanvas");
-                if (!canvas) {
-                    console.error("Canvas element for word cloud not found!");
-                    return;
-                }
-                const ctx = canvas.getContext("2d");
-                ctx.clearRect(0, 0, width, height); // Clear previous drawing
-                ctx.translate(width / 2, height / 2); // Center the drawing
-
-                words.forEach(function(d) {
-                    ctx.save();
-                    ctx.translate(d.x, d.y);
-                    ctx.rotate(d.rotate * Math.PI / 180);
-                    ctx.textAlign = "center";
-                    ctx.font = d.size + "px " + d.font;
-                    ctx.fillStyle = fill(d.text);
-                    ctx.fillText(d.text, 0, 0);
-                    ctx.restore();
+            if (renderer_three) {
+                spheres_three.forEach(sphere => {
+                    if (sphere.geometry) sphere.geometry.dispose();
+                    if (sphere.material) {
+                        if (sphere.material.map) {
+                            sphere.material.map.dispose();
+                        }
+                        sphere.material.dispose();
+                    }
+                    if (sphere.userData.labelSprite) {
+                        if (sphere.userData.labelSprite.material.map) {
+                            sphere.userData.labelSprite.material.map.dispose();
+                        }
+                        if (sphere.userData.labelSprite.material) {
+                            sphere.userData.labelSprite.material.dispose();
+                        }
+                    }
+                    if (sphere.parent) {
+                        sphere.parent.remove(sphere);
+                    }
                 });
-                console.log("Word cloud drawing complete.");
+                renderer_three.dispose();
+                renderer_three = null;
+            }
+            if (scene_three) {
+                scene_three.clear();
+                scene_three = null;
+            }
+            spheres_three.length = 0;
+            if (controls_three) {
+                controls_three.dispose();
+                controls_three = null;
             }
         }
     </script>
