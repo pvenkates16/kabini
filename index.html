@@ -2053,45 +2053,45 @@
 
         // Attendee arrival/departure info
 	const attendeesData = [
-	    { name: "Rahul", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	    { name: "Rahul", isPresent: true, blrArrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
 	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
-	    { name: "Prabhu", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	    { name: "Prabhu", isPresent: true, blrArrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
 	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
-	    { name: "Ramani", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	    { name: "Ramani", isPresent: true, blrArrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	      blrDepMode: "VandeBharat 20608 (Mysore)", blrDepTime: "1:05 PM", blrDepartureDate: "Nov 28th" },
+	    { name: "Minocha", isPresent: true, blrArrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
 	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
-	    { name: "Minocha", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	    { name: "VG", isPresent: true, blrArrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
 	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
-	    { name: "VG", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	    { name: "Khatarnath", isPresent: true, blrArrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
 	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
-	    { name: "Khatarnath", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	    { name: "Pawan", isPresent: true, blrArrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
 	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
-	    { name: "Pawan", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	    { name: "Rajiv Chandra", isPresent: true, blrArrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
 	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
-	    { name: "Rajiv Chandra", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	    { name: "Arore", isPresent: true, blrArrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
 	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
-	    { name: "Arore", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	    { name: "Murthy", isPresent: true, blrArrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
 	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
-	    { name: "Murthy", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	    { name: "Gajju", isPresent: true, blrArrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
 	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
-	    { name: "Gajju", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	    { name: "Khalid", isPresent: true, blrArrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
 	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
-	    { name: "Khalid", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	    { name: "Venky", isPresent: true, blrArrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
 	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
-	    { name: "Venky", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
-	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
-	    { name: "Jamil", isPresent: true, blrMode: "6E771", blrTime: "09:15 AM", blrArrivalDate: "Nov 25th",
+	    { name: "Jamil", isPresent: true, blrArrMode: "6E771", blrTime: "09:15 AM", blrArrivalDate: "Nov 25th",
 	      blrDepMode: "6E451", blrDepTime: "5:30 PM", blrDepartureDate: "Nov 28th" },
-	    { name: "Batra", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	    { name: "Batra", isPresent: true, blrArrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
 	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
-	    { name: "Dudduboss", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	    { name: "Dudduboss", isPresent: true, blrArrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
 	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
-	    { name: "Richie", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	    { name: "Richie", isPresent: true, blrArrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
 	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
-	    { name: "Manoj Gupta", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	    { name: "Manoj Gupta", isPresent: true, blrArrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
 	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
-	    { name: "Vijeta", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	    { name: "Vijeta", isPresent: true, blrArrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
 	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" },
-	    { name: "Benny", isPresent: true, blrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
+	    { name: "Benny", isPresent: true, blrArrMode: "Car", blrTime: "10:00 AM", blrArrivalDate: "Nov 25th",
 	      blrDepMode: "Car", blrDepTime: "5:00 PM", blrDepartureDate: "Nov 28th" }
 	];
         console.log("Attendees data:", attendeesData);
@@ -2102,28 +2102,41 @@
             console.log("Attendee data update function stub executed.");
         }
 
-        // Helper function to create a flight link element if a mode looks like a flight number
-        function createFlightLinkElement(modeText) {
-            // Regular expression to identify a flight code (e.g., 6E771, 6E451)
-            const flightRegex = /^[A-Z0-9]{2,3}\d{2,4}$/i;
+        // Helper function to create a link element for flights or the Vande Bharat train
+        function createTravelLinkElement(modeText) {
             const trimmedMode = modeText.trim();
+            let link = null;
+            let displayText = trimmedMode;
+        
+            // 1. Check for Flight Codes (e.g., 6E771)
+            const flightRegex = /^[A-Z0-9]{2,3}\d{2,4}$/i;
             
             if (flightRegex.test(trimmedMode)) {
                 const flightNumber = trimmedMode;
-                // Construct the URL using the flight number in lowercase
-                const flightLink = `https://www.flightradar24.com/data/flights/${flightNumber.toLowerCase()}`;
-                
-                const link = document.createElement('a');
-                link.href = flightLink;
-                link.textContent = flightNumber;
-                link.target = "_blank"; // Opens in a new tab
-                link.style.color = '#bf360c'; // Deep Orange highlight
-                link.style.fontWeight = 'bold';
-                link.style.textDecoration = 'underline'; // Added underline for clarity
-                return link; // Returns the clickable link element
+                link = `https://www.flightradar24.com/data/flights/${flightNumber.toLowerCase()}`;
+                displayText = flightNumber; 
             }
-            return trimmedMode; // Returns the original text if it's not a flight (e.g., "Car")
+            
+            // 2. Check for Vande Bharat Train (and other similar travel types if added later)
+            if (trimmedMode.includes("VandeBharat")) {
+                link = "https://www.railyatri.in/trains/route-20608-vande-bharat-expres"; // Link to the train schedule
+            }
+        
+            if (link) {
+                const linkElement = document.createElement('a');
+                linkElement.href = link;
+                linkElement.textContent = displayText;
+                linkElement.target = "_blank"; 
+                linkElement.style.color = '#bf360c'; 
+                linkElement.style.fontWeight = 'bold';
+                linkElement.style.textDecoration = 'underline';
+                return linkElement;
+            }
+            
+            return document.createTextNode(displayText); // Return plain text for "Car" or other modes
         }
+
+// ... rest of the script (renderAttendeeTable) uses this function ...
 
 // --- UPDATED: Function to render the read-only arrival table with dynamic flight links ---
 	function renderAttendeeTable() {
@@ -2162,7 +2175,7 @@
 		let arrivalModeCell = row.insertCell();
 		arrivalModeCell.className = "px-4 py-4 text-sm text-gray-700 whitespace-nowrap";
         
-        const arrivalLinkOrText = createFlightLinkElement(attendee.blrMode);
+        const arrivalLinkOrText = createTravelLinkElement(attendee.blrArrMode);
         if (typeof arrivalLinkOrText === 'string') {
             arrivalModeCell.textContent = arrivalLinkOrText;
         } else {
@@ -2186,7 +2199,7 @@
 		let departureModeCell = row.insertCell();
 		departureModeCell.className = "px-4 py-4 text-sm text-gray-700 whitespace-nowrap";
         
-        const departureLinkOrText = createFlightLinkElement(attendee.blrDepMode);
+        const departureLinkOrText = createTravelLinkElement(attendee.blrDepMode);
         if (typeof departureLinkOrText === 'string') {
             departureModeCell.textContent = departureLinkOrText;
         } else {
