@@ -2102,8 +2102,21 @@
             console.log("Attendee data update function stub executed.");
         }
 
+        // --- NEW HELPER FUNCTION TO GET FLIGHT DATE ---
+        // This assumes all arrivals are Nov 25th and all departures are Nov 28th.
+        function getFlightDate(isArrival) {
+            // Current year is 2025 (from context)
+            const year = 2025;
+            
+            // Nov 25th for Arrival, Nov 28th for Departure
+            const month = 11;
+            const day = isArrival ? 25 : 28; 
+            
+            // FlightStats date format is YYYY/MM/DD
+            return `${year}/${month.toString().padStart(2, '0')}/${day.toString().padStart(2, '0')}`;
+        }
         // Helper function to create a link element for flights or the Vande Bharat train
-        function createTravelLinkElement(modeText) {
+        function createTravelLinkElement(modeText, isArrival) { // <-- Added isArrival parameter
             const trimmedMode = modeText.trim();
             let link = null;
             let displayText = trimmedMode;
@@ -2112,9 +2125,17 @@
             const flightRegex = /^[A-Z0-9]{2,3}\d{2,4}$/i;
             
             if (flightRegex.test(trimmedMode)) {
-                const flightNumber = trimmedMode;
-                link = `https://www.flightradar24.com/data/flights/${flightNumber.toLowerCase()}`;
-                displayText = flightNumber; 
+                // --- 1. Get Date ---
+                const flightDate = getFlightDate(isArrival); // Get the correct date string
+        
+                // --- 2. Separate IATA Prefix and Number ---
+                const iataPrefix = trimmedMode.substring(0, 2).toUpperCase();
+                const flightNumber = trimmedMode.substring(2);
+                
+                // --- 3. Construct FlightStats URL ---
+                link = `https://www.flightstats.com/v2/flight-tracker/${iataPrefix}/${flightNumber}/${flightDate}`;
+                
+                displayText = trimmedMode;
             }
             
             // 2. Check for Vande Bharat Train (and other similar travel types if added later)
@@ -2175,7 +2196,7 @@
 		let arrivalModeCell = row.insertCell();
 		arrivalModeCell.className = "px-4 py-4 text-sm text-gray-700 whitespace-nowrap";
         
-        const arrivalLinkOrText = createTravelLinkElement(attendee.blrArrMode);
+        const arrivalLinkOrText = createTravelLinkElement(attendee.blrArrMode, true);
         if (typeof arrivalLinkOrText === 'string') {
             arrivalModeCell.textContent = arrivalLinkOrText;
         } else {
@@ -2199,7 +2220,7 @@
 		let departureModeCell = row.insertCell();
 		departureModeCell.className = "px-4 py-4 text-sm text-gray-700 whitespace-nowrap";
         
-        const departureLinkOrText = createTravelLinkElement(attendee.blrDepMode);
+        const departureLinkOrText = createTravelLinkElement(attendee.blrDepMode, false);
         if (typeof departureLinkOrText === 'string') {
             departureModeCell.textContent = departureLinkOrText;
         } else {
